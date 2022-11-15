@@ -73,6 +73,39 @@ export const constantRoutes = [
       },
     ]
   },
+  {
+    path: '/',
+    component: Layout,
+    redirect: 'home',
+    children: [
+      {
+        path: 'home',
+        component: () => import('@/views/home'),
+        name:'Home',
+        meta: { title: '首页', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'news',
+        component: () => import('@/views/news'),
+        name: 'News',
+        meta: { title: '资讯中心', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/user'),
+        name: 'User',
+        meta: { title: '用户中心', icon: 'dashboard', affix: true },
+        children: [
+          {
+            path: '/user/news',
+            component: () => import('@/views/user/news/add.vue'),
+            name: 'UserNewsAdd',
+            meta: { title: '资讯中心', icon: 'dashboard', affix: true }
+          }
+        ]
+      },
+    ]
+  },
   // {
   //   path: '/notice',
   //   component: () => import('@/views/notice/index'),

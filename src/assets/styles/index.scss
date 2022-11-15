@@ -35,6 +35,15 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
+ol, ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li{
+  margin: 0;
+  padding: 0;
+}
+
 label {
   font-weight: 700;
 }
@@ -55,7 +64,7 @@ html {
 }
 
 .no-padding {
-  padding: 0px !important;
+  padding: 0 !important;
 }
 
 .padding-content {

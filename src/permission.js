@@ -10,7 +10,12 @@ NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/dataScreen']
 
+//TODO 白名单暂时取消权限校验 先本地开发
 whiteList.push('/index')
+whiteList.push('/home')
+whiteList.push('/news')
+whiteList.push('/user')
+whiteList.push('/user/news')
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()

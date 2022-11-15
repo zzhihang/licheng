@@ -1,25 +1,16 @@
 <template>
   <div :class="classObj" class="app-wrapper" :style="{'--current-color': theme}">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view v-if="needTagsView" />
-      </div>
-      <div class="main-box">
-        <app-main />
-      </div>
-      <right-panel>
-        <settings />
-      </right-panel>
+    <top-header></top-header>
+    <div class="main-box">
+      <app-main />
     </div>
+    <home-footer></home-footer>
   </div>
 </template>
 
 <script>
 import RightPanel from '@/components/RightPanel'
-import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
+import { AppMain, Navbar, Settings, Sidebar, TagsView, TopHeader, HomeFooter } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 import variables from '@/assets/styles/variables.scss'
@@ -32,7 +23,9 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView
+    TopHeader,
+    TagsView,
+    HomeFooter
   },
   mixins: [ResizeMixin],
   computed: {

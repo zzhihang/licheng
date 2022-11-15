@@ -10,10 +10,10 @@ function resolve(dir) {
 }
 
 process.env.VUE_APP_ENV = 'uat'
-let target = 'https://sso.tongxincaijin.cn'
+let target = '39.104.116.61'
 // let target = 'http://192.168.110.34:9080'
-let port = ''
-let https = true
+let port = '8082'
+let https = false
 let analysis = false
 let params
 if (process.env.npm_config_argv) {
@@ -174,7 +174,11 @@ module.exports = {
       },
       resolve: {
         alias: {
-          '@': resolve('src')
+          '@': resolve('src'),
+          '@images': resolve('src/assets/images'),
+          '@components': resolve('src/components'),
+          '@utils': resolve('src/utils'),
+          '@views': resolve('src/views'),
         }
       },
       plugins,
@@ -246,5 +250,11 @@ module.exports = {
             }
         }
       )
-  }
+  },
+  // pluginOptions: {
+  //   'style-resources-loader': {
+  //     preProcessor: 'scss',
+  //     patterns: ['./src/assets/styles/mixin.scss']
+  //   }
+  // }
 }

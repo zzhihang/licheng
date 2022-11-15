@@ -195,12 +195,15 @@
     }
   </style>
   <%if(NODE_ENV === 'production'){%>
-  <script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/vue.min@2.6.9.js"></script>
+<!--  <script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/vue.min@2.6.9.js"></script>-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
   <%}else{%>
   <script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/vue@2.6.9.js"></script>
   <%}%>
-  <script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/elementUI@2.15.8.js"></script>
-  <link rel="stylesheet" href="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/css/elementUI.css" />
+<!--  <script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/elementUI@2.15.8.js"></script>-->
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.10/index.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.10/theme-chalk/index.css" rel="stylesheet">
+<!--  <link rel="stylesheet" href="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/css/elementUI.css" />-->
 </head>
 <body>
 <div id="app">
@@ -211,6 +214,7 @@
     <div class="load_title">正在加载系统资源，请耐心等待</div>
   </div>
 </div>
-<script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/echarts.min.js"></script>
+<!--<script src="https://txcj-bid.oss-cn-qingdao.aliyuncs.com/cdn/js/echarts.min.js"></script>-->
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
 </body>
 </html>
