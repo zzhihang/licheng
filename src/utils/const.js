@@ -5,6 +5,10 @@ export const FORM_TYPE = {
   RADIO: 'radio',
   TEXTAREA: 'textarea',
   CHECKBOX: 'checkbox',
+  DATEPICKER: 'datepicker',
+  EDITOR: 'editor',
+  FILE_UPLOAD: 'file-upload',
+  IMAGE_UPLOAD: 'image-upload',
 }
 
 export const NEWS_TYPE = [{
@@ -16,5 +20,17 @@ export const NEWS_TYPE = [{
 },{
   label: '综合研究',
   value: 3
+}]
+
+
+export const NEWS_STATUS = [{
+  label: '草稿',
+  value: 0
+},{
+  label: '已发布',
+  value: 1
+},{
+  label: '已下架',
+  value: 2
 }]
 

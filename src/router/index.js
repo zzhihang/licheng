@@ -66,7 +66,7 @@ export const constantRoutes = [
     redirect: 'index',
     children: [
       {
-        path: 'index',
+        path: '/index',
         component: () => import('@/views/index'),
         name:'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
@@ -79,29 +79,77 @@ export const constantRoutes = [
     redirect: 'home',
     children: [
       {
-        path: 'home',
+        path: '/home',
         component: () => import('@/views/home'),
         name:'Home',
         meta: { title: '首页', icon: 'dashboard', affix: true }
       },
       {
-        path: 'news',
+        path: '/news',
         component: () => import('@/views/news'),
         name: 'News',
         meta: { title: '资讯中心', icon: 'dashboard', affix: true }
       },
       {
-        path: 'user',
-        component: () => import('@/views/user'),
+        path: '/center',
+        component: () => import('@/views/center'),
         name: 'User',
+        redirect: '/center/user',
         meta: { title: '用户中心', icon: 'dashboard', affix: true },
         children: [
           {
-            path: '/user/news',
-            component: () => import('@/views/user/news/add.vue'),
-            name: 'UserNewsAdd',
+            path: '/center/user',
+            component: () => import('@/views/center/user/index.vue'),
+            name: 'CenterUser',
+            meta: { title: '用户管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/news',
+            component: () => import('@/views/center/news/index.vue'),
+            name: 'CenterNews',
             meta: { title: '资讯中心', icon: 'dashboard', affix: true }
-          }
+          },
+          {
+            path: '/center/news/add',
+            component: () => import('@/views/center/news/add.vue'),
+            name: 'CenterNewsAdd',
+            meta: { title: '发布资讯', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/bidding',
+            component: () => import('@/views/center/bidding/index.vue'),
+            name: 'CenterBidding',
+            meta: { title: '竞价交易管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/listing',
+            component: () => import('@/views/center/listing/index.vue'),
+            name: 'CenterListing',
+            meta: { title: '挂牌交易管理', icon: 'dashboard', affix: true }
+          },{
+            path: '/center/logistics',
+            component: () => import('@/views/center/logistics/index.vue'),
+            name: 'CenterLogistics',
+            meta: { title: '物流服务管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/product',
+            component: () => import('@/views/center/product/index.vue'),
+            name: 'CenterProduct',
+            meta: { title: '商品管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/storage',
+            component: () => import('@/views/center/storage/index.vue'),
+            name: 'CenterStorage',
+            meta: { title: '仓储服务管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/transaction',
+            component: () => import('@/views/center/transaction/index.vue'),
+            name: 'CenterTransaction',
+            meta: { title: '交易查询', icon: 'dashboard', affix: true }
+          },
         ]
       },
     ]

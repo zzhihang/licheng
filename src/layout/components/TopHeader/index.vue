@@ -7,7 +7,9 @@
       <div class="menu">
         <ul>
           <li v-for="(item, index) in menus" :class="{'active': active === index}" :key="index">
-            {{item.title}}
+            <router-link :to="item.path">
+              {{item.title}}
+            </router-link>
           </li>
           <li>登录</li>
           <li>注册</li>
@@ -29,18 +31,25 @@ export default {
       active: 0,
       menus: [{
         title: '网站首页',
+        path: '/home'
       },{
         title: '交易中心',
+        path: '/transaction'
       },{
         title: '资讯中心',
+        path: '/news'
       },{
         title: '物流服务',
+        path: '/logistics'
       },{
         title: '仓储服务',
+        path: '/storage'
       },{
         title: '供应商服务',
+        path: '/supply'
       },{
         title: '用户中心',
+        path: '/center'
       }]
     }
   }

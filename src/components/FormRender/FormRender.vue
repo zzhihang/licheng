@@ -1,11 +1,6 @@
 <template>
   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item v-for="(item, index) in data" :label="item.label" :prop="item.field" :key="index">
-        <el-input v-if="item.type === FORM_TYPE.INPUT"
-                  v-model="ruleForm[item.field]"
-                  :placeholder="item.placeholder || ('请填写' + item.label)">
-        </el-input>
-
         <el-select v-if="item.type === FORM_TYPE.SELECT"
                    v-model="ruleForm[item.field]"
                    :placeholder="item.placeholder || ('请选择' + item.label)">
@@ -16,26 +11,37 @@
           </el-option>
         </el-select>
 
-        <el-radio-group v-if="item.type === FORM_TYPE.RADIO" v-model="ruleForm[item.field]">
+        <el-radio-group v-else-if="item.type === FORM_TYPE.RADIO" v-model="ruleForm[item.field]">
           <el-radio v-for="(option, i) in item.options" :label="option.value">{{option.label}}</el-radio>
         </el-radio-group>
 
-        <el-input v-if="item.type === FORM_TYPE.TEXTAREA"
+        <el-input v-else-if="item.type === FORM_TYPE.TEXTAREA"
                   v-model="ruleForm[item.field]"
                   type="textarea"
         ></el-input>
 
-        <el-input v-if="item.type === FORM_TYPE.CHECKBOX"
+        <el-input v-else-if="item.type === FORM_TYPE.CHECKBOX"
                   v-model="ruleForm[item.field]"
                   type="textarea"
         ></el-input>
 
-        <el-checkbox-group v-if="item.type === FORM_TYPE.CHECKBOX" v-model="ruleForm[item.field]">
+        <el-checkbox-group v-else-if="item.type === FORM_TYPE.CHECKBOX" v-model="ruleForm[item.field]">
           <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
           <el-checkbox label="地推活动" name="type"></el-checkbox>
           <el-checkbox label="线下主题活动" name="type"></el-checkbox>
           <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
         </el-checkbox-group>
+
+        <editor v-else-if="item.type === FORM_TYPE.EDITOR" v-model="ruleForm[item.field]" :minHeight="300"/>
+
+        <file-upload v-else-if="item.type === FORM_TYPE.FILE_UPLOAD" v-model="ruleForm[item.field]"/>
+
+        <image-upload v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD" v-model="ruleForm[item.field]"/>
+
+        <el-input v-else
+                  v-model="ruleForm[item.field]"
+                  :placeholder="item.placeholder || ('请填写' + item.label)">
+        </el-input>
 
       </el-form-item>
   </el-form>
@@ -45,8 +51,16 @@
 import Vue from 'vue';
 import {FORM_TYPE} from "@utils/const";
 import {getAppList} from "@/api/common";
+import Editor from '@components/Editor'
+import FileUpload from '@components/FileUpload'
+import ImageUpload from '@components/ImageUpload'
 
 export default {
+  components: {
+    Editor,
+    FileUpload,
+    ImageUpload,
+  },
   props: {
     data: {
       type: Array,
@@ -109,8 +123,8 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm() {
+      this.$refs.ruleForm.resetFields();
     }
   }
 }
