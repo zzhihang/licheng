@@ -1,3 +1,5 @@
+export const URL_PREFIX = ''
+
 //自定义表单render类型
 export const FORM_TYPE = {
   INPUT: 'input',
@@ -9,6 +11,7 @@ export const FORM_TYPE = {
   EDITOR: 'editor',
   FILE_UPLOAD: 'file-upload',
   IMAGE_UPLOAD: 'image-upload',
+  ADDRESS_SELECT: 'address-select',
 }
 
 export const NEWS_TYPE = [{
@@ -32,5 +35,14 @@ export const NEWS_STATUS = [{
 },{
   label: '已下架',
   value: 2
+}]
+
+
+export const LOGISTICS_TYPE = [{
+  label: '车找货',
+  value: 0
+},{
+  label: '货找车',
+  value: 1
 }]
 

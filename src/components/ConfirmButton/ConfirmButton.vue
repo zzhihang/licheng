@@ -8,11 +8,7 @@
 
 <script>
   import request from '@/utils/request'
-
-  const tipMap = {
-    del: '删除',
-    cancel: '取消'
-  }
+  import {URL_PREFIX} from "@utils/const";
 
   export default {
     props: {
@@ -24,32 +20,33 @@
         type: String,
         default: ''
       },
-      ids: {
-        type: Array,
-        default: []
+      id: {
+        type: [String, Number],
+        default: ''
       },
+      title: {
+        type: String,
+        default: ''
+      }
     },
     methods: {
       async deleteClick(){
-        if(!this.ids.length){
+        if(!this.id){
           return this.$message.warning(`请选择要操作的数据`)
         }
-        this.$confirm({
-          content: `确定删除吗？`,
-          onOk: async () => {
-            const result = await request({
-              url: this.url,
-              method: 'post',
-              data: {ids: this.ids}
-            })
-            if (result.success) {
-              this.$message.info(`删除成功`)
-              this.$emit('deleteSuccess')
-              //await this.$refs.table.refresh()
-            } else {
-              this.$message.error(result.msg)
-            }
+        this.$confirm(this.title || `是否确定进行此操作?`, '确定提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          const result = await request({
+            url: URL_PREFIX + this.url + this.id,
+            method: 'get',
+          })
+          if(result.code === 200){
+            this.$emit('onSuccess')
           }
+          this.$message.success(result.msg)
         })
       },
     }

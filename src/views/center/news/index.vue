@@ -8,14 +8,27 @@
     </div>
     <data-table ref="table" :columns="columns" url="/bulktrade/news/list">
       <template slot="operate" slot-scope="{row}">
-        <el-button type="text">编辑</el-button>
+        <el-button type="text" v-if="row.status === 0">编辑</el-button>
         <confirm-button
           style="margin-left: 8px"
-          url="/sysdept/delete"
-          :ids="[row.id]"
-          @deleteSuccess="onSearch"
+          url="/news/delete/"
+          :id="row.id"
+          title="是否确定删除草稿"
+          @onSuccess="onSearch"
+          v-if="row.status === 0"
         >
           删除
+        </confirm-button>
+        <el-button type="text" v-if="row.status === 1 || row.status === 2">查看</el-button>
+        <confirm-button
+          style="margin-left: 8px"
+          url="/news/off/"
+          :id="row.id"
+          @onSuccess="onSearch"
+          title="是否确定取消发布"
+          v-if="row.status === 1"
+        >
+          取消发布
         </confirm-button>
       </template>
     </data-table>

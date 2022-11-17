@@ -18,6 +18,7 @@
         <el-input v-else-if="item.type === FORM_TYPE.TEXTAREA"
                   v-model="ruleForm[item.field]"
                   type="textarea"
+                  :placeholder="item.placeholder || ('请输入' + item.label)"
         ></el-input>
 
         <el-input v-else-if="item.type === FORM_TYPE.CHECKBOX"
@@ -25,12 +26,13 @@
                   type="textarea"
         ></el-input>
 
-        <el-checkbox-group v-else-if="item.type === FORM_TYPE.CHECKBOX" v-model="ruleForm[item.field]">
-          <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-          <el-checkbox label="地推活动" name="type"></el-checkbox>
-          <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-          <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-        </el-checkbox-group>
+        <el-date-picker
+          v-else-if="item.type === FORM_TYPE.DATEPICKER"
+          v-model="ruleForm[item.field]"
+          type="date"
+          :placeholder="item.placeholder || ('请选择' + item.label)"
+        >
+        </el-date-picker>
 
         <editor v-else-if="item.type === FORM_TYPE.EDITOR" v-model="ruleForm[item.field]" :minHeight="300"/>
 
@@ -40,7 +42,8 @@
 
         <el-input v-else
                   v-model="ruleForm[item.field]"
-                  :placeholder="item.placeholder || ('请填写' + item.label)">
+                  :placeholder="item.placeholder || ('请填写' + item.label)"
+        >
         </el-input>
 
       </el-form-item>

@@ -13,7 +13,7 @@
                 v-for="(child, index) in item.options"
                 :key="index"
                 :value="child.value">
-                {{ child.text }}
+                {{ child.label }}
               </el-option>
             </el-select>
 
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { formatDate } from "../../utils/time";
+import { formatDate } from "@utils/time";
 
 export default {
   name: 'SearchForm',

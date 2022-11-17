@@ -64,7 +64,14 @@ export default {
         path: '/center/bidding'
       },{
         name: '物流服务管理',
-        path: '/center/logistics'
+        path: '/center/logistics',
+        children: [{
+          name: '我发布的物流资讯',
+          path: '/center/logistics/publish',
+        },{
+          name: '我收藏的物流资讯',
+          path: '/center/news/collect',
+        }]
       },{
         name: '仓储服务管理',
         path: '/center/storage'
@@ -116,6 +123,7 @@ export default {
     .right-panel{
       flex: 1;
       padding-left: 40px;
+      overflow: hidden;
     }
 
     .panel-title{

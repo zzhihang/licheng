@@ -130,7 +130,24 @@ export const constantRoutes = [
             path: '/center/logistics',
             component: () => import('@/views/center/logistics/index.vue'),
             name: 'CenterLogistics',
+            redirect: '/center/logistics/publish',
             meta: { title: '物流服务管理', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/logistics/publish',
+            component: () => import('@/views/center/logistics/index.vue'),
+            name: 'CenterLogisticsPublish',
+            meta: { title: '我的发布', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/logistics/publish/goods-find-car',
+            component: () => import('@/views/center/logistics/publish/goods-find-car.vue'),
+            meta: { title: '发布货找车资讯', icon: 'dashboard', affix: true }
+          },
+          {
+            path: '/center/logistics/publish/car-find-goods',
+            component: () => import('@/views/center/logistics/publish/car-find-goods.vue'),
+            meta: { title: '发布车找货资讯', icon: 'dashboard', affix: true }
           },
           {
             path: '/center/product',

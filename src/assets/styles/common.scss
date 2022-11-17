@@ -20,6 +20,9 @@
 .bill-action{
   margin-top: 20px;
   margin-bottom: 30px;
+  .el-button{
+    margin-right: 20px;
+  }
 }
 
 .form-button-box{
@@ -27,5 +30,11 @@
   text-align: center;
   .el-button{
     margin-right: 30px;
+  }
+}
+
+.el-table__row .el-tooltip{
+  .el-button{
+    margin-right: 18px;
   }
 }

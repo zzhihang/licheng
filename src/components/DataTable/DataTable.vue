@@ -3,12 +3,15 @@
     <el-table
       :data="data"
       stripe
-      style="width: 100%">
+      style="width: 100%"
+    >
       <template v-for="item in columns">
         <el-table-column
           :key="item.key"
           :prop="item.key"
           :label="item.name"
+          :width="item.width || 150"
+          :fixed="item.key === 'operate' ? 'right' : false"
           align="center"
           :formatter="formatter(item)"
           show-overflow-tooltip
@@ -38,6 +41,7 @@
 <script>
 import Vue from 'vue';
 import {getData} from "@/api/common";
+import {URL_PREFIX} from "@utils/const";
 
 export default {
   name: 'DataTable',
@@ -89,7 +93,7 @@ export default {
       this.pageNum = 1;
       this.getList(params)
     },
-    getList(query) {
+    getList: function (query) {
       if (!this.url) {
         return
       }
@@ -100,7 +104,7 @@ export default {
         params = data
         data = {}
       }
-      getData({url: this.url, data, method: this.method, params})
+      getData({url: URL_PREFIX + this.url, data, method: this.method, params})
         .then((res) => {
           this.loading = false
           if (res.code === 200) {
