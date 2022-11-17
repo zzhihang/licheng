@@ -23,8 +23,12 @@
       class="table-pager"
       background
       layout="prev, pager, next"
+      :disabled="loading"
+      :page-size="pageSize"
       :total="total"
       :hide-on-single-page="true"
+      @size-change="onPageChange"
+      @current-change="onPageChange"
     >
     </el-pagination>
   </div>
@@ -54,19 +58,22 @@ export default {
       type: String,
       default: 'get'
     },
+    pageSize: {
+      type: Number,
+      default: 10
+    },
   },
   data() {
     return {
       data: [],
       params: {},
-      total: 0
+      total: 0,
+      pageNum: 1,
+      pageSize: this.pageSize,
+      loading: false,
     }
   },
   methods: {
-    load(params = {}) {
-      this.params = params;
-      this.getList();
-    },
     formatter(item) {
       return (row, column, val) => {
         if (item.dict) {
@@ -77,13 +84,17 @@ export default {
         }
         return val;
       }
-
     },
-    getList() {
+    load(params){ //带条件查询的话从1开始
+      this.pageNum = 1;
+      this.getList(params)
+    },
+    getList(query) {
       if (!this.url) {
         return
       }
       this.loading = true
+      this.params = Object.assign({}, this.params, {pageNum: this.pageNum, pageSize: this.pageSize}, query);
       let data = this.params, params = {};
       if (this.method === 'get') {
         params = data
@@ -96,13 +107,17 @@ export default {
             this.data = res.rows;
             this.total = res.total;
           } else {
-            this.tableData = []
-            this.page.attrs.total = 0
+            this.data = []
+            this.total = 0
           }
         })
         .finally(() => {
           this.loading = false
         })
+    },
+    onPageChange(pageNum){
+      this.pageNum = pageNum;
+      this.getList();
     }
   },
   watch: {

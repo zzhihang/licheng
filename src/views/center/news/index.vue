@@ -6,7 +6,7 @@
         <el-button icon="el-icon-plus" type="warning">发布</el-button>
       </router-link>
     </div>
-    <data-table ref="dataTable" :columns="columns" url="/bulktrade/news/list">
+    <data-table ref="table" :columns="columns" url="/bulktrade/news/list">
       <template slot="operate" slot-scope="{row}">
         <el-button type="text">编辑</el-button>
         <confirm-button
@@ -78,7 +78,7 @@ export default {
   methods: {
     onSearch(params){
       this.queryParam = params;
-      this.$refs.table.refresh(true)
+      this.$refs.table.load(params)
     },
   },
 }

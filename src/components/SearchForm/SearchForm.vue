@@ -20,6 +20,7 @@
             <el-date-picker
               v-else-if="item.type === 'datepicker'"
               type="date"
+              @change="onDatePickerChange($event, item.field)"
               v-model:value="queryParams[item.field]"
               placeholder="选择日期">
             </el-date-picker>
@@ -48,6 +49,8 @@
 </template>
 
 <script>
+import { formatDate } from "../../utils/time";
+
 export default {
   name: 'SearchForm',
   props: {
@@ -69,6 +72,10 @@ export default {
     search() {
       const params = this.queryParams
       this.$emit('search', params)
+    },
+    onDatePickerChange(e, field){
+      debugger
+      this.queryParams[field] = formatDate(e)
     },
     onPickerChange(e) {//这样写可能会报错,但是目前看来不影响什么,先这样吧.
       if (e) {
