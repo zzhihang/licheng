@@ -14,55 +14,14 @@ import Vue from 'vue';
 import FormRender from '@components/FormRender/FormRender'
 import {FORM_TYPE} from "@utils/const";
 import {goodsFindCar} from "@/api/logistics/logistics";
+import {GOODS_FIND_CAR_MODEL} from "@views/center/logistics/publish/model/model";
 export default {
   components: {
     FormRender
   },
   data() {
     return {
-      formData: [{
-        type: FORM_TYPE.INPUT,
-        label: '标题名称',
-        field: 'title'
-      },{
-        type: FORM_TYPE.ADDRESS_SELECT,
-        label: '装货地点',
-        field: 'fromDistrictStr',
-        extraField: 'fromDistrictId' //额外传递的id字段
-      },{
-        type: FORM_TYPE.TEXTAREA,
-        label: '详细地址',
-        field: 'fromAddress',
-      },{
-        type: FORM_TYPE.INPUT,
-        label: '商品名称',
-        field: 'goodsName'
-      },{
-        type: FORM_TYPE.INPUT,
-        label: '商品重量',
-        field: 'weight'
-      },{
-        type: FORM_TYPE.DATEPICKER,
-        label: '装货日期',
-        field: 'loadingDate'
-      },{
-        type: FORM_TYPE.ADDRESS_SELECT,
-        label: '收货地点',
-        field: 'toDistrictStr',
-        extraField: 'toDistrictId' //额外传递的id字段
-      },{
-        type: FORM_TYPE.TEXTAREA,
-        label: '具体要求',
-        field: 'details'
-      },{
-        type: FORM_TYPE.INPUT,
-        label: '联系人',
-        field: 'contact'
-      },{
-        type: FORM_TYPE.INPUT,
-        label: '联系电话',
-        field: 'tel'
-      },]
+      formData: GOODS_FIND_CAR_MODEL
     }
   },
   created() {

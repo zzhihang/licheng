@@ -8,21 +8,21 @@
                     :key="index">
 
     </news-list-card>
-    <el-pagination
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
+    <my-pager @current-change="onPageChange">
+    </my-pager>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import NewsListCard from "@/views/components/news/NewsListCard";
+import NewsListCard from "@views/news/components/NewsListCard";
 import {newCenterList} from "@/api/news/news";
+import MyPager from "@components/mine/MyPager/MyPager";
 
 export default {
   components: {
-    NewsListCard
+    NewsListCard,
+    MyPager
   },
   data() {
     return {
@@ -33,12 +33,14 @@ export default {
     this.getList();
   },
   methods: {
+    onPageChange(){
+
+    },
     async getList() {
       const {rows} = await newCenterList({newsType: 1});
       this.data = rows;
     }
   },
-
 }
 </script>
 

@@ -64,7 +64,8 @@
     "vuedraggable": "2.24.3",
     "vuex": "3.6.0",
     "webpack-dev-server": "^4.9.2",
-    "xlsx": "^0.16.0"
+    "xlsx": "^0.16.0",
+    "element-china-area-data": "5.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.4.6",

@@ -45,7 +45,7 @@ export default {
         title: '仓储服务',
         path: '/storage'
       },{
-        title: '供应商服务',
+        title: '供应链服务',
         path: '/supply'
       },{
         title: '用户中心',

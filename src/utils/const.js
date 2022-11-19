@@ -12,6 +12,7 @@ export const FORM_TYPE = {
   FILE_UPLOAD: 'file-upload',
   IMAGE_UPLOAD: 'image-upload',
   ADDRESS_SELECT: 'address-select',
+  ADDRESS_SELECT_RANGE: 'address_select_range',
 }
 
 export const NEWS_TYPE = [{
@@ -44,5 +45,21 @@ export const LOGISTICS_TYPE = [{
 },{
   label: '货找车',
   value: 1
+}]
+
+export const LOGISTICS_COST_TYPE = [{
+  label: '金额',
+  value: 0
+},{
+  label: '面议',
+  value: 1
+}]
+
+export const STORAGE_TYPE = [{
+  label: '货找仓',
+  value: 2
+},{
+  label: '仓找货',
+  value: 3
 }]
 

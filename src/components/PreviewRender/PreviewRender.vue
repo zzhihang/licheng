@@ -1,0 +1,83 @@
+<template>
+  <div class="preview-render">
+    <template v-for="(item, index) in list">
+      <h1 v-if="item.asTitle">
+        <span>{{dataSource[item.field]}}</span>
+        <el-button v-if="showCollect"
+                   style="margin-left: 18px; border-radius: 8px;"
+                   plain icon="el-icon-star-off"
+                   @click="$emit('onCollectClick')"
+                   size="small">收藏</el-button>
+      </h1>
+      <div class="preview-item"
+           v-else
+           :key="index"
+      >
+        <span class="preview-item-title">{{item.label}}</span>
+        <div class="preview-item-content" v-if="item.type === FORM_TYPE.ADDRESS_SELECT_RANGE">
+          {{dataSource[item.field1]}}
+          <i class="el-icon-right" v-if="dataSource[item.field1]"></i>
+          {{dataSource[item.field2]}}
+        </div>
+        <span class="preview-item-content" v-else>{{dataSource[item.field]}}</span>
+      </div>
+    </template>
+  </div>
+</template>
+
+<script>
+import Vue from 'vue';
+import {FORM_TYPE} from "@utils/const";
+
+export default {
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    },
+    dataSource: {
+      type: Object,
+      default: () => {}
+    },
+    showCollect: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      FORM_TYPE: FORM_TYPE
+    }
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+  .preview-render{
+    padding: 24px 24px 60px;
+    background: #F9F9FC;
+    border-radius: 8px;
+    h1{
+      color: #333333;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+    .preview-item{
+      font-size: 14px;
+      display: flex;
+      line-height: 40px;
+      margin-bottom: 20px;
+      .preview-item-title{
+        color: #333333;
+        display: inline-block;
+        width: 116px;
+        text-align: left;
+        font-weight: bold;
+      }
+      .preview-item-content{
+        color: #666666;
+      }
+    }
+  }
+</style>

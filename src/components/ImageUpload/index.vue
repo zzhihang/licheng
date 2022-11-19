@@ -74,7 +74,7 @@ export default {
       dialogVisible: false,
       hideUpload: false,
       baseUrl: process.env.VUE_APP_BASE_API,
-      uploadImgUrl: process.env.VUE_APP_BASE_API + '/common/upload', // 上传的图片服务器地址
+      uploadImgUrl: process.env.VUE_APP_BASE_API + '/upload', // 上传的图片服务器地址
       headers: {
         Authorization: 'Bearer ' + getToken()
       },
@@ -182,7 +182,7 @@ export default {
       this.dialogVisible = true
     },
     // 对象转成指定字符串分隔
-    listToString(list, separator) {
+    listToString(list, separator) {debugger
       let strs = ''
       separator = separator || ','
       for (const i in list) {

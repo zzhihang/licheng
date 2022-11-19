@@ -4,6 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
+import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
+import CenterRouterView from "@views/center/components/CenterRouterView";
 
 /**
  * Note: 路由配置项
@@ -68,8 +70,8 @@ export const constantRoutes = [
       {
         path: '/index',
         component: () => import('@/views/index'),
-        name:'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        name: 'Index',
+        meta: {title: '首页', icon: 'dashboard', affix: true}
       },
     ]
   },
@@ -81,91 +83,198 @@ export const constantRoutes = [
       {
         path: '/home',
         component: () => import('@/views/home'),
-        name:'Home',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        name: 'Home',
+        meta: {title: '首页', icon: 'dashboard', affix: true}
       },
       {
         path: '/news',
         component: () => import('@/views/news'),
         name: 'News',
-        meta: { title: '资讯中心', icon: 'dashboard', affix: true }
+        meta: {title: '资讯中心'},
+        children: [{
+          path: '/news/policy',
+          component: () => import('@/views/center/news/index.vue'),
+          meta: {title: '政策文件'}
+        }, {
+          path: '/news/industry',
+          component: () => import('@/views/center/news/index.vue'),
+          meta: {title: '行业新闻'}
+        }, {
+          path: '/news/study',
+          component: () => import('@/views/center/news/index.vue'),
+          meta: {title: '综合研究'}
+        }, {
+          path: '/news/:id',
+          component: () => import('@/views/center/news/index.vue'),
+          meta: {title: '新闻详情'}
+        }]
+      }, {
+        path: '/logistics/goods-find-car/:id',
+        component: () => import('@/views/logistics/detail'),
+        meta: {title: '查看货找车'},
+        hidden: true,
+      }, {
+        path: '/logistics/car-find-goods/:id',
+        component: () => import('@/views/logistics/detail'),
+        meta: {title: '查看车找货'},
+        hidden: true,
       },
       {
+        path: '/logistics',
+        component: PanelContainer,
+        redirect: '/logistics/goods-find-car',
+        meta: {title: '物流服务', icon: 'dashboard', affix: true},
+        children: [{
+          path: '/logistics/goods-find-car',
+          component: () => import('@/views/logistics'),
+          meta: {title: '货找车'}
+        }, {
+          path: '/logistics/car-find-goods',
+          component: () => import('@/views/logistics'),
+          meta: {title: '车找货'}
+        }, {
+          path: '/logistics/goods-find-car/:id',
+          component: () => import('@/views/logistics/detail'),
+          meta: {title: '查看货找车'},
+          hidden: true,
+        }, {
+          path: '/logistics/car-find-goods/:id',
+          component: () => import('@/views/logistics/detail'),
+          meta: {title: '查看车找货'},
+          hidden: true,
+        }]
+      }, {
+        path: '/storage',
+        component: PanelContainer,
+        redirect: '/storage/goods-find-warehouse',
+        meta: {title: '仓储服务'},
+        children: [{
+          path: '/storage/goods-find-warehouse',
+          component: () => import('@/views/storage'),
+          meta: {title: '货找仓'}
+        }, {
+          path: '/logistics/warehouse-find-goods',
+          component: () => import('@/views/storage'),
+          meta: {title: '仓找货'}
+        }, {
+          path: '/logistics/goods-find-warehouse/:id',
+          component: () => import('@/views/storage/detail'),
+          meta: {title: '查看货找仓'},
+          hidden: true,
+        }, {
+          path: '/logistics/warehouse-find-goods/:id',
+          component: () => import('@/views/storage/detail'),
+          meta: {title: '查看仓找货'},
+          hidden: true,
+        }]
+      }, {
+        path: '/supply',
+        component: PanelContainer,
+        redirect: '/supply',
+        meta: {title: '供应链服务'},
+        children: [{
+          path: '/supply',
+          component: () => import('@/views/supply'),
+          name: 'CenterUser',
+          meta: {title: '供应链服务', icon: 'dashboard', affix: true}
+        }]
+      }, {
         path: '/center',
-        component: () => import('@/views/center'),
+        //component: () => import('@/views/center'),
+        component: PanelContainer,
         name: 'User',
         redirect: '/center/user',
-        meta: { title: '用户中心', icon: 'dashboard', affix: true },
+        meta: {title: '用户中心', icon: 'dashboard', affix: true},
         children: [
           {
             path: '/center/user',
             component: () => import('@/views/center/user/index.vue'),
             name: 'CenterUser',
-            meta: { title: '用户管理', icon: 'dashboard', affix: true }
+            meta: {title: '用户管理', icon: 'dashboard', affix: true}
           },
           {
             path: '/center/news',
             component: () => import('@/views/center/news/index.vue'),
             name: 'CenterNews',
-            meta: { title: '资讯中心', icon: 'dashboard', affix: true }
+            meta: {title: '资讯中心', icon: 'dashboard', affix: true}
           },
           {
             path: '/center/news/add',
             component: () => import('@/views/center/news/add.vue'),
             name: 'CenterNewsAdd',
-            meta: { title: '发布资讯', icon: 'dashboard', affix: true }
+            meta: {title: '发布资讯', icon: 'dashboard', affix: true}
           },
           {
             path: '/center/bidding',
             component: () => import('@/views/center/bidding/index.vue'),
             name: 'CenterBidding',
-            meta: { title: '竞价交易管理', icon: 'dashboard', affix: true }
+            meta: {title: '竞价交易管理', icon: 'dashboard', affix: true}
           },
           {
             path: '/center/listing',
             component: () => import('@/views/center/listing/index.vue'),
             name: 'CenterListing',
-            meta: { title: '挂牌交易管理', icon: 'dashboard', affix: true }
-          },{
+            meta: {title: '挂牌交易管理', icon: 'dashboard', affix: true}
+          }, {
             path: '/center/logistics',
-            component: () => import('@/views/center/logistics/index.vue'),
+            component: CenterRouterView,
             name: 'CenterLogistics',
             redirect: '/center/logistics/publish',
-            meta: { title: '物流服务管理', icon: 'dashboard', affix: true }
-          },
-          {
-            path: '/center/logistics/publish',
-            component: () => import('@/views/center/logistics/index.vue'),
-            name: 'CenterLogisticsPublish',
-            meta: { title: '我的发布', icon: 'dashboard', affix: true }
-          },
-          {
-            path: '/center/logistics/publish/goods-find-car',
-            component: () => import('@/views/center/logistics/publish/goods-find-car.vue'),
-            meta: { title: '发布货找车资讯', icon: 'dashboard', affix: true }
-          },
-          {
-            path: '/center/logistics/publish/car-find-goods',
-            component: () => import('@/views/center/logistics/publish/car-find-goods.vue'),
-            meta: { title: '发布车找货资讯', icon: 'dashboard', affix: true }
+            meta: {title: '物流服务管理', icon: 'dashboard', affix: true},
+            children: [{
+              path: '/center/logistics/publish',
+              component: () => import('@/views/center/logistics/index.vue'),
+              name: 'CenterLogisticsPublish',
+              meta: {title: '我的发布', icon: 'dashboard', affix: true},
+            }, {
+              path: '/center/logistics/publish/goods-find-car',
+              component: () => import('@/views/center/logistics/publish/goods-find-car.vue'),
+              meta: {title: '发布货找车资讯', icon: 'dashboard', affix: true}
+            }, {
+              path: '/center/logistics/publish/car-find-goods',
+              component: () => import('@/views/center/logistics/publish/car-find-goods.vue'),
+              meta: {title: '发布车找货资讯', icon: 'dashboard', affix: true}
+            }, {
+              path: '/center/logistics/collect',
+              component: () => import('@/views/center/logistics/collect.vue'),
+              meta: {title: '我的收藏', icon: 'dashboard', affix: true}
+            },]
           },
           {
             path: '/center/product',
             component: () => import('@/views/center/product/index.vue'),
             name: 'CenterProduct',
-            meta: { title: '商品管理', icon: 'dashboard', affix: true }
+            meta: {title: '商品管理'}
           },
           {
             path: '/center/storage',
-            component: () => import('@/views/center/storage/index.vue'),
+            component: CenterRouterView,
             name: 'CenterStorage',
-            meta: { title: '仓储服务管理', icon: 'dashboard', affix: true }
+            meta: {title: '仓储服务管理'},
+            redirect: '/center/storage/publish',
+            children: [{
+              path: '/center/storage/publish',
+              component: () => import('@/views/center/storage/index.vue'),
+              meta: {title: '我的发布'},
+            }, {
+              path: '/center/storage/publish/goods-find-warehouse',
+              component: () => import('@/views/center/storage/publish/goods-find-warehouse.vue'),
+              meta: {title: '发布货找仓资讯'}
+            }, {
+              path: '/center/storage/publish/warehouse-find-goods',
+              component: () => import('@/views/center/storage/publish/warehouse-find-goods.vue'),
+              meta: {title: '发布仓找货资讯'}
+            }, {
+              path: '/center/storage/collect',
+              component: () => import('@/views/center/storage/collect.vue'),
+              meta: {title: '我的收藏'}
+            },]
           },
           {
             path: '/center/transaction',
             component: () => import('@/views/center/transaction/index.vue'),
             name: 'CenterTransaction',
-            meta: { title: '交易查询', icon: 'dashboard', affix: true }
+            meta: {title: '交易查询', icon: 'dashboard', affix: true}
           },
         ]
       },
@@ -187,7 +296,7 @@ export const constantRoutes = [
         path: 'profile',
         component: () => import('@/views/system/user/profile/index'),
         name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
+        meta: {title: '个人中心', icon: 'user'}
       }
     ]
   }
@@ -198,13 +307,13 @@ export const dynamicRoutes = [
     path: '/system/user-auth',
     component: Layout,
     hidden: true,
-    permissions: ['system:user:edit','system:user:auth'],
+    permissions: ['system:user:edit', 'system:user:auth'],
     children: [
       {
         path: 'role/:userId(\\d+)',
         component: () => import('@/views/system/user/authRole'),
         name: 'AuthRole',
-        meta: { title: '分配角色', activeMenu: '/system/user' }
+        meta: {title: '分配角色', activeMenu: '/system/user'}
       }
     ]
   },
@@ -212,13 +321,13 @@ export const dynamicRoutes = [
     path: '/system/role-auth',
     component: Layout,
     hidden: true,
-    permissions: ['system:role:edit','system:role:auth'],
+    permissions: ['system:role:edit', 'system:role:auth'],
     children: [
       {
         path: 'user/:roleId(\\d+)',
         component: () => import('@/views/system/role/authUser'),
         name: 'AuthUser',
-        meta: { title: '分配用户', activeMenu: '/system/role' }
+        meta: {title: '分配用户', activeMenu: '/system/role'}
       }
     ]
   },
@@ -232,7 +341,7 @@ export const dynamicRoutes = [
         path: 'index/:dictId(\\d+)',
         component: () => import('@/views/system/dict/data'),
         name: 'Data',
-        meta: { title: '字典数据', activeMenu: '/system/dict' }
+        meta: {title: '字典数据', activeMenu: '/system/dict'}
       }
     ]
   },
@@ -246,7 +355,7 @@ export const dynamicRoutes = [
         path: 'index',
         component: () => import('@/views/monitor/job/log'),
         name: 'JobLog',
-        meta: { title: '调度日志', activeMenu: '/monitor/job' }
+        meta: {title: '调度日志', activeMenu: '/monitor/job'}
       }
     ]
   },
@@ -260,13 +369,13 @@ export const dynamicRoutes = [
         path: 'index',
         component: () => import('@/views/tool/gen/editTable'),
         name: 'GenEdit',
-        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
+        meta: {title: '修改生成配置', activeMenu: '/tool/gen'}
       }
     ]
   }
 ]
 export default new Router({
   mode: 'history', // 去掉url中的#
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })

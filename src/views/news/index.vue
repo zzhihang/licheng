@@ -1,32 +1,24 @@
 <template>
   <div class="w news-center">
-    <child-menu title="资讯中心" :list="list"></child-menu>
-    <div class="menu-panel">
-      <h4>最新资讯</h4>
+    <panel-container title="资讯中心">
       <news-list></news-list>
-    </div>
+    </panel-container>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import ChildMenu from "@components/ChildMenu/ChildMenu";
-import NewsList from "@/views/components/news/NewsList";
+import NewsList from "@views/news/components/NewsList";
+import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
 
 export default {
   components: {
-    ChildMenu,
-    NewsList
+    NewsList,
+    PanelContainer
   },
   data() {
     return {
-      list: [{
-        title: '政策文件',
-      },{
-        title: '行业新闻',
-      },{
-        title: '综合研究',
-      }]
+
     }
   },
 }

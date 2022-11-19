@@ -70,7 +70,7 @@ export default {
           path: '/center/logistics/publish',
         },{
           name: '我收藏的物流资讯',
-          path: '/center/news/collect',
+          path: '/center/logistics/collect',
         }]
       },{
         name: '仓储服务管理',

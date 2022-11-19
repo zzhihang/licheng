@@ -12,15 +12,15 @@
 <script>
 import Vue from 'vue';
 import FormRender from '@components/FormRender/FormRender'
-import {carFindGoods} from "@/api/logistics/logistics";
-import {CAR_FIND_GOODS_MODEL} from "@views/center/logistics/publish/model/model";
+import {GOODS_FIND_WAREHOUSE_MODEL} from "@views/center/storage/publish/model/model";
+import {saveGoodsFindWarehouse} from "@/api/storage/storage";
 export default {
   components: {
     FormRender
   },
   data() {
     return {
-      formData: CAR_FIND_GOODS_MODEL
+      formData: GOODS_FIND_WAREHOUSE_MODEL
     }
   },
   created() {
@@ -32,7 +32,7 @@ export default {
         if (valid) {
           const params = this.$refs.formRender.getData();
           params.status = status;
-          const result = await carFindGoods(params);
+          const result = await saveGoodsFindWarehouse(params);
           if(result.code === 200){
             this.$router.go(-1);
             this.$message.success(result.msg)
