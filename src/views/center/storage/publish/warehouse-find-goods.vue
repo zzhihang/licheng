@@ -13,7 +13,7 @@
 import Vue from 'vue';
 import FormRender from '@components/FormRender/FormRender'
 import {WAREHOUSE_FIND_GOODS_MODEL} from "@views/center/storage/publish/model/model";
-import {saveWarehouseFindGoods} from "@/api/storage/storage";
+import {getWarehouseFindGoods, saveWarehouseFindGoods} from "@/api/storage/storage";
 export default {
   components: {
     FormRender
@@ -24,9 +24,18 @@ export default {
     }
   },
   created() {
-    this.title = this.$route.meta.title
+    if(this.$route.query.id){
+      this.getDetail()
+    }
   },
   methods: {
+    async getDetail(){
+      const {data} = await getWarehouseFindGoods(this.$route.query.id)
+      if(this.$route.query.copy){
+        delete data.id; //复制则删除id
+      }
+      this.$refs.formRender.setData(data)
+    },
     submitForm(status) {
       this.$refs.formRender.$refs.ruleForm.validate(async (valid) => {
         if (valid) {

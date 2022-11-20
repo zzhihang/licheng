@@ -88,36 +88,22 @@ export const constantRoutes = [
       },
       {
         path: '/news',
-        component: () => import('@/views/news'),
-        name: 'News',
+        component: PanelContainer,
         meta: {title: '资讯中心'},
+        redirect: '/news/policy',
         children: [{
           path: '/news/policy',
-          component: () => import('@/views/center/news/index.vue'),
+          component: () => import('@/views/news/index.vue'),
           meta: {title: '政策文件'}
         }, {
           path: '/news/industry',
-          component: () => import('@/views/center/news/index.vue'),
+          component: () => import('@/views/news/index.vue'),
           meta: {title: '行业新闻'}
         }, {
           path: '/news/study',
-          component: () => import('@/views/center/news/index.vue'),
+          component: () => import('@/views/news/index.vue'),
           meta: {title: '综合研究'}
-        }, {
-          path: '/news/:id',
-          component: () => import('@/views/center/news/index.vue'),
-          meta: {title: '新闻详情'}
         }]
-      }, {
-        path: '/logistics/goods-find-car/:id',
-        component: () => import('@/views/logistics/detail'),
-        meta: {title: '查看货找车'},
-        hidden: true,
-      }, {
-        path: '/logistics/car-find-goods/:id',
-        component: () => import('@/views/logistics/detail'),
-        meta: {title: '查看车找货'},
-        hidden: true,
       },
       {
         path: '/logistics',
@@ -132,18 +118,9 @@ export const constantRoutes = [
           path: '/logistics/car-find-goods',
           component: () => import('@/views/logistics'),
           meta: {title: '车找货'}
-        }, {
-          path: '/logistics/goods-find-car/:id',
-          component: () => import('@/views/logistics/detail'),
-          meta: {title: '查看货找车'},
-          hidden: true,
-        }, {
-          path: '/logistics/car-find-goods/:id',
-          component: () => import('@/views/logistics/detail'),
-          meta: {title: '查看车找货'},
-          hidden: true,
         }]
-      }, {
+      },
+      {
         path: '/storage',
         component: PanelContainer,
         redirect: '/storage/goods-find-warehouse',
@@ -153,16 +130,16 @@ export const constantRoutes = [
           component: () => import('@/views/storage'),
           meta: {title: '货找仓'}
         }, {
-          path: '/logistics/warehouse-find-goods',
+          path: '/storage/warehouse-find-goods',
           component: () => import('@/views/storage'),
           meta: {title: '仓找货'}
         }, {
-          path: '/logistics/goods-find-warehouse/:id',
+          path: '/storage/goods-find-warehouse/:id',
           component: () => import('@/views/storage/detail'),
           meta: {title: '查看货找仓'},
           hidden: true,
         }, {
-          path: '/logistics/warehouse-find-goods/:id',
+          path: '/storage/warehouse-find-goods/:id',
           component: () => import('@/views/storage/detail'),
           meta: {title: '查看仓找货'},
           hidden: true,
@@ -178,7 +155,26 @@ export const constantRoutes = [
           name: 'CenterUser',
           meta: {title: '供应链服务', icon: 'dashboard', affix: true}
         }]
-      }, {
+      },
+      {
+        path: '/logistics/:id',
+        component: () => import('@/views/logistics/detail'),
+        meta: {title: '查看车找货'},
+        hidden: true,
+      },
+      {
+        path: '/news/:id',
+        component: () => import('@/views/news/detail.vue'),
+        meta: {title: '资讯详情'},
+        hidden: true
+      },
+      {
+        path: '/storage/:id',
+        component: () => import('@/views/storage/detail.vue'),
+        meta: {title: '资讯详情'},
+        hidden: true
+      },
+      {
         path: '/center',
         //component: () => import('@/views/center'),
         component: PanelContainer,
@@ -194,15 +190,26 @@ export const constantRoutes = [
           },
           {
             path: '/center/news',
-            component: () => import('@/views/center/news/index.vue'),
+            component: CenterRouterView,
             name: 'CenterNews',
-            meta: {title: '资讯中心', icon: 'dashboard', affix: true}
-          },
-          {
-            path: '/center/news/add',
-            component: () => import('@/views/center/news/add.vue'),
-            name: 'CenterNewsAdd',
-            meta: {title: '发布资讯', icon: 'dashboard', affix: true}
+            meta: {title: '资讯管理'},
+            redirect: '/center/news',
+            children: [{
+              path: '/center/news',
+              component: () => import('@/views/center/news/index.vue'),
+              meta: {title: '资讯管理'}
+            },{
+              path: '/center/news/add',
+              component: () => import('@/views/center/news/add.vue'),
+              name: 'CenterNewsAdd',
+              hidden: true,
+              meta: {title: '发布资讯'}
+            },{
+              path: '/center/news/:id',
+              component: () => import('@/views/center/news/detail.vue'),
+              hidden: true,
+              meta: {title: '资讯详情'}
+            },]
           },
           {
             path: '/center/bidding',
@@ -254,21 +261,31 @@ export const constantRoutes = [
             redirect: '/center/storage/publish',
             children: [{
               path: '/center/storage/publish',
+              title: '我发布的仓储资讯',
               component: () => import('@/views/center/storage/index.vue'),
               meta: {title: '我的发布'},
             }, {
               path: '/center/storage/publish/goods-find-warehouse',
               component: () => import('@/views/center/storage/publish/goods-find-warehouse.vue'),
-              meta: {title: '发布货找仓资讯'}
+              meta: {title: '发布货找仓资讯'},
+              hidden: true
             }, {
               path: '/center/storage/publish/warehouse-find-goods',
               component: () => import('@/views/center/storage/publish/warehouse-find-goods.vue'),
-              meta: {title: '发布仓找货资讯'}
+              meta: {title: '发布仓找货资讯'},
+              hidden: true
             }, {
               path: '/center/storage/collect',
+              title: '我收藏的仓储资讯',
               component: () => import('@/views/center/storage/collect.vue'),
-              meta: {title: '我的收藏'}
-            },]
+              meta: {title: '我的收藏'},
+            },{
+              path: '/center/storage/:id',
+              title: '资讯详情',
+              component: () => import('@/views/center/storage/detail.vue'),
+              meta: {title: '资讯详情'},
+              hidden: true
+            }]
           },
           {
             path: '/center/transaction',

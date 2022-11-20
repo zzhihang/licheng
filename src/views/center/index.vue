@@ -79,7 +79,7 @@ export default {
         name: '资讯管理',
         path: '/center/news',
         children: [{
-          name: '咨询管理',
+          name: '资讯管理',
           path: '/center/news',
         }]
       },{

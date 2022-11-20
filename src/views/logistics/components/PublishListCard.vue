@@ -56,6 +56,7 @@ export default {
     padding: 20px 24px;
     border-radius: 8px;
     border: 1px solid #DEE3ED;
+    cursor: pointer;
     img{
       width: 70px;
       height: 70px;

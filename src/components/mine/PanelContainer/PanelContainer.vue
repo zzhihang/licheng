@@ -8,27 +8,27 @@
       text-color="#333333"
       active-text-color="#165DFF">
       <template v-for="(item, index) in menus">
-        <router-link :to="item.path">
           <el-submenu :key="index"
-                      :index="index"
+                      :index="String(index)"
           >
             <template slot="title" v-if="!item.hidden">
-              <span>{{ item.meta.title }}</span>
+              <router-link :to="item.path">
+                <span>{{ item.meta.title }}</span>
+              </router-link>
             </template>
             <el-menu-item-group v-if="item.children">
               <template v-for="(child, childIndex) in item.children">
-                <router-link :to="child.path">
+                <router-link :to="child.path" v-if="!child.hidden">
                   <el-menu-item :key="childIndex"
                                 :index="index + '-' + childIndex"
                                 style="padding-left: 60px;"
                   >
-                    {{ child.name }}
+                    {{ child.title || child.meta.title }}
                   </el-menu-item>
                 </router-link>
               </template>
             </el-menu-item-group>
           </el-submenu>
-        </router-link>
       </template>
     </el-menu>
     <div class="right-panel">
@@ -48,12 +48,6 @@ import {constantRoutes} from '@/router'
 
 export default {
   components: {},
-  props: {
-    menus: {
-      type: Array,
-      default: []
-    },
-  },
   data() {
     return {
       title: '',
@@ -84,6 +78,7 @@ export default {
   display: flex;
   padding-top: 30px;
   padding-bottom: 240px;
+  background: #FFFFFF;
 
   .el-menu {
     background: #FFFFFF;
@@ -91,10 +86,6 @@ export default {
     border-radius: 8px;
     width: 246px;
     flex-shrink: 0;
-
-    ::v-deep .el-menu-item {
-      padding-left: 60px;
-    }
   }
 
   .right-panel {

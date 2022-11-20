@@ -6,7 +6,7 @@
         <el-button icon="el-icon-plus" type="warning">发布</el-button>
       </router-link>
     </div>
-    <data-table ref="table" :columns="columns" url="/bulktrade/news/list">
+    <data-table ref="table" :columns="columns" url="/news/list">
       <template slot="operate" slot-scope="{row}">
         <el-button type="text" v-if="row.status === 0">编辑</el-button>
         <confirm-button
@@ -19,7 +19,10 @@
         >
           删除
         </confirm-button>
-        <el-button type="text" v-if="row.status === 1 || row.status === 2">查看</el-button>
+        <el-button type="text"
+                   v-if="row.status === 1 || row.status === 2"
+                   @click="$router.push({path: `/center/news/${row.id}`})"
+        >查看</el-button>
         <confirm-button
           style="margin-left: 8px"
           url="/news/off/"
@@ -82,6 +85,7 @@ export default {
         name: '操作',
         key: 'operate',
         slots: ['operate'],
+        width: 200
       }]
     }
   },

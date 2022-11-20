@@ -1,4 +1,5 @@
 import {FORM_TYPE, LOGISTICS_COST_TYPE} from "@utils/const";
+import {MOBILE_VALIDATOR} from "@utils/validator";
 
 export const CAR_FIND_GOODS_MODEL = [{
   type: FORM_TYPE.INPUT,
@@ -35,7 +36,8 @@ export const CAR_FIND_GOODS_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',
-  field: 'tel'
+  field: 'tel',
+  validator: MOBILE_VALIDATOR
 }]
 
 export const GOODS_FIND_CAR_MODEL = [{
@@ -80,5 +82,6 @@ export const GOODS_FIND_CAR_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',
-  field: 'tel'
+  field: 'tel',
+  validator: MOBILE_VALIDATOR
 }]

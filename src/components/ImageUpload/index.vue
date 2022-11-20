@@ -97,13 +97,15 @@ export default {
           this.fileList = list.map(item => {
             if (typeof item === 'string') {
               if (item.indexOf(this.baseUrl) === -1) {
-                item = { name: this.baseUrl + item, url: this.baseUrl + item }
+                //item = { name: this.baseUrl + item, url: this.baseUrl + item }
+                item = { name: this.baseUrl + item, url: item }
               } else {
                 item = { name: item, url: item }
               }
             }
             return item
           })
+          console.log(this.fileList)
         } else {
           this.fileList = []
           return []
@@ -124,7 +126,7 @@ export default {
     },
     // 上传成功回调
     handleUploadSuccess(res) {
-      this.fileList.push({ name: res.fileName, url: res.fileName })
+      this.fileList.push({ name: res.fileName, url: res.data.url })
       this.$emit('input', this.listToString(this.fileList))
       this.loading.close()
     },
@@ -182,7 +184,7 @@ export default {
       this.dialogVisible = true
     },
     // 对象转成指定字符串分隔
-    listToString(list, separator) {debugger
+    listToString(list, separator) {
       let strs = ''
       separator = separator || ','
       for (const i in list) {

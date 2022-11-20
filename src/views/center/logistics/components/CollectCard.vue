@@ -24,6 +24,7 @@ export default {
     padding: 22px 29px;
     font-size: 14px;
     color: #666666;
+    cursor: pointer;
     .time{
       font-size: 12px;
     }

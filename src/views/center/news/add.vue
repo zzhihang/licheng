@@ -49,7 +49,6 @@ export default {
         if (valid) {
           const params = this.$refs.formRender.getData();
           params.status = status;
-          params.cover = 'https://wx2.sinaimg.cn/mw2000/001PqFBDgy1h82dkk3yezj66qo8aokjt02.jpg' //TODO test
           const result = await addNews(params);
           if(result.code === 200){
             this.$router.go(-1);

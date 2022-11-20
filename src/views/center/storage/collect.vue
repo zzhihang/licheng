@@ -1,14 +1,16 @@
 <template>
   <div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="货找仓" name="first">货找仓</el-tab-pane>
-      <el-tab-pane label="仓找货" name="second">仓找货</el-tab-pane>
+    <el-tabs v-model="active" @tab-click="handleClick">
+      <el-tab-pane label="货找仓" name="1"></el-tab-pane>
+      <el-tab-pane label="仓找货" name="2"></el-tab-pane>
     </el-tabs>
     <div class="list">
       <collect-card v-for="(item, index) in list"
                     :key="index"
                     :title="item.title"
-                    :time="item.createTime"
+                    :time="item.postTime"
+                    @click.native="onCardClick(item)"
+                    style="margin-bottom: 10px;"
       ></collect-card>
     </div>
   </div>
@@ -16,16 +18,16 @@
 
 <script>
 import Vue from 'vue';
-import CollectCrd from "@views/center/logistics/components/CollectCrd";
-import {userFavoriteWarehouseFindGoods} from "@/api/storage/storage";
+import CollectCard from "@views/center/logistics/components/CollectCard";
+import {userFavoriteGoodsFindWarehouse, userFavoriteWarehouseFindGoods} from "@/api/storage/storage";
 
 export default {
   components: {
-    CollectCrd
+    CollectCard
   },
   data() {
     return {
-      activeName: 'first',
+      active: '1',
       list: []
     }
   },
@@ -34,10 +36,18 @@ export default {
   },
   methods: {
     async getList() {
-      const {data} = await userFavoriteWarehouseFindGoods({pageNum: 1})
+      let service = userFavoriteWarehouseFindGoods
+      if(this.active === '1'){
+        service = userFavoriteGoodsFindWarehouse;
+      }
+      const {rows} = await service({pageNum: 1})
+      this.list = rows;
     },
     handleClick(e) {
-
+      this.getList();
+    },
+    onCardClick(data){
+      this.$router.push({path: '/center/storage/' + data.id, query: {type: data.type}})
     }
   },
 }

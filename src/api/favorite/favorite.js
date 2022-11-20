@@ -7,8 +7,16 @@ import request from "@utils/request";
 */
 export function addFavorite({businessId, favoriteType}) {
   return request({
-    url: `/favorite/newFavorite`,
-    method: 'get',
+    url: `/favorite/new`,
+    method: 'post',
+    params: {businessId, favoriteType}
+  })
+}
+
+export function cancelFavorite({businessId, favoriteType}) {
+  return request({
+    url: `/favorite/cancel`,
+    method: 'post',
     params: {businessId, favoriteType}
   })
 }

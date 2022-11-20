@@ -9,8 +9,7 @@
                        :time="item.postTime"
                        @click.native="$emit('onCardClick', item.id)"
     ></publish-list-card>
-    <my-pager @current-change="onPageChange">
-    </my-pager>
+    <my-pager style="text-align: center" @current-change="onPageChange" :total="total"></my-pager>
   </div>
 </template>
 
@@ -32,15 +31,18 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      pageNum: 1,
+      total: 0
     }
   },
   created() {
     this.getList();
   },
   methods: {
-    onPageChange(){
-
+    onPageChange(pageNum){
+      this.pageNum = pageNum
+      this.getList()
     },
     async getList() {
       const result = await request({
@@ -50,6 +52,7 @@ export default {
       });
       if(result.code === 200){
         this.data = result.rows;
+        this.total = result.total
       }else{
         this.$message.error(result.msg);
       }

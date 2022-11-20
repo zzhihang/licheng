@@ -1,9 +1,5 @@
 <template>
-  <div class="w news-center">
-    <panel-container title="资讯中心">
-      <news-list></news-list>
-    </panel-container>
-  </div>
+  <news-list></news-list>
 </template>
 
 <script>

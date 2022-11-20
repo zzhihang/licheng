@@ -1,4 +1,5 @@
 import {FORM_TYPE, LOGISTICS_COST_TYPE} from "@utils/const";
+import {MOBILE_VALIDATOR} from "@utils/validator";
 
 export const WAREHOUSE_FIND_GOODS_MODEL = [{
   type: FORM_TYPE.INPUT,
@@ -17,7 +18,7 @@ export const WAREHOUSE_FIND_GOODS_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '面积',
-  field: 'requireArea',
+  field: 'area',
 },{
   type: FORM_TYPE.RADIO,
   label: '费用类型',
@@ -39,7 +40,8 @@ export const WAREHOUSE_FIND_GOODS_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',
-  field: 'tel'
+  field: 'tel',
+  validator: MOBILE_VALIDATOR
 },{
   type: FORM_TYPE.IMAGE_UPLOAD,
   label: '厂房照片',
@@ -85,5 +87,6 @@ export const GOODS_FIND_WAREHOUSE_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',
-  field: 'tel'
+  field: 'tel',
+  validator: MOBILE_VALIDATOR
 }]

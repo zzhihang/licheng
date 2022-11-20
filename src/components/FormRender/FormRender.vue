@@ -4,7 +4,6 @@
                     :label="item.label"
                     :prop="item.field"
                     :key="index"
-                    :required="item.required || true"
       >
         <el-select v-if="item.type === FORM_TYPE.SELECT"
                    v-model="ruleForm[item.field]"
@@ -107,44 +106,32 @@ export default {
       FORM_TYPE: FORM_TYPE,
       options: regionData,
       ruleForm: {},
-      rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
-        ]
-      }
+      rules: {}
     };
   },
   watch: {
     data: {
       handler(val) {
-        const form = {}
+        const form = {};
+        const rules = {};
         this.data.forEach(item => { //自动生成ruleForm
           if(item.defaultValue === undefined){
             form[item.field] =  ''
           }else{
             form[item.field] =  item.defaultValue
           }
+          //生成rules
+          rules[item.field] = [{required: item.required !== false, message: '请填写必填项'}]
+          if(item.validator){
+            if(Array.isArray(item.validator)){
+              rules[item.field].concat(item.validator)
+            }else{
+              rules[item.field].push(item.validator)
+            }
+          }
         })
         this.ruleForm = form;
+        this.rules = rules
       },
       immediate: true
     },
@@ -168,6 +155,9 @@ export default {
     },
     resetForm() {
       this.$refs.ruleForm.resetFields();
+    },
+    setData(data){
+      this.ruleForm = data
     }
   }
 }

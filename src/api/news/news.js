@@ -1,6 +1,8 @@
 import request from '@/utils/request'
 
-export function newCenterList({newsType = 1, pageNum = 1, pageSize = 10}) {
+
+//0 资讯类型 1 政策文件 2 行业新闻 3 综合研究
+export function newCenterList({newsType = 0, pageNum = 1, pageSize = 10}) {
   return request({
     url: '/news/newCenterList',
     method: 'get',
@@ -18,8 +20,23 @@ export function userCenterNewsList({title = '', pageNum = 1, pageSize = 10}) {
 
 export function addNews(data) {
   return request({
-    url: '/goodsFindCar',
+    url: '/news',
     method: 'post',
     data: data
   })
 }
+
+export function getNewsDetail(id) {
+  return request({
+    url: `/news/newsDetail/${id}`,
+    method: 'get'
+  })
+}
+
+export function getNewsHotList(id) {
+  return request({
+    url: `/news/hotList`,
+    method: 'get'
+  })
+}
+

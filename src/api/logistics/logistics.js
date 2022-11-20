@@ -37,11 +37,33 @@ export function userFavoriteCarFindGoods({pageNum, pageSize = 10}) {
 * @Param:
 * @return:
 */
-export function goodsFindCar2c({pageNum, pageSize = 10}) {
+export function getGoodsFindCarList2c({pageNum=1, pageSize = 10}) {
   return request({
     url: '/goodsFindCar/indexList',
     method: 'get',
     params: {pageNum, pageSize}
+  })
+}
+
+export function getCarFindGoodsList2c({pageNum=1, pageSize = 10}) {
+  return request({
+    url: '/carFindGoods/indexList',
+    method: 'get',
+    params: {pageNum, pageSize}
+  })
+}
+
+export function getCarFindGoodsDetail2c(id) {
+  return request({
+    url: `/carFindGoods/indexDetail/${id}`,
+    method: 'get',
+  })
+}
+
+export function getGoodsFindCarDetail2c(id) {
+  return request({
+    url: `/goodsFindCar/indexDetail/${id}`,
+    method: 'get',
   })
 }
 
@@ -51,6 +73,7 @@ export function getCarFindGoods(id) {
     method: 'get',
   })
 }
+
 
 export function getGoodsFindCar(id) {
   return request({

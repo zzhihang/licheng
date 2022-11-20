@@ -17,6 +17,14 @@
   -webkit-box-orient: vertical;
 }
 
+.ellipsis3{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .bill-action{
   margin-top: 20px;
   margin-bottom: 30px;
@@ -37,4 +45,10 @@
   .el-button{
     margin-right: 18px;
   }
+}
+
+.news-detail-content{
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 300px;
 }

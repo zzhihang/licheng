@@ -5,7 +5,10 @@
                     :cover="item.cover"
                     :title="item.title"
                     :time="item.postTime"
-                    :key="index">
+                    :key="index"
+                    @click.native="onCardClick(item)"
+                    style="margin-bottom: 20px;"
+    >
 
     </news-list-card>
     <my-pager @current-change="onPageChange">
@@ -18,6 +21,13 @@ import Vue from 'vue';
 import NewsListCard from "@views/news/components/NewsListCard";
 import {newCenterList} from "@/api/news/news";
 import MyPager from "@components/mine/MyPager/MyPager";
+import {getLastPath} from '@utils/utils'
+
+const typeMap = {
+  policy: 1,
+  industry: 2,
+  study: 3,
+}
 
 export default {
   components: {
@@ -26,18 +36,26 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      pageNum: 1
     }
   },
   created() {
     this.getList();
   },
   methods: {
-    onPageChange(){
-
+    onCardClick(data){
+      this.$router.push({
+        path: `/news/${data.id}`
+      })
+    },
+    onPageChange(pageNum){
+      this.pageNum = pageNum;
+      this.getList()
     },
     async getList() {
-      const {rows} = await newCenterList({newsType: 1});
+      const type = getLastPath(this.$route.path)
+      const {rows} = await newCenterList({newsType: typeMap[type], pageNum: this.pageNum});
       this.data = rows;
     }
   },

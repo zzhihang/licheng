@@ -6,6 +6,7 @@
 import Vue from 'vue';
 import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
 import PublishList from "@views/logistics/components/PublishList";
+import {NEWS_CLASS} from "@utils/const";
 
 export default {
   components: {
@@ -20,13 +21,15 @@ export default {
   created() {
     if(this.$route.path === '/storage/goods-find-warehouse'){
       this.service = '/goodsFindWarehouse/indexList'
+      this.type = NEWS_CLASS.GOODS_FIND_WAREHOUSE
     }else{
       this.service = '/warehouseFindGoods/indexList'
+      this.type = NEWS_CLASS.WAREHOUSE_FIND_GOODS
     }
   },
   methods: {
     onCardClick(id) {
-      this.$router.push(`${this.$route.path}/${id}`)
+      this.$router.push(`/storage/${id}?type=${this.type}`)
     }
   },
 }

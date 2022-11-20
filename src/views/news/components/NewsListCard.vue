@@ -5,10 +5,10 @@
       <div>
         <h6 class="title">
           <span>{{title}}</span>
-          <span class="view-num"><img :src="require('../../../assets/icons/img/eye.png')" alt="">{{pv}}</span>
+          <span class="view-num"><i class="el-icon-view"></i>{{pv}}</span>
         </h6>
         <p class="time">{{time}}</p>
-        <p class="content">{{content}}</p>
+        <p class="content ellipsis3">{{content}}</p>
       </div>
     </div>
   </div>
@@ -48,6 +48,9 @@ export default {
     padding: 24px;
     display: flex;
     background: #F6F7FA;
+    border: 1px solid #DEE3ED;
+    border-radius: 8px;
+    cursor: pointer;
 
     img{
       width: 118px;
@@ -84,6 +87,9 @@ export default {
       color: #ACB1C0;
       display: inline-flex;
       align-items: center;
+      i{
+        margin-right: 4px;
+      }
       img{
         height: 14px;
         width: 14px;

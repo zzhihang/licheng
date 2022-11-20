@@ -7,12 +7,13 @@
             <el-select v-if="item.type === 'select'"
                        v-model="queryParams[item.field]"
                        :placeholder="`请选择${item.label}`"
-                       default-value=""
             >
               <el-option
                 v-for="(child, index) in item.options"
                 :key="index"
-                :value="child.value">
+                :value="child.value"
+                :label="item.label"
+              >
                 {{ child.label }}
               </el-option>
             </el-select>

@@ -11,7 +11,10 @@
     </div>
     <data-table ref="table" :columns="columns" url="/warehouseFindGoods/userPostWarehouseList">
       <template slot="operate" slot-scope="{row}">
-        <el-button type="text" v-if="row.status === 0">编辑</el-button>
+        <el-button type="text"
+                   v-if="row.status === 0"
+                   @click="onEditClick(row)"
+        >编辑</el-button>
         <confirm-button
           style="margin-left: 8px"
           url="/news/delete/"
@@ -22,9 +25,12 @@
         >
           删除
         </confirm-button>
-        <el-button type="text" v-if="row.status === 1 || row.status === 2">查看</el-button>
+        <el-button type="text"
+                   v-if="row.status === 1 || row.status === 2"
+                   @click="$router.push({path: '/center/storage/' + row.id, query: {type: row.type}})"
+        >查看</el-button>
         <confirm-button
-          :url="row.type === 2 ? '/goodsFindWarehouse/off' : '/warehouseFindGoods/off' "
+          :url="row.type === NEWS_CLASS.GOODS_FIND_WAREHOUSE ? '/goodsFindWarehouse/off/' : '/warehouseFindGoods/off/' "
           :id="row.id"
           @onSuccess="onSearch"
           title="是否确定取消发布"
@@ -32,7 +38,10 @@
         >
           取消发布
         </confirm-button>
-        <el-button type="text" v-if="row.status === 1 || row.status === 2">复制</el-button>
+        <el-button type="text"
+                   v-if="row.status === 1 || row.status === 2"
+                   @click="onEditClick(row, 'copy')"
+        >复制</el-button>
       </template>
     </data-table>
   </div>
@@ -41,7 +50,7 @@
 <script>
 import Vue from 'vue';
 import SearchForm from "@components/SearchForm/SearchForm";
-import {FORM_TYPE, LOGISTICS_TYPE, NEWS_STATUS, NEWS_TYPE, STORAGE_TYPE} from "@utils/const";
+import {FORM_TYPE, LOGISTICS_TYPE, NEWS_CLASS, NEWS_STATUS, NEWS_TYPE, STORAGE_TYPE} from "@utils/const";
 import DataTable from "@components/DataTable/DataTable";
 import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 
@@ -53,6 +62,7 @@ export default {
   },
   data() {
     return {
+      NEWS_CLASS,
       searchList: [{
         field: 'type',
         label: '资讯类型',
@@ -85,7 +95,7 @@ export default {
         name: '操作',
         key: 'operate',
         slots: ['operate'],
-        width: 200
+        width: 250
       }]
     }
   },
@@ -97,6 +107,12 @@ export default {
       this.queryParam = params;
       this.$refs.table.load(params)
     },
+    onEditClick(row, copy){
+      this.$router.push({
+        path: row.type === NEWS_CLASS.GOODS_FIND_WAREHOUSE ? '/center/storage/publish/goods-find-warehouse' : '/center/storage/publish/warehouse-find-goods',
+        query: {id: row.id, copy}
+      })
+    }
   },
 }
 </script>

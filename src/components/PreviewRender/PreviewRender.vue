@@ -7,7 +7,7 @@
                    style="margin-left: 18px; border-radius: 8px;"
                    plain icon="el-icon-star-off"
                    @click="$emit('onCollectClick')"
-                   size="small">收藏</el-button>
+                   size="small">{{dataSource['favorite'] ? '取消收藏' : '收藏'}}</el-button>
       </h1>
       <div class="preview-item"
            v-else
@@ -19,6 +19,12 @@
           <i class="el-icon-right" v-if="dataSource[item.field1]"></i>
           {{dataSource[item.field2]}}
         </div>
+        <el-image
+          v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD"
+          style="width: 100px; height: 100px"
+          :src="dataSource[item.field]"
+          :preview-src-list="[dataSource[item.field]]">
+        </el-image>
         <span class="preview-item-content" v-else>{{dataSource[item.field]}}</span>
       </div>
     </template>
@@ -40,6 +46,10 @@ export default {
       default: () => {}
     },
     showCollect: {
+      type: Boolean,
+      default: false
+    },
+    isFavorite: {
       type: Boolean,
       default: false
     }
