@@ -9,7 +9,7 @@ export function addFavorite({businessId, favoriteType}) {
   return request({
     url: `/favorite/new`,
     method: 'post',
-    params: {businessId, favoriteType}
+    data: {businessId, favoriteType}
   })
 }
 

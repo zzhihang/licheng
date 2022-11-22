@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px">
       <el-form-item v-for="(item, index) in data"
                     :label="item.label"
                     :prop="item.field"
@@ -22,6 +22,8 @@
         <el-input v-else-if="item.type === FORM_TYPE.TEXTAREA"
                   v-model="ruleForm[item.field]"
                   type="textarea"
+                  :maxlength="item.maxLength"
+                  :show-word-limit="true"
                   :placeholder="item.placeholder || ('请输入' + item.label)"
         ></el-input>
 
@@ -34,7 +36,9 @@
         <el-date-picker
           v-else-if="item.type === FORM_TYPE.DATEPICKER"
           v-model="ruleForm[item.field]"
+          :value-format="item.format || 'yyyy-MM-dd'"
           type="date"
+          :picker-options="item.options"
           :placeholder="item.placeholder || ('请选择' + item.label)"
         >
         </el-date-picker>
@@ -43,7 +47,10 @@
 
         <file-upload v-else-if="item.type === FORM_TYPE.FILE_UPLOAD" v-model="ruleForm[item.field]"/>
 
-        <image-upload v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD" v-model="ruleForm[item.field]"/>
+        <image-upload v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD"
+                      v-model="ruleForm[item.field]"
+                      :limit="item.limit"
+        />
 
         <el-cascader
           v-else-if="item.type === FORM_TYPE.ADDRESS_SELECT"
@@ -68,6 +75,12 @@
           </el-cascader>
         </div>
 
+        <my-select v-else-if="item.type === FORM_TYPE.MY_SELECT"
+                   v-model="ruleForm[item.field]"
+                   :placeholder="item.placeholder || ('请选择' + item.label)"
+                   :url="item.url"
+        ></my-select>
+
         <el-input v-else
                   v-model="ruleForm[item.field]"
                   :maxlength="item.maxLength"
@@ -88,12 +101,14 @@ import Editor from '@components/Editor'
 import FileUpload from '@components/FileUpload'
 import ImageUpload from '@components/ImageUpload'
 import { regionData, CodeToText } from 'element-china-area-data'
+import MySelect from "@components/mine/MySelect/MySelect";
 
 export default {
   components: {
     Editor,
     FileUpload,
     ImageUpload,
+    MySelect
   },
   props: {
     data: {

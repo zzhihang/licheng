@@ -22,16 +22,19 @@
               v-else-if="item.type === 'datepicker'"
               type="date"
               @change="onDatePickerChange($event, item.field)"
-              v-model:value="queryParams[item.field]"
+              v-model="queryParams[item.field]"
               placeholder="选择日期">
             </el-date-picker>
 
-            <el-range-picker
-              v-else-if="item.type === 'dateRange'"
-              @change="onPickerChange"
-              v-model:value="queryParams[item.field]"
-              placeholder="请选择起始时间"
-            />
+            <el-date-picker
+              v-else-if="item.type === 'datepicker_range'"
+              v-model="queryParams[item.field]"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+            </el-date-picker>
+
             <el-input v-else v-model="queryParams[item.field]" :placeholder="`请输入${item.label}`"/>
           </el-form-item>
         </el-col>
@@ -125,7 +128,7 @@ export default {
 .el-form-item {
   display: flex;
   align-items: center;
-  margin-bottom: 0;
+  margin-bottom: 16px;
   ::v-deep .el-form-item__label {
     flex-shrink: 0;
   }

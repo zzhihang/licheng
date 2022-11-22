@@ -25,4 +25,17 @@ export function addGoods(data) {
   })
 }
 
+//商品列表
+export function getProductList(name='') {
+  return request({
+    url: '/goods/list',
+    method: 'get',
+    params: {
+      name
+    }
+  })
+}
+
+
+
 

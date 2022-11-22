@@ -213,15 +213,35 @@ export const constantRoutes = [
           },
           {
             path: '/center/bidding',
-            component: () => import('@/views/center/bidding/index.vue'),
+            component: CenterRouterView,
             name: 'CenterBidding',
-            meta: {title: '竞价交易管理', icon: 'dashboard', affix: true}
+            meta: {title: '竞价交易管理'},
+            children: [{
+              path: '/center/bidding',
+              component: () => import('@/views/center/bidding/index.vue'),
+              meta: {title: '我发布的竞价商品'},
+            },{
+              path: '/center/bidding/add',
+              component: () => import('@/views/center/bidding/add.vue'),
+              meta: {title: '发布'},
+              hidden: true
+            }]
           },
           {
             path: '/center/listing',
-            component: () => import('@/views/center/listing/index.vue'),
+            component: CenterRouterView,
             name: 'CenterListing',
-            meta: {title: '挂牌交易管理', icon: 'dashboard', affix: true}
+            meta: {title: '挂牌交易管理'},
+            children: [{
+              path: '/center/listing',
+              component: () => import('@/views/center/listing/index.vue'),
+              meta: {title: '我发布的挂牌交易'},
+            },{
+              path: '/center/listing/add',
+              component: () => import('@/views/center/listing/add.vue'),
+              meta: {title: '发布'},
+              hidden: true
+            }]
           }, {
             path: '/center/logistics',
             component: CenterRouterView,

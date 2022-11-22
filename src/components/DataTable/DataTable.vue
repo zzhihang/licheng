@@ -73,7 +73,6 @@ export default {
       params: {},
       total: 0,
       pageNum: 1,
-      pageSize: this.pageSize,
       loading: false,
     }
   },
