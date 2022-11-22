@@ -249,9 +249,16 @@ export const constantRoutes = [
           },
           {
             path: '/center/product',
-            component: () => import('@/views/center/product/index.vue'),
+            component: CenterRouterView,
             name: 'CenterProduct',
-            meta: {title: '商品管理'}
+            meta: {title: '商品管理'},
+            redirect: '/center/product',
+            children: [{
+              path: '/center/product',
+              title: '商品品类管理',
+              component: () => import('@/views/center/product/index.vue'),
+              meta: {title: '商品品类管理'},
+            }]
           },
           {
             path: '/center/storage',

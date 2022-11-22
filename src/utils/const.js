@@ -71,6 +71,12 @@ export const STORAGE_TYPE = [{
   value: NEWS_CLASS.WAREHOUSE_FIND_GOODS
 }]
 
+//商品分类0 商品1
+export const PRODUCT_MANAGE_TYPE = {
+  PRODUCT_CLASS: 0,
+  PRODUCT: 1,
+}
+
 
 export const getLabelByValue = (value, dict) => {
   return dict.find(item => item.value === value).label
