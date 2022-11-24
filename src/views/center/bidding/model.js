@@ -1,7 +1,7 @@
 import {MOBILE_VALIDATOR, NUMBER_VALIDATOR} from "@utils/validator";
 import {BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE, MINUTES_LIST} from "@utils/const";
 
-export const BIDDING_ADD_MODEL = [{
+const part1 = [{
   label: '竞价活动名称',
   field: 'title',
   maxLength: 20
@@ -9,7 +9,8 @@ export const BIDDING_ADD_MODEL = [{
   label: '竞价方式',
   field: 'method',
   type: FORM_TYPE.RADIO,
-  options: BIDDING_METHOD
+  options: BIDDING_METHOD,
+  defaultValue: 1
 },{
   label: '竞价活动介绍',
   field: 'introduction',
@@ -37,7 +38,19 @@ export const BIDDING_ADD_MODEL = [{
   label: '单位',
   field: 'unit',
   defaultValue: '吨'
+}]
+
+const part2 = [{
+  label: '最小购买量',
+  field: 'minNum',
+  validator: NUMBER_VALIDATOR
 },{
+  label: '最大购买量',
+  field: 'maxNum',
+  validator: NUMBER_VALIDATOR
+}]
+
+const part3 = [{
   type: FORM_TYPE.DATEPICKER,
   label: '竞价开始时间',
   field: 'startTime',
@@ -74,11 +87,9 @@ export const BIDDING_ADD_MODEL = [{
     }
   }
 },{
-  type: FORM_TYPE.DATEPICKER,
   label: '底价单价',
   field: 'baseUnitPrice',
 },{
-  type: FORM_TYPE.DATEPICKER,
   label: '加价幅度',
   field: 'increasePrice',
 },{
@@ -87,3 +98,7 @@ export const BIDDING_ADD_MODEL = [{
   field: 'expandTime',
   options: MINUTES_LIST
 }]
+
+export const BIDDING_ADD_MODEL = part1.concat(part3)
+
+export const BIDDING_ADD_MODEL_ORDINARY = part1.concat(part2).concat(part3);

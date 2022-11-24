@@ -31,6 +31,7 @@
               v-model="queryParams[item.field]"
               type="daterange"
               range-separator="至"
+              @change="onDatePickerRangeChange($event, item.field)"
               start-placeholder="开始日期"
               end-placeholder="结束日期">
             </el-date-picker>
@@ -78,14 +79,14 @@ export default {
       this.$emit('search', params)
     },
     onDatePickerChange(e, field){
-      debugger
       this.queryParams[field] = formatDate(e)
     },
-    onPickerChange(e) {//这样写可能会报错,但是目前看来不影响什么,先这样吧.
+    onDatePickerRangeChange(e, field) {
       if (e) {
-        e[0] = e[0].format('YYYY-MM-DD');
-        e[1] = e[1].format('YYYY-MM-DD');
+        e[0] = formatDate(e[0]);
+        e[1] = formatDate(e[1])
       }
+      this.queryParams[field] = e
     }
   },
   watch: {

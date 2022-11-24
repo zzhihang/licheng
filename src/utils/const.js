@@ -10,7 +10,7 @@ export const FORM_TYPE = {
   TEXTAREA: 'textarea',
   CHECKBOX: 'checkbox',
   DATEPICKER: 'datepicker',
-  DATEPICKER_RANGE: 'datepicker_Range',
+  DATEPICKER_RANGE: 'datepicker_range',
   EDITOR: 'editor',
   FILE_UPLOAD: 'file-upload',
   IMAGE_UPLOAD: 'image-upload',
@@ -26,6 +26,9 @@ export const NEWS_CLASS = {
   WAREHOUSE_FIND_GOODS: 2,
   GOODS_FIND_WAREHOUSE: 3,
 }
+
+export const ENABLE_STATUS = 0;
+export const DISABLE_STATUS = 1;
 
 export const NEWS_TYPE = [{
   label: '政策文件',

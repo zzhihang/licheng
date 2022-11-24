@@ -12,7 +12,8 @@
 <script>
 import FormRender from '@components/FormRender/FormRender'
 import {addListing, getListingDetail} from "@/api/listing/listing";
-import {BIDDING_ADD_MODEL} from "@views/center/bidding/model";
+import {BIDDING_ADD_MODEL, BIDDING_ADD_MODEL_ORDINARY} from "@views/center/bidding/model";
+import {addBidding} from "@/api/bidding/bidding";
 
 export default {
   components: {
@@ -28,6 +29,9 @@ export default {
     if(this.$route.query.id){
       this.getDetail()
     }
+    if(String(this.$route.query.type) === '1'){
+      this.formData = BIDDING_ADD_MODEL_ORDINARY; //普通竞价
+    }
   },
   methods: {
     async getDetail(){
@@ -39,7 +43,8 @@ export default {
         if (valid) {
           const params = this.$refs.formRender.getData();
           params.status = status;
-          const result = await addListing(params);
+          params.type = this.$route.query.type;
+          const result = await addBidding(params);
           if(result.code === 200){
             this.$router.go(-1);
             this.$message.success(result.msg)

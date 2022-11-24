@@ -41,14 +41,18 @@
           <confirm-button
             size="mini"
             type="text"
-            title="是否确定禁用"
+            :title="`是否确定${getStatusText(scope.row)}`"
             :id="scope.row.id"
-            style="margin-right: 18px;">禁用</confirm-button>
+            :url="getStatusUrl(scope.row)"
+            @onSuccess="onSuccess"
+            style="margin-right: 18px;">{{getStatusText(scope.row)}}</confirm-button>
           <confirm-button
             size="mini"
             type="text"
             title="是否确定删除"
+            :url="String(scope.row.type) === '0' ? '/goods/delete/' : '/goodsType/delete/'"
             style="margin-right: 18px;"
+            @onSuccess="onSuccess"
             :id="scope.row.id">删除</confirm-button>
           <el-button
             size="medium"
@@ -71,6 +75,7 @@ import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 import ProductClass from "@views/center/product/components/ProductClass";
 import EditNodeModal from "@views/center/product/components/EditNodeModal";
 import EditProductImage from "@views/center/product/components/EditProductImage";
+import {ENABLE_STATUS, PRODUCT_MANAGE_TYPE} from "@utils/const";
 
 export default {
   components: {
@@ -106,7 +111,28 @@ export default {
     editImage(row){
       this.currentNode = row;
       this.imageVisible = true;
-    }
+    },
+    getStatusUrl(row){
+      if(String(row.status) === String( ENABLE_STATUS)){
+        if(String(row.type) === String(PRODUCT_MANAGE_TYPE.PRODUCT_CLASS)){
+          return '/goodsType/disable/'
+        }else{
+          return '/goods/disable/'
+        }
+      }else{
+        if(String(row.type) === String(PRODUCT_MANAGE_TYPE.PRODUCT_CLASS)){
+          return '/goodsType/enable/'
+        }else{
+          return '/goods/enable/'
+        }
+      }
+    },
+    getStatusText(row){
+      if(String(row.status) === String(ENABLE_STATUS)){
+        return '禁用'
+      }
+      return '启用'
+    },
   },
 }
 </script>
