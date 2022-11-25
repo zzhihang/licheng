@@ -11,6 +11,6 @@ export function addListing(data) {
 export function getListingDetail(id) {
   return request({
     url: `/listing/info/${id}`,
-    get: 'post',
+    method: 'post',
   })
 }

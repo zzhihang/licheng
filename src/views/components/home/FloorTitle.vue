@@ -3,7 +3,7 @@
     <h3>
       <span>{{title}}</span>
     </h3>
-    <p v-if="showMore">查看更多<i class="el-icon-arrow-right"></i></p>
+    <p v-if="showMore" onclick="$emit('onMoreClick')">查看更多<i class="el-icon-arrow-right"></i></p>
   </div>
 </template>
 

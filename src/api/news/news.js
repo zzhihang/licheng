@@ -40,3 +40,11 @@ export function getNewsHotList(id) {
   })
 }
 
+export function getHomeNewsList(id) {
+  return request({
+    url: `/news/index/list`,
+    method: 'get'
+  })
+}
+
+

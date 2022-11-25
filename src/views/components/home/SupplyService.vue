@@ -22,5 +22,6 @@ export default {
   .supply-service-img{
     width: 100%;
     height: 300px;
+    margin-top: 30px;
   }
 </style>

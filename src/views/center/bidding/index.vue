@@ -27,17 +27,17 @@
         <template v-if="row.status !== 0">
           <el-button type="text"
                      @click="$router.push({path: `/center/bidding/${row.id}`})"
-          >查看摘牌信息</el-button>
+          >查看商品详情</el-button>
           <el-button type="text"
                      @click="$router.push({path: `/center/bidding/${row.id}`})"
-          >查看商品详情</el-button>
+          >查看出价记录</el-button>
         </template>
         <confirm-button
           style="margin-left: 8px"
           url="/news/off/"
           :id="row.id"
           @onSuccess="onSearch"
-          title="是否确定结束挂牌"
+          title="是否确定取消发布竞价交易"
           v-if="row.status === 1"
         >
           结束挂牌

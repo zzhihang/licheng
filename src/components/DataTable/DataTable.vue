@@ -66,6 +66,10 @@ export default {
       type: Number,
       default: 10
     },
+    dataKey: {
+      type: String,
+      default: 'rows'
+    }
   },
   data() {
     return {
@@ -107,7 +111,7 @@ export default {
         .then((res) => {
           this.loading = false
           if (res.code === 200) {
-            this.data = res.rows;
+            this.data = res[this.dataKey];
             this.total = res.total;
           } else {
             this.data = []
@@ -152,6 +156,9 @@ export default {
   ::v-deep .el-table .el-table__header-wrapper th{
     background: rgba(36,104,242,0.1);;
     color: #2468F2;
+  }
+  ::v-deep .el-table__header, ::v-deep .el-table__body{
+    width: 100% !important;
   }
 }
 

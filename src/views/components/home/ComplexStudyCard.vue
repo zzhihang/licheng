@@ -1,8 +1,8 @@
 <template>
-  <el-card class="complex-card" :class="type">
-    <div style="padding: 20px;">
-      <h6 class="ellipsis2">全国疫情仍呈现“点多、面广”特点，国庆期</h6>
-      <p>国家疾控局传防司司长、一级巡视员雷正龙表备份一级巡视员雷正龙表备份一一级巡视员雷正龙表备份级巡视员雷正龙表备份一级巡视员雷正龙表备份一级巡视员雷正龙表备份一级巡视员雷正龙表备份一级巡视员雷正龙表备份一级巡视员雷正龙表备份一级巡视员雷正龙表备份</p>
+  <el-card class="complex-card" :class="`${type} ${size}`" :style="style">
+    <h6 class="ellipsis2">{{data.title}}</h6>
+    <div class="content-box">
+      <p :class="size === 'large' ? 'ellipsis3' : 'ellipsis1'">{{data.content}}</p>
       <div class="bottom">
         <el-button :type="type" size="mini" class="button">查看详情</el-button>
       </div>
@@ -19,6 +19,18 @@ export default {
       type: String,
       default: 'default'  //default为白色
     },
+    size: {
+      type: String,
+      default: 'large' //or small
+    },
+    data: {
+      type: Object,
+      default: () => {}
+    },
+    style: {
+      type: Object,
+      default: () => {}
+    },
   }
 }
 </script>
@@ -27,12 +39,35 @@ export default {
 .complex-card{
   width: 400px;
   height: 278px;
-  padding: 0;
+  padding: 30px 24px 40px;
+  box-sizing: border-box;
+  &.small{
+    height: 139px;
+    padding: 24px 23px;
+    p{
+      height: 21px;
+      margin-bottom: 0;
+      padding-right: 60px;
+    }
+    .content-box{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .el-button{
+    background-color: #2468F2;
+    color: #FFFFFF;
+  }
   &.primary{
     background: url("../../../assets/images/stucard-card-bg.png");
     background-size: cover;
+    .el-button--primary{
+      background-color: #FFFFFF;
+      color: #2468F2;
+    }
     h6{
       color: #FFFFFF;
+      line-height: 25px;
     }
     p{
       color: #EAEAEA;
@@ -54,8 +89,9 @@ export default {
     font-size: 14px;
     color: #666666;
     line-height: 21px;
-    margin-top: 10px;
-    margin-bottom: 16px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+    height: 84px;
   }
   .bottom{
     display: flex;

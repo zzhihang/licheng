@@ -65,6 +65,13 @@ export function getWarehouseFindGoods(id) {
   })
 }
 
+export function getHomeStorageList() {
+  return request({
+    url: `/warehouseFindGoods/index/list`,
+    method: 'get',
+  })
+}
+
 export function userFavoriteWarehouseFindGoods({pageNum, pageSize = 10}) {
   return request({
     url: `/favorite/userFavoriteWarehouseFindGoods`,

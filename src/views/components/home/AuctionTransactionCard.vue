@@ -1,12 +1,13 @@
 <template>
   <el-card class="auction-card">
-    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+    <img :src="data.productImg || require('../../../assets/images/null-bid.png')" class="image">
     <div>
-      <h6 class="title"><span class="ellipsis1">山东大宗玉米实业有限公司</span><el-button type="primary" size="mini">进行中</el-button></h6>
       <div class="info-list">
+        <h6 class="title"><span class="ellipsis1">{{data.company}}</span><el-button type="primary" size="mini">进行中</el-button></h6>
         <div class="info-list-item" v-for="(item, index) in config" :key="index">
           <span class="title">{{item.title}}:</span>
-          <span class="info">玉米</span>
+          <span class="info" v-if="item.render">{{item.render(data)}}</span>
+          <span class="info" v-else>{{data[item.field]}}</span>
         </div>
       </div>
     </div>
@@ -17,27 +18,35 @@
 import Vue from 'vue';
 
 export default {
-  components: {},
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       config: [{
         title: '商品名称',
-        field: 'name'
+        field: 'goodsName'
       },{
-        title: '底价单位',
-        field: 'name'
+        title: '底价单价',
+        field: 'baseUnitPrice',
+        render: (data) => {
+          return data.baseUnitPrice + data.unit;
+        }
       },{
         title: '竞价总量',
-        field: 'name'
+        field: 'goodsNum'
       },{
         title: '竞价类型',
-        field: 'name'
+        field: 'type'
       },{
         title: '竞价开始时间',
-        field: 'name'
+        field: 'startTime'
       },{
         title: '竞价结束时间',
-        field: 'name'
+        field: 'endTime'
       }]
     }
   },
@@ -46,6 +55,13 @@ export default {
 
 <style lang="scss" scoped>
 .auction-card {
+  img{
+    width: 380px;
+    height: 200px;
+  }
+  ::v-deep .el-card__body{
+    padding: 0;
+  }
   h6 {
     margin-top: 20px;
     color: #333333;
@@ -57,6 +73,10 @@ export default {
 }
 
 .info-list {
+  padding: 20px;
+  background-size: 380px 396px;
+  background: url('../../../assets/images/at-card.png') no-repeat bottom;
+
   .title {
     color: #333333;
   }

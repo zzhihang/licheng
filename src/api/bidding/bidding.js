@@ -7,3 +7,15 @@ export function addBidding(data) {
     data: data
   })
 }
+
+/**
+* @Description:  首页竞价列表
+* @Param:
+* @return:
+*/
+export function getHomeBidingList() {
+  return request({
+    url: `/bidding/index/list`,
+    method: 'get',
+  })
+}

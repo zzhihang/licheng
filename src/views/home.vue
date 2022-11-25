@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home w">
     <div class="banner-area w">
       <el-carousel>
         <el-carousel-item v-for="item in carouselImg" :key="item">
@@ -12,6 +12,8 @@
     <delisted-transaction class="floor-item"></delisted-transaction>
     <industry-news class="floor-item"></industry-news>
     <complex-study class="floor-item"></complex-study>
+    <ware-service class="floor-item"></ware-service>
+    <supply-service class="floor-item"></supply-service>
   </div>
 </template>
 
@@ -22,6 +24,8 @@ import AuctionTransaction from "@/views/components/home/AuctionTransaction";
 import DelistedTransaction from "@/views/components/home/DelistedTransaction";
 import IndustryNews from "@/views/components/home/IndustryNews";
 import ComplexStudy from "@/views/components/home/ComplexStudy";
+import WareService from "@views/components/home/WareService";
+import SupplyService from "@views/components/home/SupplyService";
 
 export default {
   components: {
@@ -30,13 +34,12 @@ export default {
     DelistedTransaction,
     IndustryNews,
     ComplexStudy,
+    WareService,
+    SupplyService,
   },
   data() {
     return {
       carouselImg: [
-        require('../assets/images/profile.jpg'),
-        require('../assets/images/profile.jpg'),
-        require('../assets/images/profile.jpg'),
         require('../assets/images/profile.jpg'),
       ]
     }

@@ -1,10 +1,10 @@
 <template>
  <div style="background: #FFFFFF">
    <div class="w">
-     <floor-title :show-more="true" title="竞价交易"></floor-title>
+     <floor-title :show-more="true" title="竞价交易" @onMoreClick=""></floor-title>
      <el-row :gutter="30">
-       <el-col :span="8" v-for="(item, index) in 6" :key="index">
-         <auction-transaction-card />
+       <el-col :span="8" v-for="(item, index) in data" :key="index">
+         <auction-transaction-card :data="item"/>
        </el-col>
      </el-row>
    </div>
@@ -15,11 +15,26 @@
 import Vue from 'vue';
 import FloorTitle from "@/views/components/home/FloorTitle";
 import AuctionTransactionCard from "@/views/components/home/AuctionTransactionCard";
+import {getHomeBidingList} from "@/api/bidding/bidding";
 
 export default {
   components: {
     FloorTitle,
     AuctionTransactionCard
+  },
+  data() {
+    return {
+      data: []
+    }
+  },
+  created(){
+    this.getData()
+  },
+  methods: {
+    async getData() {
+      const result = await getHomeBidingList();
+      this.data = result.rows
+    }
   },
 }
 </script>

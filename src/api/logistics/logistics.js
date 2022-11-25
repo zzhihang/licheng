@@ -81,3 +81,10 @@ export function getGoodsFindCar(id) {
     method: 'get',
   })
 }
+
+export function getHomeLogisticsList(id) {
+  return request({
+    url: `/goodsFindCar/index/list`,
+    method: 'get',
+  })
+}
