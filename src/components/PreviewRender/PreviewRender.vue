@@ -1,5 +1,5 @@
 <template>
-  <div class="preview-render">
+  <div class="preview-render w">
     <template v-for="(item, index) in list">
       <h1 v-if="item.asTitle">
         <span>{{dataSource[item.field]}}</span>
@@ -19,15 +19,20 @@
           <i class="el-icon-right" v-if="dataSource[item.field1]"></i>
           {{dataSource[item.field2]}}
         </div>
+        <div class="preview-item-content" v-if="item.type === FORM_TYPE.RENDER">
+          {{item.render(dataSource)}}
+        </div>
         <el-image
           v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD"
           style="width: 100px; height: 100px"
-          :src="dataSource[item.field]"
-          :preview-src-list="[dataSource[item.field]]">
+          :src="getImages(dataSource[item.field])"
+          :preview-src-list="getImages(dataSource[item.field])">
         </el-image>
         <span class="preview-item-content" v-else>{{dataSource[item.field]}}</span>
       </div>
     </template>
+    <slot name="button"></slot>
+    <slot name="extra"></slot>
   </div>
 </template>
 
@@ -57,6 +62,17 @@ export default {
   data() {
     return {
       FORM_TYPE: FORM_TYPE
+    }
+  },
+  methods: {
+    getImages(data) {
+      if(!data){
+        return []
+      }
+      if(Array.isArray(data)){
+        return data;
+      }
+      return data.split(',')
     }
   },
 }

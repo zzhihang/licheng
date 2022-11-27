@@ -17,6 +17,7 @@ export const FORM_TYPE = {
   ADDRESS_SELECT: 'address-select',
   ADDRESS_SELECT_RANGE: 'address_select_range',
   MY_SELECT: 'my_select',
+  RENDER: 'render',
 }
 
 //0 车找货 1 货找车 2 仓找货 3 货找仓

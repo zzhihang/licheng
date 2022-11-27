@@ -1,6 +1,6 @@
 <template>
   <el-pagination
-    class="table-pager"
+    class="my-pager"
     background
     layout="prev, pager, next"
     :hide-on-single-page="true"
@@ -21,5 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .my-pager{
+    text-align: center;
+  }
 </style>

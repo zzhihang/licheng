@@ -2,9 +2,9 @@
   <div style="background: #FFFFFF">
     <div class="w">
       <floor-title title="行业新闻"></floor-title>
-      <el-carousel :interval="5000" :autoplay="true" @change="onCarouselChange" arrow="hover">
+      <el-carousel :interval="5000" :autoplay="true" @change="onCarouselChange" arrow="always">
         <el-carousel-item v-for="item in total" :key="item">
-          <el-row style="margin-top: 30px;">
+          <el-row style="margin-top: 30px;" :gutter="25">
             <el-col :span="6" v-for="(item, index) in getSliceData()" :key="index">
               <industry-news-card :data="item"></industry-news-card>
             </el-col>

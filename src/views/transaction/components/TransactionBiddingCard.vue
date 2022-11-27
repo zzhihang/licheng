@@ -1,16 +1,14 @@
 <template>
   <el-card class="auction-card">
-    <img :src="data.img || require('../../../assets/images/null-bid.png')" class="image">
-    <div>
-      <div class="info-list">
-        <h6 class="title"><span class="ellipsis1">{{data.companyName}}</span><el-button type="primary" size="mini">进行中</el-button></h6>
-        <div class="info-list-item" v-for="(item, index) in config" :key="index">
-          <span class="title">{{item.title}}:</span>
-          <span class="info" v-if="item.render">{{item.render(data)}}</span>
-          <span class="info" v-else>{{data[item.field]}}</span>
-        </div>
+    <div class="info-list">
+      <h6 class="title"><span class="ellipsis1">{{data.companyName}}</span></h6>
+      <div class="info-list-item" v-for="(item, index) in config" :key="index">
+        <span class="title">{{item.title}}:</span>
+        <span class="info" v-if="item.render">{{item.render(data)}}</span>
+        <span class="info" v-else>{{data[item.field]}}</span>
       </div>
     </div>
+    <el-button type="primary" size="large">查看详情</el-button>
   </el-card>
 </template>
 
@@ -37,10 +35,10 @@ export default {
         }
       },{
         title: '竞价总量',
-        field: 'goodsNum'
+        field: 'num'
       },{
         title: '竞价类型',
-        field: 'type'
+        field: 'method'
       },{
         title: '竞价开始时间',
         field: 'startTime'
@@ -55,27 +53,26 @@ export default {
 
 <style lang="scss" scoped>
 .auction-card {
-  img{
-    width: 380px;
-    height: 200px;
-  }
+  width: 447px;
   ::v-deep .el-card__body{
     padding: 0;
   }
   h6 {
-    margin-top: 20px;
     color: #333333;
     font-size: 16px;
     line-height: 22px;
     display: flex;
     justify-content: space-between;
   }
+  .el-button{
+    width: 100%;
+  }
 }
 
 .info-list {
-  padding: 20px;
-  background-size: 380px 396px;
-  background: url('../../../assets/images/at-card.png') no-repeat bottom;
+  padding: 24px;
+  background-size: 96px 122px;
+  background: url('../../../assets/images/bidding-bg.png') no-repeat 327px 12px;
 
   .title {
     color: #333333;

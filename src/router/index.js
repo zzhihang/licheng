@@ -87,6 +87,25 @@ export const constantRoutes = [
         meta: {title: '首页', icon: 'dashboard', affix: true}
       },
       {
+        path: '/transaction',
+        component: PanelContainer,
+        meta: {title: '交易中心'},
+        redirect: '/transaction/bidding',
+        children: [{
+          path: '/transaction/bidding',
+          component: () => import('@/views/transaction/bidding.vue'),
+          meta: {title: '竞价交易'}
+        },  {
+          path: '/transaction/listing',
+          component: () => import('@/views/transaction/listing.vue'),
+          meta: {title: '挂牌交易'}
+        }, {
+          path: '/transaction/mall',
+          component: () => import('@/views/transaction/mall.vue'),
+          meta: {title: '线上商城'}
+        }]
+      },
+      {
         path: '/news',
         component: PanelContainer,
         meta: {title: '资讯中心'},
@@ -167,6 +186,11 @@ export const constantRoutes = [
         component: () => import('@/views/news/detail.vue'),
         meta: {title: '资讯详情'},
         hidden: true
+      },
+      {
+        path: '/transaction/listing/:id',
+        component: () => import('@/views/transaction/listing-detail'),
+        meta: {title: '挂牌商品详情'}
       },
       {
         path: '/storage/:id',
