@@ -203,14 +203,55 @@ export const constantRoutes = [
         //component: () => import('@/views/center'),
         component: PanelContainer,
         name: 'User',
-        redirect: '/center/user',
-        meta: {title: '用户中心', icon: 'dashboard', affix: true},
+        redirect: '/center/user/index',
+        meta: {title: '用户中心'},
         children: [
           {
-            path: '/center/user',
-            component: () => import('@/views/center/user/index.vue'),
+            path: '/center/user/index',
+            component: CenterRouterView,
             name: 'CenterUser',
-            meta: {title: '用户管理', icon: 'dashboard', affix: true}
+            meta: {title: '用户管理'},
+            children: [{
+              path: '/center/user/index',
+              component: () => import('@/views/center/user/index.vue'),
+              meta: {title: '企业认证'},
+              hidden: true
+            },{
+              path: '/center/user/enterprise',
+              component: () => import('@/views/center/user/enterprise.vue'),
+              meta: {title: '企业认证', subTitle: '企业填写真实资料进行认证'}
+            },{
+              path: '/center/user/enterprise-auth',
+              component: () => import('@/views/center/user/enterprise-auth.vue'),
+              meta: {title: '企业认证'}
+            },{
+              path: '/center/user/add',
+              component: () => import('@/views/center/user/index.vue'),
+              name: 'CenterNewsAdd',
+              meta: {title: '营运资料维护'}
+            },{
+              path: '/center/user/enterprise-audit',
+              component: () => import('@/views/center/user/enterprise-audit.vue'),
+              meta: {title: '企业认证审核'}
+            },{
+              path: '/center/user/enterprise-manage',
+              component: () => import('@/views/center/user/enterprise-manage.vue'),
+              meta: {title: '企业管理列表'}
+            },{
+              path: '/center/user/enterprise/:id',
+              component: () => import('@/views/center/user/enterprise-detail.vue'),
+              meta: {title: '查看认证资料'},
+              hidden: true
+            },{
+              path: '/center/user/enterprise-operate/:id',
+              component: () => import('@/views/center/user/enterprise-operate-detail.vue'),
+              meta: {title: '查看营运资料'},
+              hidden: true
+            },{
+              path: '/center/user/userinfo-manage',
+              component: () => import('@/views/center/user/userinfo-manage.vue'),
+              meta: {title: '用户资料管理'}
+            }]
           },
           {
             path: '/center/news',

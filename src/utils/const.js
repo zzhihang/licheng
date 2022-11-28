@@ -18,6 +18,7 @@ export const FORM_TYPE = {
   ADDRESS_SELECT_RANGE: 'address_select_range',
   MY_SELECT: 'my_select',
   RENDER: 'render',
+  IMAGE_UPLOAD_GROUP: 'image_upload_group',
 }
 
 //0 车找货 1 货找车 2 仓找货 3 货找仓
@@ -115,6 +116,37 @@ export const BIDDING_TYPE = [{
 },{
   label: '整拍竞价',
   value: 2
+}]
+
+//企业认证状态 0: 未认证 1 已认证 2 驳回认证
+export const COMPANY_STATUS = [{
+  label: '未完成企业认证',
+  value: 0
+},{
+  label: '已提交企业认证：',
+  value: 1
+},{
+  label: '驳回认证',
+  value: 2
+},{
+  label: '已通过认证',
+  value: 3
+}]
+
+export const TRADE_STATUS = [{
+  label: '允许发布交易',
+  value: 0
+},{
+  label: '不允许发布交易',
+  value: 1
+}]
+
+export const USER_STATUS = [{
+  label: '正常',
+  value: 0
+},{
+  label: '禁用',
+  value: 1
 }]
 
 export const MINUTES_LIST = Array.from(new Array(60).keys()).map(item => {

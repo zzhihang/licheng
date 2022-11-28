@@ -33,7 +33,10 @@
     </el-menu>
     <div class="right-panel">
       <h1 class="panel-title">
-        <span>{{ title }}</span>
+        <div>
+          <span>{{ title }}</span>
+          <p>{{subTitle}}</p>
+        </div>
         <el-button @click="$router.go(-1)">返回<i class="el-icon-back"></i></el-button>
       </h1>
       <router-view style="margin-top: 27px;">
@@ -51,11 +54,13 @@ export default {
   data() {
     return {
       title: '',
+      subTitle: '',
       menus: []
     }
   },
   created() {
     this.title = this.$route.meta.title
+    this.subTitle = this.$route.meta.subTitle || ''
     const {fullPath} = this.$route
     const finderPath = '/' + fullPath.split('/')[1]
     const finder = constantRoutes.find(item => item.path === '/').children
@@ -94,6 +99,25 @@ export default {
     overflow: hidden;
   }
 
+  .el-submenu {
+    border-bottom: 1px solid #EDEFF5;
+    .el-menu-item{
+      border-bottom: 1px solid #EDEFF5;
+      &:last-child{
+        border-bottom: none;
+      }
+      &:before{
+        content: '';
+        width: 6px;
+        height: 6px;
+        display: inline-block;
+        margin-right: 12px;
+        background: #165DFF;
+        border-radius: 100%;
+      }
+    }
+  }
+
   .panel-title {
     line-height: 33px;
     font-size: 28px;
@@ -101,6 +125,14 @@ export default {
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    p{
+      color: #333333;
+      line-height: 22px;
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: normal;
+    }
   }
 }
 </style>

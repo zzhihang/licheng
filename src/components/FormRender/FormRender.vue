@@ -47,10 +47,20 @@
 
         <file-upload v-else-if="item.type === FORM_TYPE.FILE_UPLOAD" v-model="ruleForm[item.field]"/>
 
+
         <image-upload v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD"
                       v-model="ruleForm[item.field]"
                       :limit="item.limit"
         />
+
+        <div class="image-upload-group" v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD_GROUP">
+          <image-upload
+            v-for="(child, index) in item.fields"
+            :key="index"
+            v-model="ruleForm[child]"
+            :limit="item.limit"
+          />
+        </div>
 
         <el-cascader
           v-else-if="item.type === FORM_TYPE.ADDRESS_SELECT"
@@ -130,18 +140,20 @@ export default {
         const form = {};
         const rules = {};
         this.data.forEach(item => { //自动生成ruleForm
-          if(item.defaultValue === undefined){
-            form[item.field] =  ''
-          }else{
-            form[item.field] =  item.defaultValue
-          }
-          //生成rules
-          rules[item.field] = [{required: item.required !== false, message: '请填写必填项'}]
-          if(item.validator){
-            if(Array.isArray(item.validator)){
-              rules[item.field].concat(item.validator)
+          if(item.field){
+            if(item.defaultValue === undefined){
+              form[item.field] =  ''
             }else{
-              rules[item.field].push(item.validator)
+              form[item.field] =  item.defaultValue
+            }
+            //生成rules
+            rules[item.field] = [{required: item.required !== false, message: '请填写必填项'}]
+            if(item.validator){
+              if(Array.isArray(item.validator)){
+                rules[item.field].concat(item.validator)
+              }else{
+                rules[item.field].push(item.validator)
+              }
             }
           }
         })
@@ -179,5 +191,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .image-upload-group{
+    display: flex;
+    align-items: center;
+  }
 </style>

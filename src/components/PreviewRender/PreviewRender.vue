@@ -19,7 +19,18 @@
           <i class="el-icon-right" v-if="dataSource[item.field1]"></i>
           {{dataSource[item.field2]}}
         </div>
-        <div class="preview-item-content" v-if="item.type === FORM_TYPE.RENDER">
+
+        <div class="preview-item-content" v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD_GROUP">
+          <el-image
+            v-for="(child, index) in item.fields"
+            :key="index"
+            style="width: 100px; height: 100px;margin-right: 24px;border-radius: 8px;"
+            :src="getImages(dataSource[child])"
+            :preview-src-list="getImages(dataSource[child])">
+          </el-image>
+        </div>
+
+        <div class="preview-item-content" v-else-if="item.type === FORM_TYPE.RENDER">
           {{item.render(dataSource)}}
         </div>
         <el-image
