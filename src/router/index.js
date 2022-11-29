@@ -230,8 +230,8 @@ export const constantRoutes = [
               meta: {title: '企业认证'},
               hidden: true
             },{
-              path: '/center/user/add',
-              component: () => import('@/views/center/user/index.vue'),
+              path: '/center/user/enterprise-operate',
+              component: () => import('@/views/center/user/enterprise-operate.vue'),
               name: 'CenterNewsAdd',
               meta: {title: '营运资料维护'}
             },{
@@ -392,9 +392,20 @@ export const constantRoutes = [
           },
           {
             path: '/center/transaction',
-            component: () => import('@/views/center/transaction/index.vue'),
+            component: CenterRouterView,
             name: 'CenterTransaction',
-            meta: {title: '交易查询', icon: 'dashboard', affix: true}
+            meta: {title: '交易查询'},
+            children: [{
+              path: '/center/transaction/bidding',
+              title: '竞价交易',
+              component: () => import('@/views/center/transaction/bidding.vue'),
+              meta: {title: '竞价交易', subTitle: '查看全部的竞价交易'},
+            },{
+              path: '/center/transaction/listing',
+              title: '挂牌交易',
+              component: () => import('@/views/center/transaction/listing.vue'),
+              meta: {title: '挂牌交易', subTitle: '查看全部的挂牌交易'},
+            }]
           },
         ]
       },

@@ -149,6 +149,25 @@ export const USER_STATUS = [{
   value: 1
 }]
 
+export const ENTERPRISE_AUDIT_TYPE = [{
+  label: '认证资料',
+  value: 0
+},{
+  label: '营运资料',
+  value: 1
+}]
+
+export const ENTERPRISE_AUDIT_STATUS = [{
+  label: '未认证',
+  value: 0
+},{
+  label: '已认证',
+  value: 1
+},{
+  label: '驳回认证',
+  value: 2
+}]
+
 export const MINUTES_LIST = Array.from(new Array(60).keys()).map(item => {
   const minute = item + 1
   return {
