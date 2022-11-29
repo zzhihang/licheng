@@ -8,7 +8,7 @@
         <span class="info" v-else>{{data[item.field]}}</span>
       </div>
     </div>
-    <el-button type="primary" size="large">查看详情</el-button>
+    <el-button type="primary" size="large" @click="$router.push({path: '/transaction/bidding/detail', query:{id: data.id}})">查看详情</el-button>
   </el-card>
 </template>
 

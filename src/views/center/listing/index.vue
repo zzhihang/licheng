@@ -33,10 +33,11 @@
         </template>
         <confirm-button
           style="margin-left: 8px"
-          url="/news/off/"
+          url="/listing/end/"
           :id="row.id"
           @onSuccess="onSearch"
-          title="是否确定结束挂牌"
+          info="是否确定结束挂牌"
+          tip="商品尚未被摘牌，是否确认结束挂牌"
           v-if="row.status === 1"
         >
           结束挂牌

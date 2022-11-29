@@ -3,7 +3,7 @@
     <search-form :list="searchList" @search="onSearch"></search-form>
     <el-row :gutter="20">
       <el-col v-for="(item, index) in data" :span="12" :key="index">
-        <transaction-bidding-card :data="item"  style="margin-bottom: 20px;"></transaction-bidding-card>
+        <transaction-bidding-card :data="item" style="margin-bottom: 20px;"></transaction-bidding-card>
       </el-col>
     </el-row>
     <my-pager @current-change="onPageChange" :total="total" :page-size="2"/>

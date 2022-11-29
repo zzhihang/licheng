@@ -176,6 +176,7 @@ module.exports = {
         alias: {
           '@': resolve('src'),
           '@images': resolve('src/assets/images'),
+          '@icons': resolve('src/assets/icons'),
           '@components': resolve('src/components'),
           '@utils': resolve('src/utils'),
           '@views': resolve('src/views'),
