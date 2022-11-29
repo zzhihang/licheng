@@ -4,15 +4,16 @@
       <el-tab-pane label="货找车" name="1"></el-tab-pane>
       <el-tab-pane label="车找货" name="2"></el-tab-pane>
     </el-tabs>
-    <div class="list">
-      <collect-card v-for="(item, index) in list"
-                    :key="index"
-                    :title="item.title"
-                    :time="item.postTime"
-                    @click.native="onCardClick(item)"
-                    style="margin-bottom: 10px;"
-      ></collect-card>
+    <div class="list" v-if="list.length">
+        <collect-card v-for="(item, index) in list"
+                      :key="index"
+                      :title="item.title"
+                      :time="item.postTime"
+                      @click.native="onCardClick(item)"
+                      style="margin-bottom: 10px;"
+        ></collect-card>
     </div>
+    <el-empty v-else description="暂无数据"></el-empty>
   </div>
 </template>
 

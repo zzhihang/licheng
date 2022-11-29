@@ -8,7 +8,7 @@
 
 <script>
 import PreviewRender from "@components/PreviewRender/PreviewRender";
-import {ENTERPRISE_MODEL} from "@views/center/user/model/enterprise-model";
+import {ENTERPRISE_OPERATE_MODEL} from "@views/center/user/model/enterprise-model";
 import {getEnterpriseOperate} from "@/api/user/user";
 
 export default {
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      list: ENTERPRISE_MODEL,
+      list: ENTERPRISE_OPERATE_MODEL,
       dataSource: {}
     }
   },

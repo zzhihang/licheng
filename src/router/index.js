@@ -223,7 +223,8 @@ export const constantRoutes = [
             },{
               path: '/center/user/enterprise-auth',
               component: () => import('@/views/center/user/enterprise-auth.vue'),
-              meta: {title: '企业认证'}
+              meta: {title: '企业认证'},
+              hidden: true
             },{
               path: '/center/user/add',
               component: () => import('@/views/center/user/index.vue'),
@@ -321,11 +322,13 @@ export const constantRoutes = [
             }, {
               path: '/center/logistics/publish/goods-find-car',
               component: () => import('@/views/center/logistics/publish/goods-find-car.vue'),
-              meta: {title: '发布货找车资讯', icon: 'dashboard', affix: true}
+              meta: {title: '发布货找车资讯'},
+              hidden: true
             }, {
               path: '/center/logistics/publish/car-find-goods',
               component: () => import('@/views/center/logistics/publish/car-find-goods.vue'),
-              meta: {title: '发布车找货资讯', icon: 'dashboard', affix: true}
+              meta: {title: '发布车找货资讯'},
+              hidden: true
             }, {
               path: '/center/logistics/collect',
               component: () => import('@/views/center/logistics/collect.vue'),

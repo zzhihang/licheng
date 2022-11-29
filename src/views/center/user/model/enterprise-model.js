@@ -34,27 +34,27 @@ export const ENTERPRISE_MODEL = [{
 
 export const ENTERPRISE_OPERATE_MODEL = [{
   label: '道路运输许可证编号',
-  field: 'name',
+  field: 'transportNo',
   maxLength: 100
 },{
   label: '驾驶员姓名',
-  field: 'code',
+  field: 'driver',
   validator: NUMBER_CODE_VALIDATOR,
   maxLength: 18
 },{
   label: '驾驶员身份证号',
-  field: 'legalPerson',
+  field: 'driverIdNum',
   maxLength: 20
 },{
   label: '企业营运联系人',
-  field: 'contact',
+  field: 'operateContact',
   maxLength: 20
 },{
   label: '联系电话',
-  field: 'contactIdNum',
+  field: 'operateTel',
   validator: ID_CARD_VALIDATOR
 },{
   type: FORM_TYPE.IMAGE_UPLOAD_GROUP,
   label: '上传证件照',
-  fields: ['contactIdNumFront', 'contactIdNumBack', 'businessLicense'],
+  fields: ['transportLicense', 'driverLicense', 'driverIdNumFront', 'driverIdNumBack'],
 }]

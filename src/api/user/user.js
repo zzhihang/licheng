@@ -22,9 +22,25 @@ export function getEnterprise(id) {
   })
 }
 
+//当前的企业认证信息
+export function getCurrentEnterpriseInfo(id) {
+  return request({
+    url: `/company/current`,
+    method: 'get',
+  })
+}
+
+//当前的企业营运信息
+export function getCurrentEnterpriseOperateInfo(id) {
+  return request({
+    url: `/operate/current`,
+    method: 'get',
+  })
+}
+
 export function getEnterpriseOperate(companyId) {
   return request({
-    url: `/company/infoByCompany/${companyId}`,
+    url: `/operate/infoByCompany/${companyId}`,
     method: 'get',
   })
 }

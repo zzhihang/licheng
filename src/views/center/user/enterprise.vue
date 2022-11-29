@@ -25,7 +25,7 @@
 
 <script>
 import Vue from 'vue';
-import {getUserInfo} from "@/api/user/user";
+import {getCurrentEnterpriseInfo, getUserInfo} from "@/api/user/user";
 import {ENTERPRISE_MODEL} from "@views/center/user/model/enterprise-model";
 import PreviewRender from "@components/PreviewRender/PreviewRender";
 
@@ -42,12 +42,16 @@ export default {
   },
   created() {
     this.getData()
+    this.getAuthInfo();
   },
   methods: {
     async getData() {
       const result = await getUserInfo();
-      //0 普通 1 认证 2 管理员 //TODO 修改
+      //0 普通 1 认证 2 管理员 //TODO 使用全局store修改
       this.userType = result.data.type || 0;
+    },
+    async getAuthInfo(){
+      const result = await getCurrentEnterpriseInfo();
       this.dataSource = result.data;
     }
   },

@@ -2,17 +2,13 @@
   <div>
     <search-form :list="searchList" @search="onSearch"></search-form>
     <data-table ref="table" :columns="columns" url="/user/list">
-      <template slot="yingyun" slot-scope="{row}">
-        <el-button type="text"
-                   @click="$router.push({path: `/center/user/enterprise-operate/${row.id}`})"
-        >查看</el-button>
-      </template>
-      <template slot="renzheng" slot-scope="{row}">
-        <el-button type="text"
-                   @click="$router.push({path: `/center/user/enterprise/${row.id}`})"
-        >查看</el-button>
-      </template>
       <template slot="operate" slot-scope="{row}">
+        <confirm-button type="text"
+                        :id="row.id"
+                        @onSuccess="onSearch"
+                        info="是否确定重置密码"
+                        tip="重置密码后，将会给用户短信发送新的初始密码"
+        >重置密码</confirm-button>
         <confirm-button
           v-if="Number(row.status) === 0"
           url="/company/disableTrade/"
@@ -21,7 +17,7 @@
           info="是否确定禁用用户"
           tip="禁用后，用户将无法登录"
         >
-          禁止发布交易
+          禁用
         </confirm-button>
 
         <confirm-button
@@ -32,7 +28,7 @@
           info="是否确定启用用户"
           tip="启用后，用户可正常登录"
         >
-          允许发布交易
+          启用
         </confirm-button>
       </template>
     </data-table>
@@ -87,7 +83,7 @@ export default {
         name: '操作',
         key: 'operate',
         slots: ['operate'],
-        width: 100
+        width: 200
       }]
     }
   },
