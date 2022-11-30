@@ -1,5 +1,5 @@
 <template>
-  <div class="preview-render w">
+  <div class="preview-render">
     <template v-for="(item, index) in list">
       <h1 v-if="item.asTitle">
         <span>{{dataSource[item.field]}}</span>
