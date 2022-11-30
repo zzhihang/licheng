@@ -1,5 +1,5 @@
 <template>
-  <div class="my-menu">
+  <div class="my-menu" v-if="menus.length">
     <el-menu
       default-active="1"
       @open="handleOpen"
@@ -63,6 +63,7 @@ export default {
         const finderPath = '/' + fullPath.split('/')[1]
         const finder = constantRoutes.find(item => item.path === '/').children
         this.menus = finder.find(item => item.path === finderPath).children || [];
+        this.menus = this.menus.filter(item => !item.hidden)
       },
       immediate: true
     }

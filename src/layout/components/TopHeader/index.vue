@@ -52,6 +52,15 @@ export default {
         path: '/center'
       }]
     }
+  },
+  watch: {
+    $route: {
+      handler(val) {
+        const path = val.fullPath;
+        this.active = this.menus.findIndex(item => path.includes(item.path));
+      },
+      immediate: true
+    }
   }
 }
 </script>

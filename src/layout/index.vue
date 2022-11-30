@@ -4,7 +4,7 @@
     <div class="my-container w">
       <panel-container />
       <div class="main-box">
-        <div class="right-panel">
+        <div class="right-panel" v-if="!hiddenRight">
           <h1 class="panel-title">
             <div>
               <span>{{ title }}</span>
@@ -48,6 +48,7 @@ export default {
     return {
       title: '',
       subTitle: '',
+      hiddenRight: false
     }
   },
   computed: {
@@ -79,6 +80,9 @@ export default {
   watch: {
     $route: {
       handler(val) {
+        if(val.fullPath === '/home'){
+          this.hiddenRight = true;
+        }
         this.title = this.$route.meta.title
         this.subTitle = this.$route.meta.subTitle || ''
       },
