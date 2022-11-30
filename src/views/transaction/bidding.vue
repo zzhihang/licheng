@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-form :list="searchList" @search="onSearch"></search-form>
-    <el-row :gutter="20">
+    <el-row :gutter="20" style="margin-top: 30px;">
       <el-col v-for="(item, index) in data" :span="12" :key="index">
         <transaction-bidding-card :data="item" style="margin-bottom: 20px;"></transaction-bidding-card>
       </el-col>

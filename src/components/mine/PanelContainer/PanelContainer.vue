@@ -4,6 +4,7 @@
       default-active="1"
       @open="handleOpen"
       @close="handleClose"
+      :unique-opened="true  "
       background-color="#fff"
       text-color="#333333"
       active-text-color="#165DFF">
@@ -97,6 +98,9 @@ export default {
       &:last-child {
         border-bottom: none;
       }
+      &.is-active:before{
+        background: #165DFF;
+      }
 
       &:before {
         content: '';
@@ -104,7 +108,7 @@ export default {
         height: 6px;
         display: inline-block;
         margin-right: 12px;
-        background: #165DFF;
+        background: #666666;
         border-radius: 100%;
       }
     }

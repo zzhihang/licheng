@@ -1,22 +1,7 @@
 <template>
   <div :class="classObj" class="app-wrapper" :style="{'--current-color': theme}">
     <top-header></top-header>
-    <div class="my-container w">
-      <panel-container />
-      <div class="main-box">
-        <div class="right-panel" v-if="!hiddenRight">
-          <h1 class="panel-title">
-            <div>
-              <span>{{ title }}</span>
-              <p>{{subTitle}}</p>
-            </div>
-            <el-button @click="$router.go(-1)">返回<i class="el-icon-back"></i></el-button>
-          </h1>
-        </div>
-        <app-main />
-      </div>
-    </div>
-
+    <router-view></router-view>
     <home-footer></home-footer>
   </div>
 </template>
@@ -82,6 +67,8 @@ export default {
       handler(val) {
         if(val.fullPath === '/home'){
           this.hiddenRight = true;
+        }else{
+          this.hiddenRight = false;
         }
         this.title = this.$route.meta.title
         this.subTitle = this.$route.meta.subTitle || ''

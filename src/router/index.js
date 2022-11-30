@@ -5,6 +5,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
+import MenuRouterView from "@/layout/components/MenuRouterView";
 import CenterRouterView from "@views/center/components/CenterRouterView";
 
 /**
@@ -88,7 +89,7 @@ export const constantRoutes = [
       },
       {
         path: '/transaction',
-        component: CenterRouterView,
+        component: MenuRouterView,
         meta: {title: '交易中心'},
         redirect: '/transaction/bidding',
         children: [{
@@ -111,7 +112,7 @@ export const constantRoutes = [
       },
       {
         path: '/news',
-        component: CenterRouterView,
+        component: MenuRouterView,
         meta: {title: '资讯中心'},
         redirect: '/news/policy',
         children: [{
@@ -130,7 +131,7 @@ export const constantRoutes = [
       },
       {
         path: '/logistics',
-        component: CenterRouterView,
+        component: MenuRouterView,
         redirect: '/logistics/goods-find-car',
         meta: {title: '物流服务', icon: 'dashboard', affix: true},
         children: [{
@@ -145,7 +146,7 @@ export const constantRoutes = [
       },
       {
         path: '/storage',
-        component: CenterRouterView,
+        component: MenuRouterView,
         redirect: '/storage/goods-find-warehouse',
         meta: {title: '仓储服务'},
         children: [{
@@ -169,7 +170,7 @@ export const constantRoutes = [
         }]
       }, {
         path: '/supply',
-        component: CenterRouterView,
+        component: MenuRouterView,
         redirect: '/supply',
         meta: {title: '供应链服务'},
         children: [{
@@ -204,7 +205,7 @@ export const constantRoutes = [
       },
       {
         path: '/center',
-        component: CenterRouterView,
+        component: MenuRouterView,
         name: 'User',
         redirect: '/center/user/index',
         meta: {title: '用户中心'},
