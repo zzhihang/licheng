@@ -34,14 +34,14 @@ export default {
         type: FORM_TYPE.MY_SELECT,
         url: DICT_PRODUCT_LIST
       },{
-        field: 'time',
-        label: '竞价日期',
-        type: FORM_TYPE.DATEPICKER_RANGE
-      },{
         field: 'status',
         label: '活动状态',
         type: FORM_TYPE.SELECT,
         options: BIDDING_METHOD
+      },{
+        field: 'time',
+        label: '竞价日期',
+        type: FORM_TYPE.DATEPICKER_RANGE
       }],
       data: [],
       pageNum: 1,

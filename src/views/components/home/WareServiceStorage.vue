@@ -5,7 +5,7 @@
       <img :src="require('../../../assets/icons/img/yunduo.png')" alt="">
     </h2>
     <ul>
-      <li v-for="(item, index) in data" :key="index">
+      <li v-for="(item, index) in data" :key="index" @click="$router.push({path: `/storage/${item.id}`})">
         <span class="time">
           <h6>{{getDay(item.postTime)}}</h6>
           <p>{{ getYear(item.postTime) }}</p>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-form :list="searchList" @search="onSearch"></search-form>
-    <data-table ref="table" :columns="columns" url="/listing/adminList">
+    <data-table ref="table" :columns="columns" url="/bidding/adminList">
       <template slot="operate" slot-scope="{row}">
         <el-button type="text"
                    @click="$router.push({path: `/center/bidding/${row.id}`})"
@@ -29,12 +29,12 @@ export default {
         field: 'goodsName',
         label: '商品名称',
       },{
-        field: 'tradeStatus',
+        field: 'status',
         label: '交易状态',
         type: FORM_TYPE.SELECT,
         options: TRANSACTION_STATUS
       },{
-        field: 'tradeStatus',
+        field: 'method',
         label: '竞价方式',
         type: FORM_TYPE.SELECT,
         options: BIDDING_METHOD
@@ -43,40 +43,45 @@ export default {
         label: '挂牌日期',
         type: FORM_TYPE.DATEPICKER_RANGE,
       },{
-        field: 'manufacturer',
-        label: '供货商名称',
+        field: 'companyName',
+        label: '销售商名称',
       }],
       columns: [{
         name: '活动ID',
-        key: 'code',
+        key: 'id',
       },{
         name: '活动名称',
-        key: 'manufacturer',
+        key: 'title',
       },{
         name: '销售商名称',
-        key: 'goodsName',
+        key: 'companyName',
       },{
         name: '竞价类型',
-        key: 'createTime',
+        key: 'type',
       },{
         name: '竞价方式',
-        key: 'unitPrice',
+        key: 'method',
       },{
-        name: '商品类型',
-        key: 'num',
+        name: '商品名称',
+        key: 'goodsName',
       },{
         name: '商品数量',
-        key: 'purchaserCompany',
+        key: 'goodsNum',
       },{
         name: '开始时间',
-        key: 'transactionEndTime',
+        key: 'startTime',
       },{
         name: '结束时间',
-        key: 'transactionEndTime',
+        key: 'endTime',
       },{
         name: '交易状态',
         key: 'status',
         dict: TRANSACTION_STATUS
+      },{
+        name: '操作',
+        key: 'operate',
+        slots: ['operate'],
+        width: 100
       }]
     }
   },

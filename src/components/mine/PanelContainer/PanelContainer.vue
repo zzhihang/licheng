@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-container w">
+  <div class="my-menu">
     <el-menu
       default-active="1"
       @open="handleOpen"
@@ -8,64 +8,45 @@
       text-color="#333333"
       active-text-color="#165DFF">
       <template v-for="(item, index) in menus">
-          <el-submenu :key="index"
-                      :index="String(index)"
-          >
-            <template slot="title" v-if="!item.hidden">
-              <router-link :to="item.path">
-                <span>{{ item.meta.title }}</span>
+        <el-submenu :key="index"
+                    :index="String(index)"
+        >
+          <template slot="title" v-if="!item.hidden">
+            <router-link :to="item.path">
+              <span>{{ item.meta.title }}</span>
+            </router-link>
+          </template>
+          <el-menu-item-group v-if="item.children">
+            <template v-for="(child, childIndex) in item.children">
+              <router-link :to="child.path" v-if="!child.hidden">
+                <el-menu-item :key="childIndex"
+                              :index="index + '-' + childIndex"
+                              style="padding-left: 60px;"
+                >
+                  {{ child.title || child.meta.title }}
+                </el-menu-item>
               </router-link>
             </template>
-            <el-menu-item-group v-if="item.children">
-              <template v-for="(child, childIndex) in item.children">
-                <router-link :to="child.path" v-if="!child.hidden">
-                  <el-menu-item :key="childIndex"
-                                :index="index + '-' + childIndex"
-                                style="padding-left: 60px;"
-                  >
-                    {{ child.title || child.meta.title }}
-                  </el-menu-item>
-                </router-link>
-              </template>
-            </el-menu-item-group>
-          </el-submenu>
+          </el-menu-item-group>
+        </el-submenu>
       </template>
     </el-menu>
-    <div class="right-panel">
-      <h1 class="panel-title">
-        <div>
-          <span>{{ title }}</span>
-          <p>{{subTitle}}</p>
-        </div>
-        <el-button @click="$router.go(-1)">返回<i class="el-icon-back"></i></el-button>
-      </h1>
-      <router-view style="margin-top: 27px;">
-        <slot></slot>
-      </router-view>
-    </div>
   </div>
 </template>
 
 <script>
 import {constantRoutes} from '@/router'
+import {getAppList} from "@/api/common";
 
 export default {
   components: {},
   data() {
     return {
-      title: '',
-      subTitle: '',
       menus: []
     }
   },
   created() {
-    this.title = this.$route.meta.title
-    this.subTitle = this.$route.meta.subTitle || ''
-    const {fullPath} = this.$route
-    const finderPath = '/' + fullPath.split('/')[1]
-    const finder = constantRoutes.find(item => item.path === '/').children
-    this.menus = finder.find(item => item.path === finderPath).children || [];
-    console.log(this.menus)
+
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -74,16 +55,23 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  watch: {
+    $route: {
+      handler(val) {
+        const {fullPath} = this.$route
+        const finderPath = '/' + fullPath.split('/')[1]
+        const finder = constantRoutes.find(item => item.path === '/').children
+        this.menus = finder.find(item => item.path === finderPath).children || [];
+      },
+      immediate: true
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.panel-container {
-  display: flex;
-  padding-top: 30px;
-  padding-bottom: 240px;
-  background: #FFFFFF;
+.my-menu {
 
   .el-menu {
     background: #FFFFFF;
@@ -101,12 +89,15 @@ export default {
 
   .el-submenu {
     border-bottom: 1px solid #EDEFF5;
-    .el-menu-item{
+
+    .el-menu-item {
       border-bottom: 1px solid #EDEFF5;
-      &:last-child{
+
+      &:last-child {
         border-bottom: none;
       }
-      &:before{
+
+      &:before {
         content: '';
         width: 6px;
         height: 6px;
@@ -115,23 +106,6 @@ export default {
         background: #165DFF;
         border-radius: 100%;
       }
-    }
-  }
-
-  .panel-title {
-    line-height: 33px;
-    font-size: 28px;
-    color: #333333;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    p{
-      color: #333333;
-      line-height: 22px;
-      font-size: 16px;
-      margin-top: 10px;
-      font-weight: normal;
     }
   }
 }

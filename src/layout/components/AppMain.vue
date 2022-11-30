@@ -18,14 +18,19 @@ export default {
     key() {
       return this.$route.path
     }
-  }
+  },
+  data() {
+    return {
+
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .app-main {
-  height: 100%;
-  min-width: 1156px;
+  //height: 100%;
+  //min-width: 1156px;
   /* 50= navbar  50  */
   width: 100%;
   position: relative;

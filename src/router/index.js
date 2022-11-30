@@ -88,7 +88,7 @@ export const constantRoutes = [
       },
       {
         path: '/transaction',
-        component: PanelContainer,
+        component: CenterRouterView,
         meta: {title: '交易中心'},
         redirect: '/transaction/bidding',
         children: [{
@@ -111,7 +111,7 @@ export const constantRoutes = [
       },
       {
         path: '/news',
-        component: PanelContainer,
+        component: CenterRouterView,
         meta: {title: '资讯中心'},
         redirect: '/news/policy',
         children: [{
@@ -130,7 +130,7 @@ export const constantRoutes = [
       },
       {
         path: '/logistics',
-        component: PanelContainer,
+        component: CenterRouterView,
         redirect: '/logistics/goods-find-car',
         meta: {title: '物流服务', icon: 'dashboard', affix: true},
         children: [{
@@ -145,7 +145,7 @@ export const constantRoutes = [
       },
       {
         path: '/storage',
-        component: PanelContainer,
+        component: CenterRouterView,
         redirect: '/storage/goods-find-warehouse',
         meta: {title: '仓储服务'},
         children: [{
@@ -169,7 +169,7 @@ export const constantRoutes = [
         }]
       }, {
         path: '/supply',
-        component: PanelContainer,
+        component: CenterRouterView,
         redirect: '/supply',
         meta: {title: '供应链服务'},
         children: [{
@@ -204,8 +204,7 @@ export const constantRoutes = [
       },
       {
         path: '/center',
-        //component: () => import('@/views/center'),
-        component: PanelContainer,
+        component: CenterRouterView,
         name: 'User',
         redirect: '/center/user/index',
         meta: {title: '用户中心'},

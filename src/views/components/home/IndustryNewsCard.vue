@@ -6,7 +6,7 @@
       <p class="ellipsis3">{{data.content}}</p>
       <div class="bottom">
         <span class="source">新华网</span>
-        <el-button type="text" class="button">查看更多<i class="el-icon-arrow-right"></i></el-button>
+        <el-button type="text" class="button" @click="$router.push({path: `/news/${data.id}`})">查看更多<i class="el-icon-arrow-right"></i></el-button>
       </div>
     </div>
   </el-card>

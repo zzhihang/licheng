@@ -1,7 +1,7 @@
 <template>
  <div style="background: #FFFFFF">
    <div class="w">
-     <floor-title :show-more="true" title="竞价交易" @onMoreClick=""></floor-title>
+     <floor-title :show-more="true" title="竞价交易" @onMoreClick="$router.push({path: '/transaction/bidding'})"></floor-title>
      <el-row :gutter="30">
        <el-col :span="8" v-for="(item, index) in data" :key="index">
          <auction-transaction-card :data="item"/>

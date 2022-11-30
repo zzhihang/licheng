@@ -5,7 +5,8 @@
       <img :src="require('../../../assets/icons/img/mofang.png')" alt="">
     </h2>
     <ul>
-      <li v-for="(item, index) in data" :key="index">
+      <li v-for="(item, index) in data" :key="index"
+          @click="$router.push({path: `/logistics/${item.id}`})">
         <div class="content ellipsis1">{{item.title}}</div>
         <span class="time">
           <p>{{item.postTime}}</p>

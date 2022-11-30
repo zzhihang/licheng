@@ -4,7 +4,7 @@
     <div class="content-box">
       <p :class="size === 'large' ? 'ellipsis3' : 'ellipsis1'">{{data.content}}</p>
       <div class="bottom">
-        <el-button :type="type" size="mini" class="button">查看详情</el-button>
+        <el-button :type="type" size="mini" class="button" @click="$router.push({path: `/news/${data.id}`})">查看详情</el-button>
       </div>
     </div>
   </el-card>
