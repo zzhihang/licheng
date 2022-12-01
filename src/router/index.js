@@ -97,10 +97,6 @@ export const constantRoutes = [
           component: () => import('@/views/transaction/bidding.vue'),
           meta: {title: '竞价交易'}
         }, {
-          path: '/transaction/bidding/detail',
-          component: () => import('@/views/transaction/bidding-detail.vue'),
-          meta: {title: '竞价商品详情'}
-        }, {
           path: '/transaction/listing',
           component: () => import('@/views/transaction/listing.vue'),
           meta: {title: '挂牌交易'}
@@ -201,6 +197,12 @@ export const constantRoutes = [
         path: '/storage/:id',
         component: () => import('@/views/storage/detail.vue'),
         meta: {title: '资讯详情'},
+        hidden: true
+      },
+      {
+        path: '/transaction/bidding/detail',
+        component: () => import('@/views/transaction/bidding-detail.vue'),
+        meta: {title: '竞价商品详情'},
         hidden: true
       },
       {

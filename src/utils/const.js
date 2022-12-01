@@ -177,6 +177,9 @@ export const MINUTES_LIST = Array.from(new Array(60).keys()).map(item => {
 })
 
 export const getLabelByValue = (value, dict) => {
+  if(!value){
+    return ''
+  }
   return dict.find(item => String(item.value) === String(value)).label
 }
 

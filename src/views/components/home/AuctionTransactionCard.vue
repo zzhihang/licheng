@@ -1,6 +1,6 @@
 <template>
-  <el-card class="auction-card">
-    <img :src="data.img || require('../../../assets/images/null-bid.png')" class="image">
+  <el-card class="auction-card" @click.native="$router.push({path: '/transaction/bidding/detail', query: {id: data.id}})">
+    <img :src="data.img || require('@images/null-bid.png')" class="image">
     <div>
       <div class="info-list">
         <h6 class="title"><span class="ellipsis1">{{data.companyName}}</span><el-button type="primary" size="mini">进行中</el-button></h6>
@@ -55,6 +55,7 @@ export default {
 
 <style lang="scss" scoped>
 .auction-card {
+  cursor: pointer;
   img{
     width: 380px;
     height: 200px;

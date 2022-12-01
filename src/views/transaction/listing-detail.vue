@@ -5,7 +5,13 @@
                     :show-collect="false"
     >
       <template #button>
-        <el-button type="primary" style="width: 100px;margin-left: 270px;margin-bottom: 40px;">摘牌</el-button>
+        <confirm-button type="primary"
+                        style="width: 100px;margin-left: 270px;margin-bottom: 40px;"
+                        url="/listing/pick"
+                        :id="id"
+                        info="是否确定摘牌"
+                        tip="摘牌后需等待供货商确认，是否达成交易，以供货商最终确认为准。"
+        >摘牌</confirm-button>
       </template>
       <template #extra>
         <div class="preview-item">
@@ -32,12 +38,14 @@
 
 <script>
 import PreviewRender from "@components/PreviewRender/PreviewRender";
-import {getTransactionListingDetail} from "@/api/transaction/transaction";
 import {FORM_TYPE, LOGISTICS_COST_TYPE} from "@utils/const";
+import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
+import {getListingDetail} from "@/api/listing/listing";
 
 export default {
   components: {
     PreviewRender,
+    ConfirmButton
   },
   data() {
     return {
@@ -80,6 +88,7 @@ export default {
         field: 'imgUrls',
       }],
       dataSource: {},
+      id: ''
     }
   },
   created() {
@@ -88,7 +97,7 @@ export default {
   },
   methods: {
     async getData() {
-      const {data} = await getTransactionListingDetail(this.id)
+      const {data} = await getListingDetail(this.id)
       this.dataSource = data;
     },
   },

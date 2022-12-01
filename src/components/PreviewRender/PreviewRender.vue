@@ -94,6 +94,7 @@ export default {
     padding: 24px 24px 60px;
     background: #F9F9FC;
     border-radius: 8px;
+    width: 100%;
     h1{
       color: #333333;
       font-size: 18px;

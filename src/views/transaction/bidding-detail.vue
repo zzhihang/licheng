@@ -1,43 +1,46 @@
 <template>
-  <div>
+  <div class="w">
     <div class="bidding-floor actions">
       <div style="flex: 1">
         <h1 class="title-box">竞价商品详情</h1>
-        <bidding-product-card></bidding-product-card>
+        <bidding-product-card :data="model"></bidding-product-card>
       </div>
       <div style="flex-shrink: 0;margin-left: 30px;">
-        <rank-list></rank-list>
-        <bidding-action-card></bidding-action-card>
+        <rank-list :data="rankList" :is-open="isOpen"></rank-list>
+        <bidding-action-card :is-open="isOpen" :is-finish="isFinish" :data="model" :distance="isOpen ? endDistance : startDistance" style="margin-top: 20px;"></bidding-action-card>
       </div>
     </div>
 
     <div class="bidding-floor">
-      <h1 class="title-box">竞价商品详情</h1>
-      <data-table ref="table" :columns="columns" url="/bidding/userPost" style="margin-top: 21px;"></data-table>
+      <h1 class="title-box">我的竞价记录</h1>
+      <el-card body-style="padding: 0" style="margin-top: 20px;">
+        <my-bidding-record :data="userBiddingList"/>
+      </el-card>
     </div>
 
     <div class="bidding-floor">
       <h1 class="title-box">竞价活动介绍</h1>
       <div class="floor-content">
-        <div class="floor-content-item">
-          <span class="intro-title">指标：</span>
-          <span class="intro-content">如有质量问题双方共同协商解决</span>
-        </div>
-        <div class="floor-content-item">
-          <span class="intro-title">指标：</span>
-          <span class="intro-content">如有质量问题双方共同协商解决</span>
-        </div>
-        <div class="floor-content-item">
-          <span class="intro-title">指标：</span>
-          <span class="intro-content">如有质量问题双方共同协商解决</span>
-        </div>
+        {{model.introduction || '暂无竞价活动介绍'}}
+<!--        <div class="floor-content-item">-->
+<!--          <span class="intro-title">指标：</span>-->
+<!--          <span class="intro-content">如有质量问题双方共同协商解决</span>-->
+<!--        </div>-->
+<!--        <div class="floor-content-item">-->
+<!--          <span class="intro-title">指标：</span>-->
+<!--          <span class="intro-content">如有质量问题双方共同协商解决</span>-->
+<!--        </div>-->
+<!--        <div class="floor-content-item">-->
+<!--          <span class="intro-title">指标：</span>-->
+<!--          <span class="intro-content">如有质量问题双方共同协商解决</span>-->
+<!--        </div>-->
       </div>
     </div>
 
     <div class="bidding-floor">
       <h1 class="title-box">竞价规则</h1>
       <div class="floor-content">
-        <bidding-rule></bidding-rule>
+        <bidding-rule :type="model.type"></bidding-rule>
       </div>
     </div>
 
@@ -45,13 +48,13 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import RankList from "@views/transaction/components/RankList";
 import BiddingActionCard from "@views/transaction/components/BiddingActionCard";
 import BiddingProductCard from "@views/transaction/components/BiddingProductCard";
 import BiddingRule from "@views/transaction/components/BiddingRule";
-import {BIDDING_METHOD, BIDDING_TYPE, TRANSACTION_STATUS} from "@utils/const";
 import DataTable from "@components/DataTable/DataTable";
+import {getBiddingInfo} from "@/api/bidding/bidding";
+import MyBiddingRecord from "@views/transaction/components/MyBiddingRecord";
 
 export default {
   components: {
@@ -59,32 +62,39 @@ export default {
     BiddingActionCard,
     BiddingProductCard,
     DataTable,
-    BiddingRule
+    BiddingRule,
+    MyBiddingRecord
   },
   data() {
     return {
-      columns: [{
-        name: '采购商',
-        key: 'id',
-        width: 80
-      },{
-        name: '竞拍单价',
-        key: 'title',
-      },{
-        name: '数量',
-        key: 'type',
-        dict: BIDDING_TYPE
-      },{
-        name: '时间',
-        key: 'method',
-        dict: BIDDING_METHOD
-      },{
-        name: '状态',
-        key: 'goodsName',
-      },{
-        name: '有效数量',
-        key: 'goodsNum',
-      }]
+      model: {},
+      rankList: [],
+      userBiddingList: [],
+      isOpen: false,
+      isFinish: false,
+      startDistance: 0,
+      endDistance: 0
+    }
+  },
+  created() {
+    this.getDetail();
+  },
+  methods: {
+    async getDetail() {
+      const result = await getBiddingInfo(this.$route.query.id);
+      if(result.code === 200){
+        this.model = result.data;
+        this.rankList = result.data.rankList;
+        this.userBiddingList = result.data.userBiddingList;
+        const startDistance = new Date(result.data.startTime) - new Date().getTime();
+        const endDistance = new Date(result.data.endTime) - new Date().getTime();
+        if(startDistance < 0){
+          this.isOpen = true;
+        }
+        if(endDistance < 0){
+          this.isFinish = true;
+        }
+      }
     }
   },
 }
@@ -109,6 +119,7 @@ export default {
       border-radius: 8px;
       overflow: hidden;
       padding: 24px 22px;
+      background: #ffffff;
     }
   }
 

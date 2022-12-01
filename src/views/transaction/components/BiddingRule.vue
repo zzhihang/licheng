@@ -2,7 +2,7 @@
   <div>
     <h1 class="rule-title">普通竞价交易通用规则：</h1>
     <ul class="rules">
-      <li v-for="(item, index) in rules" :key="index">{{item}}</li>
+      <li v-for="(item, index) in rule" :key="index">{{item}}</li>
     </ul>
     <h1 class="rule-title">延时规则：</h1>
     <ul class="rules" style="list-style: none;">
@@ -13,11 +13,19 @@
 
 <script>
 import Vue from 'vue';
+import {getAppList} from "@/api/common";
 
 export default {
+  props: {
+    type: {
+      type: [String, Number],
+      default: 1
+    }
+  },
   data() {
     return {
-      rules: [
+      rule: [],
+      rules1: [
         '竞拍按照价格优先，同等价格数量优先，同等价格同等数量报价时间优先的原则成交。',
         '报价规范：买方报价同时提报价格和数量。买方报价的价格应大于等于拍卖底价。买方报价的数量应是最小购买量的正整数倍。',
         '买方在单场交易中可多次报价，符合报价规范的每次报价均是有效报价。',
@@ -40,6 +48,14 @@ export default {
       ]
     }
   },
+  watch: {
+    type: {
+      handler(val) {
+        this.rule = this['rules' + String(val)]
+      },
+      immediate: true
+    }
+  }
 }
 </script>
 

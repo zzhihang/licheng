@@ -7,8 +7,10 @@
     </div>
     <div class="entry-list">
       <div class="entry-list-item" v-for="(item, index) in entryList" :key="index">
-        <img :src="item.icon" alt="">
-        <p>{{item.title}}</p>
+        <router-link :to="item.path">
+          <img :src="item.icon" alt="">
+          <p>{{item.title}}</p>
+        </router-link>
       </div>
     </div>
   </div>
@@ -25,16 +27,20 @@ export default {
     return {
       entryList: [{
         icon: require('../../../../src/assets/icons/img/icon1.png'),
-        title: '发布竞价交易'
+        title: '发布竞价交易',
+        path: '/center/bidding'
       },{
         icon: require('../../../../src/assets/icons/img/icon2.png'),
-        title: '参与竞价交易'
+        title: '参与竞价交易',
+        path: '/transaction/bidding'
       },{
         icon: require('../../../../src/assets/icons/img/icon3.png'),
-        title: '发布挂牌交易'
+        title: '发布挂牌交易',
+        path: '/center/listing'
       },{
         icon: require('../../../../src/assets/icons/img/icon4.png'),
-        title: '参与摘牌交易'
+        title: '参与摘牌交易',
+        path: '/transaction/listing'
       }]
     }
   }
@@ -76,6 +82,7 @@ export default {
       font-size: 12px;
       width: 50%;
       margin-bottom: 20px;
+      cursor: pointer;
       img{
         height: 24px;
         width: 24px;

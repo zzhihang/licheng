@@ -155,5 +155,28 @@
     font-weight: bold !important;
     font-size: 18px !important;
   }
+}
 
+.data-table {
+  margin-bottom: 30px;
+
+  .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: rgba(244, 247, 252, 0.75);
+  }
+  .el-table td.el-table__cell,{
+    border-bottom: none;
+  }
+
+ .el-table .el-table__header-wrapper th{
+    background: rgba(36,104,242,0.1);;
+    color: #2468F2;
+  }
+  .el-table__header, .el-table__body{
+    width: 100% !important;
+  }
+}
+
+.table-pager {
+  margin: 30px auto 0;
+  text-align: center;
 }

@@ -16,11 +16,4 @@ export function getTransactionListingList({ pageNum = 1, pageSize = 10}) {
   })
 }
 
-export function getTransactionListingDetail(id) {
-  return request({
-    url: `/listing/info/${id}`,
-    method: 'get',
-  })
-}
-
 

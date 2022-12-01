@@ -14,3 +14,11 @@ export function getListingDetail(id) {
     method: 'post',
   })
 }
+
+//挂牌交易-摘牌
+export function pickListing(id) {
+  return request({
+    url: `/listing/pick/${id}`,
+    method: 'get',
+  })
+}

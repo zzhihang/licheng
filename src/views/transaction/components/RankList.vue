@@ -2,25 +2,27 @@
   <el-card class="rank-list" body-style="padding: 0">
     <h3 class="title">
       <img :src="require('@images/rank.png')" alt="">
-      <span>排行版</span>
+      <span>排行榜</span>
     </h3>
     <el-table
-      :data="tableData"
-      style="width: 100%">
+      :data="data"
+      style="width: 100%"
+      :empty-text="isOpen ? '暂无数据' : '竞价未开始'"
+    >
       <el-table-column
-        prop="date"
+        prop="rank"
         header-align="center"
         align="center"
         label="排名">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="price"
         header-align="center"
         align="center"
         label="竞拍单价">
       </el-table-column>
       <el-table-column
-        prop="address"
+        prop="num"
         header-align="center"
         align="center"
         label="数量">
@@ -33,25 +35,19 @@
 import Vue from 'vue';
 
 export default {
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    },
+    isOpen: {
+      type: Boolean,
+      default: false
+    },
+  },
   data() {
     return {
-      tableData:  [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+
     }
   },
 }

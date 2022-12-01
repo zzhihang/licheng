@@ -13,6 +13,7 @@
           :width="item.width || 150"
           :fixed="item.key === 'operate' ? 'right' : false"
           align="center"
+          header-align="center"
           :formatter="formatter(item)"
           show-overflow-tooltip
         >
@@ -143,27 +144,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.data-table {
-  margin-bottom: 30px;
 
-  ::v-deep .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
-    background: rgba(244, 247, 252, 0.75);
-  }
-  ::v-deep .el-table td.el-table__cell,{
-    border-bottom: none;
-  }
-
-  ::v-deep .el-table .el-table__header-wrapper th{
-    background: rgba(36,104,242,0.1);;
-    color: #2468F2;
-  }
-  ::v-deep .el-table__header, ::v-deep .el-table__body{
-    width: 100% !important;
-  }
-}
-
-.table-pager {
-  margin: 30px auto 0;
-  text-align: center;
-}
 </style>
