@@ -57,3 +57,28 @@ export function getBiddingMaxPrice(biddingId) {
     method: 'get',
   })
 }
+
+/**
+ * @Description: 商品绑定的企业列表
+ * @Param:
+ * @return:
+ */
+export function getBiddingCompanyList(goodsId) {
+  return request({
+    url: `/biddingCompany/list/${goodsId}`,
+    method: 'get',
+  })
+}
+
+/**
+ * @Description: 商品绑定的企业列表
+ * @Param:
+ * @return:
+ */
+export function saveBiddingCompanyList({goodsId, data}) {
+  return request({
+    url: `/biddingCompany/save/${goodsId}`,
+    method: 'post',
+    data
+  })
+}

@@ -86,6 +86,49 @@ export const PRODUCT_MANAGE_TYPE = {
   PRODUCT: 1,
 }
 
+export const ACTIVITY_STATUS = [{
+  label: '进行中',
+  value: 2
+},{
+  label: '交易结束',
+  value: 3
+}]
+
+export const ACTIVITY_TRANSACTION_STATUS = [{
+  label: '无效',
+  value: 0
+},{
+  label: '有效',
+  value: 1
+},{
+  label: '部分有效',
+  value: 2
+}]
+
+export const BIDDING_TRANSACTION_STATUS = [{
+  label: '未成交',
+  value: 0
+},{
+  label: '成交',
+  value: 1
+},{
+  label: '部分成交',
+  value: 2
+}]
+
+//挂牌状态
+export const LISTING_TRANSACTION_STATUS = [{
+  label: '待卖方确认',
+  value: 0
+},{
+  label: '交易成功',
+  value: 1
+},{
+  label: '交易结束',
+  value: 2
+}]
+
+
 export const TRANSACTION_STATUS = [{
   label: '草稿',
   value: 0
@@ -167,6 +210,9 @@ export const ENTERPRISE_AUDIT_STATUS = [{
   label: '驳回认证',
   value: 2
 }]
+
+
+
 
 export const MINUTES_LIST = Array.from(new Array(60).keys()).map(item => {
   const minute = item + 1

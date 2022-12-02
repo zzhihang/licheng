@@ -1,18 +1,16 @@
 <template>
   <div>
     <search-form :list="searchList" @search="onSearch"></search-form>
-    <data-table ref="table" :columns="columns" url="/bidding/userPost">
+    <data-table ref="table" :columns="columns" url="/biddingTransaction/joinList">
       <template slot="operate" slot-scope="{row}">
-        <el-button type="text" @click="$router.push({path: '/center/bidding/add', query: {id: row.id}})"
-                   v-if="row.status === 0">编辑</el-button>
-        <template v-if="row.status !== 0">
-          <el-button type="text"
-                     @click="$router.push({path: `/center/bidding/${row.id}`})"
-          >参与竞价</el-button>
-          <el-button type="text"
-                     @click="$router.push({path: `/center/bidding/${row.id}`})"
-          >查看</el-button>
-        </template>
+        <el-button type="text"
+                   v-if="String(row.status) === '2'"
+                   @click="$router.push({path: `/transaction/bidding/detail?id=${row.id}`})"
+        >参与竞价</el-button>
+        <el-button type="text"
+                   v-if="String(row.status) === '3'"
+                   @click="$router.push({path: `/transaction/bidding/detail?id=${row.id}`})"
+        >查看</el-button>
       </template>
     </data-table>
   </div>
@@ -20,7 +18,7 @@
 
 <script>
 import SearchForm from "@components/SearchForm/SearchForm";
-import {BIDDING_METHOD, BIDDING_TYPE, DICT_PRODUCT_LIST, FORM_TYPE, TRANSACTION_STATUS} from "@utils/const";
+import {ACTIVITY_STATUS, ACTIVITY_TRANSACTION_STATUS, BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE} from "@utils/const";
 import DataTable from "@components/DataTable/DataTable";
 import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 
@@ -38,13 +36,13 @@ export default {
         type: FORM_TYPE.MY_SELECT,
         url: DICT_PRODUCT_LIST
       },{
-        field: 'time',
+        field: 'company',
         label: '供货商名称',
       },{
         field: 'status',
         label: '活动状态',
         type: FORM_TYPE.SELECT,
-        options: TRANSACTION_STATUS
+        options: ACTIVITY_STATUS
       }],
       columns: [{
         name: '活动ID',
@@ -55,15 +53,15 @@ export default {
         key: 'title',
       },{
         name: '活动状态',
-        key: 'type',
-        dict: BIDDING_TYPE
+        key: 'status',
+        dict: ACTIVITY_STATUS
       },{
         name: '竞价方式',
         key: 'method',
         dict: BIDDING_METHOD
       },{
         name: '供应商名称',
-        key: 'goodsName',
+        key: 'company',
       },{
         name: '商品名称',
         key: 'goodsName',
@@ -75,13 +73,14 @@ export default {
         key: 'endTime',
       },{
         name: '起拍价格（元）',
-        key: 'endTime',
+        key: 'baseUnitPrice',
       },{
         name: '总量',
-        key: 'num',
+        key: 'goodsNum',
       },{
         name: '是否成交',
-        key: 'num',
+        key: 'transactionStatus',
+        dict: ACTIVITY_TRANSACTION_STATUS
       },{
         name: '操作',
         key: 'operate',

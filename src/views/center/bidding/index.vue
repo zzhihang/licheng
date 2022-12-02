@@ -18,7 +18,8 @@
           style="margin-left: 8px"
           url="/bidding/delete/"
           :id="row.id"
-          title="是否确定删除挂牌信息"
+          info="是否确定删除挂牌信息"
+          tip="竞价商品删除后不可恢复"
           @onSuccess="onSearch"
           v-if="row.status === 0"
         >
@@ -26,21 +27,23 @@
         </confirm-button>
         <template v-if="row.status !== 0">
           <el-button type="text"
-                     @click="$router.push({path: `/center/bidding/${row.id}`})"
+                     @click="$router.push({path: `/transaction/bidding/detail?id=${row.id}`})"
           >查看商品详情</el-button>
-          <el-button type="text"
-                     @click="$router.push({path: `/center/bidding/${row.id}`})"
-          >查看出价记录</el-button>
         </template>
+        <el-button type="text"
+                   v-if="row.status === 1 || row.status === 3"
+                   @click="$router.push({path: `/center/bidding/record/${row.id}?status=${row.status}`})"
+        >查看出价记录</el-button>
         <confirm-button
           style="margin-left: 8px"
           url="/news/off/"
           :id="row.id"
           @onSuccess="onSearch"
-          title="是否确定取消发布竞价交易"
+          info="是否确定取消发布竞价交易"
+          tip="竞价交易取消发布后将变为草稿状态"
           v-if="row.status === 1"
         >
-          结束挂牌
+          取消发布
         </confirm-button>
       </template>
     </data-table>

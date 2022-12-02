@@ -12,6 +12,7 @@
 <script>
 import FormRender from '@components/FormRender/FormRender'
 import {addListing, getListingDetail} from "@/api/listing/listing";
+import {LISTING_ADD_MODEL} from "@views/center/listing/model";
 
 export default {
   components: {
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      formData: [],
+      formData: LISTING_ADD_MODEL,
     }
   },
   created() {

@@ -7,7 +7,7 @@
       <template #button>
         <confirm-button type="primary"
                         style="width: 100px;margin-left: 270px;margin-bottom: 40px;"
-                        url="/listing/pick"
+                        url="/listing/pick/"
                         :id="id"
                         info="是否确定摘牌"
                         tip="摘牌后需等待供货商确认，是否达成交易，以供货商最终确认为准。"
@@ -56,7 +56,6 @@ export default {
       },{
         label: '商品品级',
         field: 'goodsGrade',
-        extraField: 'districtId' //额外传递的id字段
       },{
         label: '商品单价',
         field: 'unitPrice',

@@ -11,7 +11,7 @@ export function addListing(data) {
 export function getListingDetail(id) {
   return request({
     url: `/listing/info/${id}`,
-    method: 'post',
+    method: 'get',
   })
 }
 
@@ -19,6 +19,14 @@ export function getListingDetail(id) {
 export function pickListing(id) {
   return request({
     url: `/listing/pick/${id}`,
+    method: 'get',
+  })
+}
+
+//摘牌列表
+export function getListingTransactionDetail(id) {
+  return request({
+    url: `/listingTransaction/pickList/${id}`,
     method: 'get',
   })
 }

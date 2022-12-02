@@ -295,11 +295,20 @@ export const constantRoutes = [
             },{
               path: '/center/bidding-join',
               component: () => import('@/views/center/bidding/join.vue'),
-              meta: {title: '我参与的竞价活动'},
+              meta: {title: '我参与的竞价交易'},
+            },{
+              path: '/center/bidding-company-manage',
+              component: () => import('@/views/center/bidding/bidding-company-manage.vue'),
+              meta: {title: '竞价企业维护'},
             },{
               path: '/center/bidding/add',
               component: () => import('@/views/center/bidding/add.vue'),
               meta: {title: '发布'},
+              hidden: true
+            },{
+              path: '/center/bidding/record/:id',
+              component: () => import('@/views/center/bidding/record.vue'),
+              meta: {title: '出价记录'},
               hidden: true
             }]
           },
@@ -313,9 +322,18 @@ export const constantRoutes = [
               component: () => import('@/views/center/listing/index.vue'),
               meta: {title: '我发布的挂牌交易'},
             },{
+              path: '/center/listing-join',
+              component: () => import('@/views/center/listing/join.vue'),
+              meta: {title: '我参与的挂牌交易'},
+            },{
               path: '/center/listing/add',
               component: () => import('@/views/center/listing/add.vue'),
               meta: {title: '发布'},
+              hidden: true
+            },{
+              path: '/center/listing/detail/:id',
+              component: () => import('@/views/center/listing/detail.vue'),
+              meta: {title: '挂牌信息'},
               hidden: true
             }]
           }, {
