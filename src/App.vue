@@ -26,16 +26,16 @@ export default {
     ...mapState('user', ['token'])
   },
   watch: {
-    token: {
-      handler(val) {
-        val && getAppList().then(res => {
-          if (res.code === 200) {
-            this.setAppList(res.data.map(({appCode:value,appName:label})=>({label,value})))
-          }
-        })
-      },
-      immediate: true
-    }
+    // token: {
+    //   handler(val) {
+    //     val && getAppList().then(res => {
+    //       if (res.code === 200) {
+    //         this.setAppList(res.data.map(({appCode:value,appName:label})=>({label,value})))
+    //       }
+    //     })
+    //   },
+    //   immediate: true
+    // }
   },
   methods: {
     ...mapActions('app', ['setAppList'])

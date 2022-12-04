@@ -1,5 +1,6 @@
 <template>
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px">
+  <div>
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px">
       <el-form-item v-for="(item, index) in data"
                     :label="item.label"
                     :prop="item.field"
@@ -98,9 +99,13 @@
         >
           <template v-if="item.append" slot="append">{{item.append}}</template>
         </el-input>
-
       </el-form-item>
-  </el-form>
+    </el-form>
+    <div class="form-button-box">
+      <slot></slot>
+      <confirm-button type="primary" @onConfirm="resetForm" info="是否确定清空表单" tip="清空后将无法恢复" plain>清空</confirm-button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -112,13 +117,15 @@ import FileUpload from '@components/FileUpload'
 import ImageUpload from '@components/ImageUpload'
 import { regionData, CodeToText } from 'element-china-area-data'
 import MySelect from "@components/mine/MySelect/MySelect";
+import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 
 export default {
   components: {
     Editor,
     FileUpload,
     ImageUpload,
-    MySelect
+    MySelect,
+    ConfirmButton
   },
   props: {
     data: {
@@ -170,15 +177,6 @@ export default {
     onAddressChange(e, field, extraField){
       this.ruleForm[field] = CodeToText[e[0]] + CodeToText[e[1]] + CodeToText[e[2]];
       this.ruleForm[extraField] = Number(e[2])
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.$emit('onSubmitClick', this.ruleForm)
-        } else {
-          return false;
-        }
-      });
     },
     resetForm() {
       this.$refs.ruleForm.resetFields();

@@ -11,23 +11,26 @@
               {{item.title}}
             </router-link>
           </li>
-          <li>登录</li>
-          <li>注册</li>
+          <li @click="dialogVisible = true">登录</li>
+          <li @click="$router.push('/register')">注册</li>
         </ul>
       </div>
     </div>
+    <login-modal :visible.sync="dialogVisible"/>
   </el-header>
 </template>
 
 <script>
 import Vue from 'vue';
+import LoginModal from "@views/LoginModal";
 
 export default {
   components: {
-
+    LoginModal
   },
   data(){
     return {
+      dialogVisible: false,
       active: 0,
       menus: [{
         title: '网站首页',
@@ -90,6 +93,7 @@ export default {
       font-size: 14px;
       margin-right: 30px;
       position: relative;
+      cursor: pointer;
     }
     .active{
       &:after{

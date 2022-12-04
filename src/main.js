@@ -37,6 +37,7 @@ import DictData from '@/components/DictData'
 import Mine from '@/components/mine'
 import upload from '@/utils/oss'
 import { permission } from '@/mixins/permission'
+import {callConfirm} from "@components/CallConfirm/CallConfirm";
 
 Vue.mixin(permission)
 // 全局方法挂载
@@ -95,6 +96,7 @@ new Vue({
 })
 // Vue.prototype.ossUrl = process.env.VUE_APP_BASE_API
 Vue.prototype.ossUrl = 'https://txcj-bid.oss-cn-qingdao.aliyuncs.com'
+Vue.prototype.$callConfirm = callConfirm
 Element.MenuItem.computed.paddingStyle = paddingStyle
 Element.Submenu.computed.paddingStyle = paddingStyle
 Element.Dialog.props.closeOnClickModal.default = false

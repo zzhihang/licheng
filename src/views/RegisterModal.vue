@@ -1,4 +1,8 @@
 <template>
+  <el-dialog
+    :visible.sync="visible"
+    class="login-modal"
+    width="40%">
   <div class="register">
     <el-form ref="registerForm" :model="registerForm" :rules="registerRules" class="register-form">
       <h3 class="title">注册</h3>
@@ -8,12 +12,12 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="company">
-        <el-input v-model="registerForm.mobile" type="text" auto-complete="off" placeholder="请输入手机号码">
+        <el-input v-model="registerForm.company" type="text" auto-complete="off" placeholder="请输入手机号码">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
-      <el-form-item prop="authCode">
-        <el-input v-model="registerForm.authCode" type="text" auto-complete="off" placeholder="请输入短信验证码">
+      <el-form-item prop="password">
+        <el-input v-model="form.password" type="password" auto-complete="off" placeholder="请输入短信验证码">
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon"/>
           <el-button type="text"
                      slot="suffix"
@@ -45,6 +49,20 @@
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
+      <el-form-item v-if="captchaOnOff" prop="code">
+        <el-input
+          v-model="registerForm.code"
+          auto-complete="off"
+          placeholder="验证码"
+          style="width: 63%"
+          @keyup.enter.native="handleRegister"
+        >
+          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+        </el-input>
+        <div class="register-code">
+          <img :src="codeUrl" class="register-code-img" @click="getCode">
+        </div>
+      </el-form-item>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -57,11 +75,16 @@
           <span v-else>注 册 中...</span>
         </el-button>
         <div style="float: right;">
-          <router-link class="link-type" :to="'/login'">已有账号，立即登录</router-link>
+          <router-link class="link-type" :to="'/login'">使用已有账户登录</router-link>
         </div>
       </el-form-item>
     </el-form>
+    <!--  底部  -->
+    <div class="el-register-footer">
+      <span>Copyright © 2018-2021 All Rights Reserved.</span>
+    </div>
   </div>
+  </el-dialog>
 </template>
 
 <script>
@@ -85,34 +108,38 @@ export default {
       },
       registerForm: {
         username: '',
-        mobile: '',
         password: '',
         confirmPassword: '',
         roleId: 100,
-        authCode: '',
+        company: '',
+        code: '',
         uuid: ''
       },
       registerRules: {
         username: [
           { required: true, trigger: 'blur', message: '请输入您的账号' },
-          { min: 2, max: 20, message: '用户账号长度必须介于 6 和 20 之间', trigger: 'blur' }
+          { min: 2, max: 20, message: '用户账号长度必须介于 2 和 20 之间', trigger: 'blur' }
+        ],
+        company: [
+          { required: true, trigger: 'blur', message: '请输入公司名称' },
+          { min: 2, max: 50, message: '用户账号长度必须介于 2 和 50 之间' }
         ],
         password: [
           { required: true, trigger: 'blur', message: '请输入您的密码' },
-          { min: 5, max: 20, message: '用户密码长度必须介于 6 和 20 之间', trigger: 'blur' }
+          { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
         ],
         confirmPassword: [
           { required: true, trigger: 'blur', message: '请再次输入您的密码' },
           { required: true, validator: equalToPassword, trigger: 'blur' }
         ],
-        authCode: [{ required: true, trigger: 'change', message: '请输入验证码' }]
+        code: [{ required: true, trigger: 'change', message: '请输入验证码' }]
       },
       loading: false,
       captchaOnOff: true
     }
   },
   created() {
-
+    this.getCode()
   },
   methods: {
     getCaptcha (e) {
@@ -126,7 +153,6 @@ export default {
             if (state.time-- <= 0) {
               state.time = 60
               state.smsSendBtn = false
-              this.registerForm.uuid = result.data.uuid
               window.clearInterval(interval)
             }
           }, 1000)
@@ -148,13 +174,6 @@ export default {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
           this.loading = true
-          const {
-              username,
-              mobile,
-              password,
-              authCode,
-              uuid,
-            } = this.registerForm;
           register(this.registerForm).then(res => {
             const username = this.registerForm.username
             this.$alert("<font color='red'>恭喜你，您的账号 " + username + ' 注册成功！</font>', '系统提示', {

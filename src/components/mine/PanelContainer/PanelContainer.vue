@@ -1,16 +1,20 @@
 <template>
-  <div class="my-menu" v-if="menus.length">
+  <div class="my-menu" :class="{'center': isMenuCenter}" v-if="menus.length">
     <el-menu
       default-active="1"
       @open="handleOpen"
       @close="handleClose"
-      :unique-opened="true  "
+      :unique-opened="true"
       background-color="#fff"
       text-color="#333333"
       active-text-color="#165DFF">
+      <template>
+        <div class="parent-menu">交易中心</div>
+      </template>
       <template v-for="(item, index) in menus">
         <el-submenu :key="index"
                     :index="String(index)"
+                    :class="{'none-menu': !item.children}"
         >
           <template slot="title" v-if="!item.hidden">
             <router-link :to="item.path">
@@ -43,11 +47,9 @@ export default {
   components: {},
   data() {
     return {
-      menus: []
+      menus: [],
+      isMenuCenter: false //左侧菜单样式是否居中显示
     }
-  },
-  created() {
-
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -65,6 +67,11 @@ export default {
         const finder = constantRoutes.find(item => item.path === '/').children
         this.menus = finder.find(item => item.path === finderPath).children || [];
         this.menus = this.menus.filter(item => !item.hidden)
+        if(!fullPath.startsWith('/center')){
+          this.isMenuCenter = true;
+        }else{
+          this.isMenuCenter = false
+        }
       },
       immediate: true
     }
@@ -74,7 +81,6 @@ export default {
 
 <style lang="scss" scoped>
 .my-menu {
-
   .el-menu {
     background: #FFFFFF;
     box-shadow: 0 0 8px 1px #E9EBED;
@@ -89,15 +95,39 @@ export default {
     overflow: hidden;
   }
 
+  &.center{
+    .parent-menu{
+      text-align: center;
+      padding-left: 0;
+    }
+  }
+
+  .parent-menu{
+    height: 56px;
+    color: #333333;;
+    font-size: 16px;
+    line-height: 56px;
+    border-bottom: 1px solid #EDEFF5;;
+    padding-left: 60px;
+    font-weight: bold;
+  }
+
+  //.el-menu-item-group ul a {
+  //  &:last-child{
+  //    .el-menu-item{
+  //      border-bottom: none;
+  //    }
+  //  }
+  //}
+
   .el-submenu {
-    border-bottom: 1px solid #EDEFF5;
 
     .el-menu-item {
       border-bottom: 1px solid #EDEFF5;
 
-      &:last-child {
-        border-bottom: none;
-      }
+      //&:last-child {
+      //  border-bottom: none;
+      //}
       &.is-active:before{
         background: #165DFF;
       }
@@ -112,6 +142,15 @@ export default {
         border-radius: 100%;
       }
     }
+  }
+  .none-menu{
+    ::v-deep .el-submenu__icon-arrow{
+      display: none;
+    }
+  }
+
+  ::v-deep .el-menu-item-group__title{
+    display: none;
   }
 }
 </style>

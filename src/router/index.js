@@ -164,17 +164,12 @@ export const constantRoutes = [
           meta: {title: '查看仓找货'},
           hidden: true,
         }]
-      }, {
+      },
+      {
         path: '/supply',
-        component: MenuRouterView,
-        redirect: '/supply',
-        meta: {title: '供应链服务'},
-        children: [{
-          path: '/supply',
-          component: () => import('@/views/supply'),
-          name: 'CenterUser',
-          meta: {title: '供应链服务', icon: 'dashboard', affix: true}
-        }]
+        component: () => import('@/views/supply'),
+        name: 'CenterUser',
+        meta: {title: '供应链服务'}
       },
       {
         path: '/logistics/:id',

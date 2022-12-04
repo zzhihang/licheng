@@ -44,7 +44,7 @@ export function getGoodsFindWarehouse2C(id) {
 
 export function getWarehouseFindGoodsList2C({pageSize = 10, pageNum = 1}) {
   return request({
-    url: `/warehouseFindGoods/indexList`,
+    url: `/index/storage/warehouseFindGoods`,
     method: 'get',
     params: {pageSize, pageNum}
   })
@@ -52,7 +52,7 @@ export function getWarehouseFindGoodsList2C({pageSize = 10, pageNum = 1}) {
 
 export function getGoodsFindWarehouseList2C({pageSize = 10, pageNum = 1}) {
   return request({
-    url: `/goodsFindWarehouse/indexList`,
+    url: `/index/storage/goodsFindWarehouse`,
     method: 'get',
     params: {pageSize, pageNum}
   })
@@ -67,7 +67,7 @@ export function getWarehouseFindGoods(id) {
 
 export function getHomeStorageList() {
   return request({
-    url: `/warehouseFindGoods/index/list`,
+    url: `/index/storage`,
     method: 'get',
   })
 }

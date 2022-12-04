@@ -2,7 +2,7 @@
   <div class="w">
     <floor-title :show-more="true" title="挂牌交易"
                  @onMoreClick="$router.push({path: '/transaction/listing'})"></floor-title>
-    <data-table style="margin-top: 30px;" :columns="columns" url="/listing/index/list" data-key="data"></data-table>
+    <data-table style="margin-top: 30px;" :columns="columns" url="/index/listing" data-key="data"></data-table>
   </div>
 </template>
 

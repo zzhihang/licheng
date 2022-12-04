@@ -20,10 +20,10 @@ export default {
   },
   created() {
     if(this.$route.path === '/storage/goods-find-warehouse'){
-      this.service = '/goodsFindWarehouse/indexList'
+      this.service = '/index/storage/goodsFindWarehouse'
       this.type = NEWS_CLASS.GOODS_FIND_WAREHOUSE
     }else{
-      this.service = '/warehouseFindGoods/indexList'
+      this.service = '/index/storage/warehouseFindGoods'
       this.type = NEWS_CLASS.WAREHOUSE_FIND_GOODS
     }
   },

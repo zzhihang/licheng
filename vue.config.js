@@ -12,7 +12,7 @@ function resolve(dir) {
 process.env.VUE_APP_ENV = 'uat'
 let target = '39.104.116.61'
 // let target = 'http://192.168.110.34:9080'
-let port = '8082'
+let port = '9080'
 let https = false
 let analysis = false
 let params
@@ -128,6 +128,13 @@ module.exports = {
       //   }
       // }
       // detail: https://cli.vuejs.org/config/#devserver-proxy
+      '/bulktrade/auth/login': {
+        target: target,
+        changeOrigin: true,
+        pathRewrite: {
+          '/bulktrade/auth/login': '/auth/login'
+        }
+      },
       [process.env.VUE_APP_BASE_API]: {
         target,
         //         target: `https://uatadmin.tongxincaijin.cn`,
@@ -138,7 +145,8 @@ module.exports = {
         pathRewrite: {
           // ['^' + process.env.VUE_APP_BASE_API]: ''
         }
-      }
+      },
+
     },
     disableHostCheck: true
   },

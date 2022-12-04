@@ -41,21 +41,24 @@ export default {
     }
   },
   created() {
-    this.service = getCarFindGoodsDetail2c;
-    this.moreService = getCarFindGoodsList2c
-    this.favoriteType = NEWS_CLASS.CAR_FIND_GOODS
-    this.id = this.$route.params.id
-    if(String(this.$route.query.type) === String(NEWS_CLASS.GOODS_FIND_CAR)){
-      this.service = getGoodsFindCarDetail2c;
-      this.moreService = getGoodsFindCarList2c
-      this.favoriteType = NEWS_CLASS.GOODS_FIND_CAR
-      this.list = GOODS_FIND_CAR_MODEL;
-    }
-    this.getData()
-    this.getMoreList()
+    this.getData();
   },
   methods: {
-    async getData() {
+    getData(){
+      this.service = getCarFindGoodsDetail2c;
+      this.moreService = getCarFindGoodsList2c
+      this.favoriteType = NEWS_CLASS.CAR_FIND_GOODS
+      this.id = this.$route.params.id
+      if(String(this.$route.query.type) === String(NEWS_CLASS.GOODS_FIND_CAR)){
+        this.service = getGoodsFindCarDetail2c;
+        this.moreService = getGoodsFindCarList2c
+        this.favoriteType = NEWS_CLASS.GOODS_FIND_CAR
+        this.list = GOODS_FIND_CAR_MODEL;
+      }
+      this.getDetail()
+      this.getMoreList()
+    },
+    async getDetail() {
       const {data} = await this.service(this.id)
       this.dataSource = data;
     },
@@ -74,6 +77,14 @@ export default {
     },
     onMoreCardClick({id}){
       this.$router.push({path: `/logistics/${id}?type=${this.$route.query.type}`})
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.getData();
+      },
+      immediate: true
     }
   },
 }

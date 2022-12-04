@@ -41,21 +41,24 @@ export default {
     }
   },
   created() {
-    this.service = getWarehouseFindGoods2C;
-    this.moreService = getWarehouseFindGoodsList2C;
-    this.favoriteType = NEWS_CLASS.WAREHOUSE_FIND_GOODS
-    this.id = this.$route.params.id
-    if(String(this.$route.query.type) === String(NEWS_CLASS.GOODS_FIND_WAREHOUSE)){
-      this.service = getGoodsFindWarehouse2C;
-      this.moreService = getGoodsFindWarehouseList2C;
-      this.favoriteType = NEWS_CLASS.GOODS_FIND_WAREHOUSE
-      this.list = GOODS_FIND_WAREHOUSE_MODEL;
-    }
-    this.getData()
-    this.getMoreList();
+    this.getData();
   },
   methods: {
-    async getData() {
+    getData(){
+      this.service = getWarehouseFindGoods2C;
+      this.moreService = getWarehouseFindGoodsList2C;
+      this.favoriteType = NEWS_CLASS.WAREHOUSE_FIND_GOODS
+      this.id = this.$route.params.id
+      if(String(this.$route.query.type) === String(NEWS_CLASS.GOODS_FIND_WAREHOUSE)){
+        this.service = getGoodsFindWarehouse2C;
+        this.moreService = getGoodsFindWarehouseList2C;
+        this.favoriteType = NEWS_CLASS.GOODS_FIND_WAREHOUSE
+        this.list = GOODS_FIND_WAREHOUSE_MODEL;
+      }
+      this.getDetail()
+      this.getMoreList();
+    },
+    async getDetail() {
       const {data} = await this.service(this.id)
       this.dataSource = data;
     },
@@ -74,6 +77,14 @@ export default {
     },
     onMoreCardClick({id}){
       this.$router.push({path: `/storage/${id}?type=${this.$route.query.type}`})
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.getData();
+      },
+      immediate: true
     }
   },
 }

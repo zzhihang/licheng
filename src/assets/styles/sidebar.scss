@@ -134,6 +134,7 @@
       &>.el-submenu__title {
         padding: 0 !important;
         padding-left: 60px !important;
+        border-bottom: 1px solid #EDEFF5;
 
         .svg-icon {
           margin-left: 20px;
@@ -155,6 +156,11 @@
         }
       }
     }
+  }
+
+  .center .el-submenu > .el-submenu__title{
+    padding-left: 0 !important;
+    text-align: center;
   }
 
   .el-menu--collapse .el-menu .el-submenu {

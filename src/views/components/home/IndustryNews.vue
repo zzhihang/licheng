@@ -42,8 +42,7 @@ export default {
     },
     async getData() {
       const result = await getHomeNewsList();
-      //TODO 取industry
-      this.data = result.data.policy.concat(result.data.policy)
+      this.data = result.data.industry;
       this.total = Math.ceil(this.data.length / 4)
     },
     onCarouselChange(e){

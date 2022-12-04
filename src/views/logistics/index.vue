@@ -15,16 +15,16 @@ export default {
   },
   data() {
     return {
-      service: '/goodsFindCar/indexList',
+      service: '/index/logistics/goodsFindCar',
       type: NEWS_CLASS.GOODS_FIND_CAR
     }
   },
   created() {
     if(this.$route.path === '/logistics/car-find-goods'){
-      this.service = '/carFindGoods/indexList'
+      this.service = '/index/logistics/carFindGoods'
       this.type = NEWS_CLASS.CAR_FIND_GOODS
     }else{
-      this.service = '/goodsFindCar/indexList'
+      this.service = '/index/logistics/goodsFindCar'
       this.type = NEWS_CLASS.GOODS_FIND_CAR
     }
   },

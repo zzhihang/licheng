@@ -1,4 +1,12 @@
 import request from '@/utils/request'
+import axios from "axios";
+
+const service = axios.create({
+  // axios中请求配置有baseURL选项，表示请求URL公共部分
+  baseURL: 'http://39.104.116.61:9080',
+  // 超时
+  timeout: 30000
+})
 
 // 登录方法
 export function login(username, password, code, uuid) {
@@ -22,7 +30,7 @@ export function login(username, password, code, uuid) {
 // 注册方法
 export function register(data) {
   return request({
-    url: '/register',
+    url: '/auth/register',
     headers: {
       isToken: false
     },
@@ -58,5 +66,18 @@ export function getCodeImg() {
     },
     method: 'get',
     timeout: 20000
+  })
+}
+
+// 获取验证码
+export function getCodeSms(mobile) {
+  return request({
+    url: '/auth/senRegisterCode',
+    headers: {
+      isToken: false
+    },
+    method: 'post',
+    timeout: 20000,
+    data: {mobile}
   })
 }

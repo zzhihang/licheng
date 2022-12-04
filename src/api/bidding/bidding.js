@@ -15,7 +15,7 @@ export function addBidding(data) {
 */
 export function getHomeBidingList() {
   return request({
-    url: `/bidding/index/list`,
+    url: `/index/bidding`,
     method: 'get',
   })
 }

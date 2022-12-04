@@ -1,6 +1,6 @@
 <template>
   <div style="display: inline-block">
-    <el-button type="text" @click="deleteClick">
+    <el-button :type="type" v-bind="$attrs" @click="onButtonClick">
       <slot></slot>
     </el-button>
   </div>
@@ -14,7 +14,7 @@
     props: {
       type: {
         type: String,
-        default: 'del'
+        default: 'text'
       },
       url: {
         type: String,
@@ -38,10 +38,7 @@
       },
     },
     methods: {
-      async deleteClick(){
-        if(!this.id){
-          return this.$message.warning(`请选择要操作的数据`)
-        }
+      async onButtonClick(){
         const h = this.$createElement;
         await this.$msgbox({
           title: this.title || '操作提示',
@@ -57,15 +54,24 @@
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = '请求中...';
-              const result = await request({
-                url: URL_PREFIX + this.url + this.id,
-                method: 'get',
-              })
-              if (result.code === 200) {
-                this.$emit('onSuccess')
+              if(this.url){//有url的自动请求 例如删除、取消等请求
+                const result = await request({
+                  url: URL_PREFIX + this.url + this.id,
+                  method: 'get',
+                })
+                if (result.code === 200) {
+                  this.$emit('onSuccess')
+                  this.$message.success(result.msg)
+                  instance.confirmButtonLoading = false;
+                }else{
+                  instance.confirmButtonLoading = false;
+                }
+              }else{
+                this.$emit('onConfirm', () => {
+                  instance.confirmButtonLoading = false;
+                  done()
+                })
               }
-              instance.confirmButtonLoading = false;
-              this.$message.success(result.msg)
               done();
             } else {
               done();

@@ -37,25 +37,41 @@ export default {
     }
   },
   created(){
-    getNewsDetail(this.$route.params.id).then((result) => {
-      if(result.code === 200){
-        this.data = result.data.news;
-        if(result.data.prev){
-          this.prev = result.data.prev.id;
-        }
-        if(result.data.next){
-          this.next = result.data.next.id;
-        }
 
-      }
-    })
-    getNewsHotList().then(result => {
-      this.hotList = result.rows.filter(item => String(item.id) !== String(this.$route.params.id)).slice(0, 5)
-    })
   },
   methods: {
+    getData(){
+      this.getDetail();
+      this.getMore();
+    },
+    getMore(){
+      getNewsHotList().then(result => {
+        this.hotList = result.rows.filter(item => String(item.id) !== String(this.$route.params.id)).slice(0, 5)
+      })
+    },
+    getDetail(){
+      getNewsDetail(this.$route.params.id).then((result) => {
+        if(result.code === 200){
+          this.data = result.data.news;
+          if(result.data.prev){
+            this.prev = result.data.prev.id;
+          }
+          if(result.data.next){
+            this.next = result.data.next.id;
+          }
+        }
+      })
+    },
     onMoreCardClick({id}) {
       this.$router.push({path: `/news/${id}`})
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.getData();
+      },
+      immediate: true
     }
   },
 }

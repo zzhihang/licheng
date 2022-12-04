@@ -39,7 +39,7 @@ export function userFavoriteCarFindGoods({pageNum, pageSize = 10}) {
 */
 export function getGoodsFindCarList2c({pageNum=1, pageSize = 10}) {
   return request({
-    url: '/goodsFindCar/indexList',
+    url: '/index/logistics/goodsFindCar',
     method: 'get',
     params: {pageNum, pageSize}
   })
@@ -47,7 +47,7 @@ export function getGoodsFindCarList2c({pageNum=1, pageSize = 10}) {
 
 export function getCarFindGoodsList2c({pageNum=1, pageSize = 10}) {
   return request({
-    url: '/carFindGoods/indexList',
+    url: '/index/logistics/carFindGoods',
     method: 'get',
     params: {pageNum, pageSize}
   })
@@ -84,7 +84,7 @@ export function getGoodsFindCar(id) {
 
 export function getHomeLogisticsList(id) {
   return request({
-    url: `/goodsFindCar/index/list`,
+    url: `/index/logistics`,
     method: 'get',
   })
 }
