@@ -55,9 +55,13 @@ export default {
           this.data = result.data.news;
           if(result.data.prev){
             this.prev = result.data.prev.id;
+          }else{
+            this.prev = '';
           }
           if(result.data.next){
             this.next = result.data.next.id;
+          }else{
+            this.next = '';
           }
         }
       })

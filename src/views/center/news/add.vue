@@ -10,7 +10,7 @@
 <script>
 import FormRender from '@components/FormRender/FormRender'
 import {FORM_TYPE, NEWS_TYPE} from "@utils/const";
-import {addNews} from "@/api/news/news";
+import {addNews, getNewsDetail} from "@/api/news/news";
 
 export default {
   components: {
@@ -35,13 +35,21 @@ export default {
         type: FORM_TYPE.EDITOR,
         label: '正文',
         field: 'content',
-      }]
+      }],
     }
   },
   created() {
     this.title = this.$route.meta.title
+    if(this.$route.query.id){
+      this.id = this.$route.query.id;
+      this.getDetail();
+    }
   },
   methods: {
+    async getDetail(){
+      const {data} = await getNewsDetail(this.id);
+      this.$refs.formRender.setData(data.news)
+    },
     submitForm(status) {
       this.$refs.formRender.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -52,6 +60,9 @@ export default {
             onConfirm: async (done) => {
               const params = this.$refs.formRender.getData();
               params.status = status;
+              if(this.id){
+                params.id = this.id;
+              }
               const result = await addNews(params);
               if(result.code === 200){
                 this.$router.go(-1);

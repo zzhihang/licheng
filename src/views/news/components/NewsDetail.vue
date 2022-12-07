@@ -9,8 +9,8 @@
       <div v-html="html" style="margin-top: 17px;"></div>
     </div>
     <div class="button-box">
-      <el-button icon="el-icon-back" @click="$router.push(`/news/${prev}`)">上一篇</el-button>
-      <el-button style="margin-left: 120px;" @click="$router.push(`/news/${next}`)">下一篇<i style="margin-left: 10px" class="el-icon-right"></i></el-button>
+      <el-button icon="el-icon-back" :disabled="!prev" @click="$router.push(`/news/${prev}`)">上一篇</el-button>
+      <el-button style="margin-left: 120px;" :disabled="!next" @click="$router.push(`/news/${next}`)">下一篇<i style="margin-left: 10px" class="el-icon-right"></i></el-button>
     </div>
   </div>
 </template>

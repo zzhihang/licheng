@@ -2,16 +2,12 @@
   <div class="user-index">
     <h1>
       <span>快捷菜单</span>
-      <el-button type="primary" plain>设置</el-button>
+      <el-button type="primary" plain @click="settingVisible = true">设置</el-button>
     </h1>
     <div class="user-content">
-      <div class="menu-item">
-        <div class="sub-title">竞价交易管理</div>
-        <el-button type="primary">我发布的竞价交易</el-button>
-      </div>
-      <div class="menu-item">
-        <div class="sub-title">竞价交易管理</div>
-        <el-button type="primary">我发布的竞价交易</el-button>
+      <div class="menu-item" v-for="(item, index) in menus" :key="index">
+        <div class="sub-title">{{item.title}}</div>
+        <el-button type="primary" v-for="child in item.children" :key="item.id">{{child.title}}</el-button>
       </div>
     </div>
     <h1 style="margin-top: 60px;">
@@ -34,31 +30,48 @@
         </div>
       </div>
     </div>
+    <menu-setting :visible.sync="settingVisible" @onSuccess="onSuccess"/>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import {getUserInfo} from "@/api/user/user";
-import {COMPANY_STATUS, getLabelByValue} from "@utils/const";
+import {getUserInfo, getUserShortcutMenu} from "@/api/user/user";
+import {COMPANY_STATUS, DEFAULT_SHORT_CUT_MENUS, getLabelByValue} from "@utils/const";
+import MenuSetting from "@views/center/user/components/MenuSetting";
+import {deepClone} from "@utils";
 
 export default {
   components: {
-
+    MenuSetting
   },
   data() {
     return {
-      data: {}
+      data: {},
+      settingVisible: false,
+      menus: []
     }
   },
   created(){
     this.getInfo();
+    this.getMenus();
   },
   methods: {
+    onSuccess(){
+      this.getMenus();
+    },
     async getInfo() {
       const {data} = await getUserInfo();
       data.companyStautsText = getLabelByValue(data.companyStatus, COMPANY_STATUS);
       this.data = data;
+    },
+    async getMenus(){
+      const {rows} = await getUserShortcutMenu()
+      if(rows.length){
+        this.menus = rows
+      }else{
+        this.menus = deepClone(DEFAULT_SHORT_CUT_MENUS)
+      }
     }
   },
 }

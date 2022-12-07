@@ -65,6 +65,7 @@ export default {
       align-items: center;
       height: 80px;
       border-bottom: 1px solid #DEE3ED;
+      cursor: pointer;
       &:before{
         content: '';
         display: inline-block;

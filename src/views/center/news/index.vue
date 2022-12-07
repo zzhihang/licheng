@@ -8,12 +8,13 @@
     </div>
     <data-table ref="table" :columns="columns" url="/news/list">
       <template slot="operate" slot-scope="{row}">
-        <el-button type="text" v-if="row.status === 0">编辑</el-button>
+        <el-button type="text" @click="$router.push({path: `/center/news/add`, query: {id: row.id}})" v-if="row.status === 0">编辑</el-button>
         <confirm-button
           style="margin-left: 8px"
           url="/news/delete/"
           :id="row.id"
-          title="是否确定删除草稿"
+          info="是否确定删除草稿"
+          tip="草稿删除后不可恢复"
           @onSuccess="onSearch"
           v-if="row.status === 0"
         >

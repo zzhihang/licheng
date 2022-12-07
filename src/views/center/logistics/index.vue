@@ -16,7 +16,8 @@
           style="margin-left: 8px"
           url="/news/delete/"
           :id="row.id"
-          title="是否确定删除草稿"
+          info="是否确定删除草稿"
+          tip="草稿删除后不可恢复"
           @onSuccess="onSearch"
           v-if="row.status === 0"
         >
@@ -24,7 +25,7 @@
         </confirm-button>
         <el-button type="text" v-if="row.status === 1 || row.status === 2">查看</el-button>
         <confirm-button
-          :url="row.type === 0 ? '/carFindGoods/off' : '/goodsFindCar/off' "
+          :url="row.type === 0 ? '/carFindGoods/off/' : '/goodsFindCar/off/' "
           :id="row.id"
           @onSuccess="onSearch"
           title="是否确定取消发布"

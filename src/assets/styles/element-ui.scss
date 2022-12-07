@@ -135,6 +135,7 @@
   }
   .el-message-box__status.el-icon-warning{
     color: #2468F2 !important;
+    top: 27%;
   }
   .el-button{
     height: 32px;
@@ -167,10 +168,11 @@
     border-bottom: none;
   }
 
- .el-table .el-table__header-wrapper th{
-    background: rgba(36,104,242,0.1);;
+  .el-table th.el-table__cell{
+    background: rgba(36,104,242,0.1);
     color: #2468F2;
   }
+
   .el-table__header, .el-table__body{
     width: 100% !important;
   }

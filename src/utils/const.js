@@ -2,6 +2,38 @@ export const URL_PREFIX = ''
 
 export const DICT_PRODUCT_LIST = '/goods/list';
 
+export const DEFAULT_SHORT_CUT_MENUS = [{
+  id: 30,
+  parentId: '',
+  title: "我发布的竞价交易",
+  path: "/center/bidding"
+},{
+  id: 31,
+  parentId: '',
+  title: "我参与的竞价交易",
+  path: "/center/bidding-join"
+},{
+  id: 34,
+  parentId: '',
+  title: "我发布的挂牌交易",
+  path: "/center/listing"
+},{
+  id: 35,
+  parentId: '',
+  title: "我参与的挂牌交易",
+  path: "/center/listing-join"
+},{
+  id: 38,
+  parentId: '',
+  title: "我的收藏",
+  path: "/center/logistics/collect",
+},{
+  id: 43,
+  parentId: '',
+  title: "我的收藏",
+  path: "/center/storage/collect",
+}]
+
 //自定义表单render类型
 export const FORM_TYPE = {
   INPUT: 'input',

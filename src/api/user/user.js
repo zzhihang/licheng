@@ -53,3 +53,25 @@ export function auditEnterprise({id, type, status}) {
     data: {id, type, status}
   })
 }
+
+export function getUserShortcutMenu() {
+  return request({
+    url: `/shortcutMenu/menus`,
+    method: 'get',
+  })
+}
+
+export function getMenuList() {
+  return request({
+    url: `/shortcutMenu/list`,
+    method: 'get',
+  })
+}
+
+export function saveShortcutMenu(data) {
+  return request({
+    url: `/shortcutMenu/save`,
+    method: 'post',
+    data
+  })
+}

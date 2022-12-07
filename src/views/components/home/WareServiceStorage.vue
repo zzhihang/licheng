@@ -71,6 +71,7 @@ export default {
       align-items: center;
       height: 80px;
       border-bottom: 1px solid #DEE3ED;
+      cursor: pointer;
       .time{
         flex-shrink: 0;
         color: #2468F2;
