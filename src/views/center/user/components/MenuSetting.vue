@@ -9,7 +9,7 @@
       <div class="choose-list">
         <p class="info"><span style="font-weight: bold;margin-right: 10px;">已选菜单</span>按住菜单标签可以对菜单进行排序</p>
         <div class="choose-list-item">
-          <el-tag type="primary" v-for="(item, index) in selected" :key="index">{{item.title}}</el-tag>
+          <el-tag type="primary" v-for="(item, index) in selected" :key="index">{{item.name}}</el-tag>
         </div>
       </div>
       <div class="menu-list">
@@ -77,8 +77,8 @@ export default {
         this.selected = deepClone(DEFAULT_SHORT_CUT_MENUS)
       }
     },
-    onToggleClick(data){
-      const index = this.selected.findIndex(item => item.id === data.id)
+    onToggleClick(data){debugger
+      const index = this.selected.findIndex(item => item.menuId === data.id)
       if(index > -1){
         this.selected.splice(index, 1)
       }else{
@@ -89,7 +89,7 @@ export default {
       }
     },
     getType(data){
-      const index = this.selected.findIndex(item => item.id === data.id);
+      const index = this.selected.findIndex(item => item.menuId === data.id);
       if(index > -1){
         return 'primary'
       }else{

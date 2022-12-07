@@ -5,7 +5,8 @@ export const CAR_FIND_GOODS_MODEL = [{
   type: FORM_TYPE.INPUT,
   label: '标题名称',
   field: 'title',
-  asTitle: true
+  asTitle: true,
+  maxLength: 20
 },{
   type: FORM_TYPE.ADDRESS_SELECT_RANGE,
   label: '运输路线',
@@ -17,6 +18,7 @@ export const CAR_FIND_GOODS_MODEL = [{
   type: FORM_TYPE.TEXTAREA,
   label: '车型和载重',
   field: 'details',
+  maxLength: 300
 },{
   type: FORM_TYPE.RADIO,
   label: '费用类型',
@@ -44,6 +46,7 @@ export const GOODS_FIND_CAR_MODEL = [{
   type: FORM_TYPE.INPUT,
   label: '标题名称',
   field: 'title',
+  maxLength: 40,
   asTitle: true
 },{
   type: FORM_TYPE.ADDRESS_SELECT,
@@ -58,10 +61,13 @@ export const GOODS_FIND_CAR_MODEL = [{
   type: FORM_TYPE.INPUT,
   label: '商品名称',
   field: 'goodsName',
+  maxLength: 20,
 },{
-  type: FORM_TYPE.INPUT,
+  type: FORM_TYPE.INPUT_NUMBER,
   label: '商品重量',
-  field: 'weight'
+  field: 'weight',
+  min: 0,
+  precision: 2
 },{
   type: FORM_TYPE.DATEPICKER,
   label: '装货日期',
@@ -78,7 +84,8 @@ export const GOODS_FIND_CAR_MODEL = [{
 },{
   type: FORM_TYPE.INPUT,
   label: '联系人',
-  field: 'contact'
+  field: 'contact',
+  maxLength: 20
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',

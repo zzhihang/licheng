@@ -1,6 +1,7 @@
 <template>
   <el-dialog
-    :visible.sync="visible"
+    :visible.sync="loginVisible"
+    @close="close"
     class="login-modal"
     width="40%">
     <div class="login">
@@ -74,12 +75,6 @@ import {encrypt, decrypt} from '@/utils/jsencrypt'
 import {mapState} from 'vuex';
 
 export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       codeUrl: '',
@@ -113,7 +108,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('app', ['isCaps'])
+    ...mapState('app', ['isCaps', 'loginVisible'])
   },
   watch: {
     $route: {
@@ -130,6 +125,9 @@ export default {
     const prefix = window.location.hostname.split('.')[0]
   },
   methods: {
+    close(){
+      this.$store.dispatch('app/toggleLoginVisible', { visible: false })
+    },
     isLogin(e) {
       if (e.keyCode === 13) {
         this.handleLogin()

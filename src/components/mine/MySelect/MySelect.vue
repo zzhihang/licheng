@@ -19,11 +19,14 @@ export default {
     url: {
       type: String,
       default: ''
-    }
+    },
+    value: {
+      type: String,
+      default: ''
+    },
   },
   data() {
     return {
-      value: '',
       options: []
     }
   },

@@ -47,7 +47,7 @@ export default {
       this.getList();
     },
     onCardClick(data){
-      this.$router.push({path: '/center/storage/' + data.id, query: {type: data.type}})
+      this.$router.push({path: '/center/logistics/' + data.businessId, query: {type: data.type}})
     }
   },
 }

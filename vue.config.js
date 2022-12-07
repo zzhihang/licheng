@@ -128,11 +128,11 @@ module.exports = {
       //   }
       // }
       // detail: https://cli.vuejs.org/config/#devserver-proxy
-      '/bulktrade/auth/login': {
+      '/auth/login': {
         target: target,
         changeOrigin: true,
         pathRewrite: {
-          '/bulktrade/auth/login': '/auth/login'
+          '/auth/login': '/auth/login'
         }
       },
       [process.env.VUE_APP_BASE_API]: {

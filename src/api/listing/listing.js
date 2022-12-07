@@ -15,18 +15,17 @@ export function getListingDetail(id) {
   })
 }
 
-//挂牌交易-摘牌
-export function pickListing(id) {
+export function getIndexListingInfo(id) {
   return request({
-    url: `/listing/pick/${id}`,
+    url: `/listing/centerInfo/${id}`,
     method: 'get',
   })
 }
 
-//摘牌列表
-export function getListingTransactionDetail(id) {
+//挂牌交易-摘牌
+export function pickListing(id) {
   return request({
-    url: `/listingTransaction/pickList/${id}`,
+    url: `/listing/pick/${id}`,
     method: 'get',
   })
 }

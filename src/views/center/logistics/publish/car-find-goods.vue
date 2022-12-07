@@ -9,7 +9,7 @@
 
 <script>
 import FormRender from '@components/FormRender/FormRender'
-import {carFindGoods} from "@/api/logistics/logistics";
+import {carFindGoods, getCarFindGoods} from "@/api/logistics/logistics";
 import {CAR_FIND_GOODS_MODEL} from "@views/center/logistics/publish/model/model";
 
 export default {
@@ -23,8 +23,20 @@ export default {
   },
   created() {
     this.title = this.$route.meta.title
+    if(this.$route.query.id){
+      this.getDetail()
+    }
   },
   methods: {
+    async getDetail(){
+      const {data} = await getCarFindGoods(this.$route.query.id)
+      if(this.$route.query.copy){
+        delete data.id; //复制则删除id
+      }
+      data.fromDistrictId = data.fromDistrictId.split(',');
+      data.toDistrictId = data.toDistrictId.split(',');
+      this.$refs.formRender.setData(data)
+    },
     submitForm(status) {
       this.$refs.formRender.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -34,6 +46,12 @@ export default {
             hiddenConfirm: status === 0,
             onConfirm: async (done) => {
               const params = this.$refs.formRender.getData();
+              if(Array.isArray(params.fromDistrictId)){
+                params.fromDistrictId = params.fromDistrictId.join(',')
+              }
+              if(Array.isArray(params.toDistrictId)){
+                params.toDistrictId = params.toDistrictId.join(',')
+              }
               params.status = status;
               const result = await carFindGoods(params);
               if(result.code === 200){

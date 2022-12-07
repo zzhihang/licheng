@@ -5,18 +5,25 @@
       <span>竞价</span>
     </h3>
     <div class="card-content" v-if="!isFinish">
-      <p class="count-down">{{isOpen ? '距离竞价结束时间' : '距离竞价开始时间'}}：<count-down :time="distance"/></p>
-      <p class="current-price">当前最高价格：{{maxPrice}}元<el-button type="text" style="margin-left: 10px; padding: 0" @click="onRefreshClick(true)">刷新</el-button></p>
-      <el-form :inline="true" :model="formData">
-        <el-form-item label="价格">
-          <el-input v-model="formData.price" placeholder="价格"></el-input>
-        </el-form-item>
-        <el-form-item label="数量">
-          <el-input v-model="formData.num" type="number" placeholder="数量"></el-input>
-        </el-form-item>
-      </el-form>
-      <div style="text-align:center;" class="sub-button">
-        <el-button type="primary" @click="onSubmit">提交竞价</el-button>
+      <p class="count-down">{{countTitle}}：<count-down style="font-weight: bold;font-size: 14px" :time="distance"/></p>
+      <div v-if="qualified">
+        <div v-if="isOpen">
+          <p class="current-price">当前最高价格：{{maxPrice}}元<el-button type="text" style="margin-left: 10px; padding: 0" @click="onRefreshClick(true)">刷新</el-button></p>
+          <el-form :inline="true" :model="formData">
+            <el-form-item label="价格">
+              <el-input-number size="mini" :min="data.baseUnitPrice" :step="data.increasePrice" v-model="formData.price" placeholder="价格"></el-input-number>
+            </el-form-item>
+            <el-form-item label="数量">
+              <el-input-number size="mini" :min="data.minNum || 1" :step="data.minNum || 1" v-model="formData.num"  placeholder="数量"></el-input-number>
+            </el-form-item>
+          </el-form>
+          <div style="text-align:center;" class="sub-button">
+            <el-button type="primary" @click="onSubmit">提交竞价</el-button>
+          </div>
+        </div>
+      </div>
+      <div class="card-content" v-else>
+        非常抱歉，您未取得竞拍资格，不能参与竞拍。
       </div>
     </div>
     <div class="card-content" v-else>
@@ -26,7 +33,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import {getBiddingMaxPrice, saveBiddingOffer} from "@/api/bidding/bidding";
 import CountDown from "@components/CountDown/CountDown";
 
@@ -42,6 +48,11 @@ export default {
     distance: {
       type: Number,
       default: 0
+    },
+    //是否有资格
+    qualified: {
+      type: Boolean,
+      default: false
     },
     isOpen: {
       type: Boolean,
@@ -81,20 +92,39 @@ export default {
     async onSubmit() {
       const params = {...this.formData, id: this.data.id}
       if(!params.num){
-        return this.$message.warning('请填写数量')
+        return this.$message.error('请填写数量')
       }
       if(Number(params.price) < Number(this.data.baseUnitPrice)){
-        return this.$message.warning('报价的价格应大于等于拍卖底价')
+        return this.$message.error('报价的价格应大于等于拍卖底价')
       }
       //普通竞价商品 报价的数量应是最小购买量的正整数倍
       if(String(this.data.type) === '1' && Number(params.num) % Number(this.data.minNum) !== 0 ){
-        return this.$message.warning('报价的数量应是最小购买量的正整数倍')
+        return this.$message.error('报价的数量应是最小购买量的正整数倍')
       }
       const result = await saveBiddingOffer(params);
       if(result.code === 200){
         this.$message.success(result.msg);
       }else{
         this.$message.error(result.msg);
+      }
+    }
+  },
+  watch: {
+    data: {
+      handler(val) {
+        this.formData.price = this.data.baseUnitPrice;
+        this.formData.num = this.data.minNum;
+      },
+      immediate: true
+    }
+  },
+  computed: {
+    countTitle(){
+      if(!this.isFinish){
+        return '距离竞价结束时间'
+      }
+      if(!this.isOpen){
+        return '距离竞价开始时间'
       }
     }
   }
@@ -104,7 +134,6 @@ export default {
 <style lang="scss" scoped>
   .action-card{
     width: 346px;
-    height: 248px;
     img{
       width: 22px;
       margin-right: 5px;
@@ -120,10 +149,10 @@ export default {
       padding: 0 24px;
     }
     .card-content{
-      padding: 12px 24px 15px;
+      padding: 12px 12px 15px 24px;
     }
     .count-down{
-      font-size: 14px;
+      font-size: 12px;
       line-height: 22px;
       color: #2468F2;
     }
@@ -144,6 +173,9 @@ export default {
     }
     .el-form-item{
       margin-bottom: 0;
+    }
+    ::v-deep .el-input-number--mini{
+      width: 100px;
     }
   }
 </style>

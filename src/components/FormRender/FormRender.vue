@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="form-render">
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px">
       <el-form-item v-for="(item, index) in data"
                     :label="item.label"
@@ -28,11 +28,14 @@
                   :placeholder="item.placeholder || ('请输入' + item.label)"
         ></el-input>
 
-        <el-input v-else-if="item.type === FORM_TYPE.CHECKBOX"
+        <el-input-number v-else-if="item.type === FORM_TYPE.INPUT_NUMBER"
                   v-model="ruleForm[item.field]"
+                  :precision="item.precision"
+                  :min="item.min"
+                  :max="item.max"
                   type="textarea"
                   :maxlength="item.maxLength"
-        ></el-input>
+        ></el-input-number>
 
         <el-date-picker
           v-else-if="item.type === FORM_TYPE.DATEPICKER"
@@ -40,6 +43,16 @@
           :value-format="item.format || 'yyyy-MM-dd'"
           type="date"
           :picker-options="item.options"
+          :placeholder="item.placeholder || ('请选择' + item.label)"
+        >
+        </el-date-picker>
+
+        <el-date-picker
+          v-else-if="item.type === FORM_TYPE.DATE_TIME_PICKER"
+          v-model="ruleForm[item.field]"
+          type="datetime"
+          :picker-options="item.options"
+          value-format="yyyy-MM-dd hh:mm:ss"
           :placeholder="item.placeholder || ('请选择' + item.label)"
         >
         </el-date-picker>
@@ -67,6 +80,7 @@
           v-else-if="item.type === FORM_TYPE.ADDRESS_SELECT"
           size="small"
           :options="options"
+          v-model="ruleForm[item.extraField]"
           @change="onAddressChange($event, item.field, item.extraField)">
         </el-cascader>
 
@@ -77,11 +91,13 @@
             size="small"
             style="margin-right: 8px;"
             :options="options"
+            v-model="ruleForm[item.extraField1]"
             @change="onAddressChange($event, item.field1, item.extraField1)">
           </el-cascader>
           <el-cascader
             size="small"
             :options="options"
+            v-model="ruleForm[item.extraField1]"
             @change="onAddressChange($event, item.field2, item.extraField2)">
           </el-cascader>
         </div>
@@ -176,7 +192,7 @@ export default {
     },
     onAddressChange(e, field, extraField){
       this.ruleForm[field] = CodeToText[e[0]] + CodeToText[e[1]] + CodeToText[e[2]];
-      this.ruleForm[extraField] = Number(e[2])
+      this.ruleForm[extraField] = e[0] + ',' + e[1] + ',' + e[2]
     },
     resetForm() {
       this.$refs.ruleForm.resetFields();
@@ -189,6 +205,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .form-render{
+    background: rgba(246,247,250,0.75);
+    border-radius: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 100px;
+  }
   .image-upload-group{
     display: flex;
     align-items: center;

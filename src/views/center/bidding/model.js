@@ -33,7 +33,8 @@ const part1 = [{
 },{
   label: '竞价商品总量',
   field: 'goodsNum',
-  maxLength: 20
+  type: FORM_TYPE.INPUT_NUMBER,
+  min: 1
 },{
   label: '单位',
   field: 'unit',
@@ -89,9 +90,13 @@ const part3 = [{
 },{
   label: '底价单价',
   field: 'baseUnitPrice',
+  type: FORM_TYPE.INPUT_NUMBER,
+  min: 0.01
 },{
   label: '加价幅度',
   field: 'increasePrice',
+  type: FORM_TYPE.INPUT_NUMBER,
+  min: 0.01
 },{
   type: FORM_TYPE.SELECT,
   label: '延长时间',

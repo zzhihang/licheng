@@ -28,7 +28,7 @@
                      @click="$router.push({path: `/center/listing/detail/${row.id}`})"
           >查看摘牌信息</el-button>
           <el-button type="text"
-                     @click="$router.push({path: `/transaction/listing/${row.id}`})"
+                     @click="$router.push({path: `/transaction/listing/${row.id}`, query: {action: 'detail'}})"
           >查看商品详情</el-button>
         </template>
         <confirm-button

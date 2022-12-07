@@ -14,7 +14,7 @@
 import FormRender from '@components/FormRender/FormRender'
 import {addListing, getListingDetail} from "@/api/listing/listing";
 import {BIDDING_ADD_MODEL, BIDDING_ADD_MODEL_ORDINARY} from "@views/center/bidding/model";
-import {addBidding} from "@/api/bidding/bidding";
+import {addBidding, getBiddingInfo} from "@/api/bidding/bidding";
 import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 
 export default {
@@ -38,18 +38,26 @@ export default {
   },
   methods: {
     async getDetail(){
-      const {data} = await getListingDetail(this.$route.query.id)
+      const {data} = await getBiddingInfo(this.$route.query.id)
       this.$refs.formRender.setData(data)
     },
     submitForm(status) {
       this.$refs.formRender.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
+          const params = this.$refs.formRender.getData();
+          if(new Date(params.startTime).getTime() > new Date(params.endTime).getTime()){
+            this.$message.error('竞价结束时间要晚于竞价开始时间')
+            return false;
+          }
+          if(new Date(params.deliveryStartTime).getTime() > new Date(params.deliveryEndTime).getTime()){
+            this.$message.error('交货有效期结束时间要晚于交货有效期开始时间')
+            return false;
+          }
           this.$callConfirm({
             info: '是否确定发布竞价交易',
             tip: '发布后待竞价开始时间时生效',
             hiddenConfirm: status === 0,
             onConfirm: async (done) => {
-              const params = this.$refs.formRender.getData();
               params.status = status;
               params.type = this.$route.query.type;
               const result = await addBidding(params);

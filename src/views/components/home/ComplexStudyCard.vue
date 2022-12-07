@@ -1,5 +1,5 @@
 <template>
-  <el-card class="complex-card" :class="`${type} ${size}`" :style="style">
+  <el-card class="complex-card" :class="`${type} ${size}`" shadow="never">
     <h6 class="ellipsis2">{{data.title}}</h6>
     <div class="content-box">
       <p :class="size === 'large' ? 'ellipsis3' : 'ellipsis1'">{{data.content}}</p>
@@ -27,10 +27,6 @@ export default {
       type: Object,
       default: () => {}
     },
-    style: {
-      type: Object,
-      default: () => {}
-    },
   }
 }
 </script>
@@ -41,9 +37,11 @@ export default {
   height: 278px;
   padding: 30px 24px 40px;
   box-sizing: border-box;
+  border-radius: 0;
   &.small{
     height: 139px;
     padding: 24px 23px;
+    background: #E5E8F1;
     p{
       height: 21px;
       margin-bottom: 0;

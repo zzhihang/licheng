@@ -48,6 +48,7 @@ const user = {
           const token = res.data.access_token
           setToken(token, res.data?.expires_in)
           commit('SET_TOKEN', token)
+          commit('app/TOGGLE_LOGIN_VISIBLE', false, {root: true})
           resolve()
         }).catch(error => {
           console.error(error)

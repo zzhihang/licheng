@@ -16,39 +16,42 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import FloorTitle from "@/views/components/home/FloorTitle";
 import IndustryNewsCard from "@/views/components/home/IndustryNewsCard";
-import {getHomeNewsList} from "@/api/news/news";
 
 export default {
   components: {
     FloorTitle,
     IndustryNewsCard
   },
+  props: {
+    data: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
-      data: [],
       total: 0,
       index: 0
     }
-  },
-  created(){
-    this.getData()
   },
   methods: {
     getSliceData(){
       return this.data.slice(this.index * 4, (this.index + 1) * 4)
     },
-    async getData() {
-      const result = await getHomeNewsList();
-      this.data = result.data.industry;
-      this.total = Math.ceil(this.data.length / 4)
-    },
     onCarouselChange(e){
       this.index = e;
     }
   },
+  watch: {
+    data: {
+      handler(val) {
+        this.total = Math.ceil(this.data.length / 4)
+      },
+      immediate: true
+    }
+  }
 }
 </script>
 

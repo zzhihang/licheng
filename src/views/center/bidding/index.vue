@@ -2,10 +2,10 @@
   <div>
     <search-form :list="searchList" @search="onSearch"></search-form>
     <div class="bill-action">
-      <router-link to="/center/bidding/add?type=1">
+      <router-link to="/center/bidding/add?type=2">
         <el-button icon="el-icon-plus" type="warning">发布整拍商品</el-button>
       </router-link>
-      <router-link to="/center/bidding/add?type=2">
+      <router-link to="/center/bidding/add?type=1">
         <el-button icon="el-icon-plus" type="warning">发布竞价商品</el-button>
       </router-link>
       <el-button icon="el-icon-upload2" type="primary" plain>导出成交量</el-button>

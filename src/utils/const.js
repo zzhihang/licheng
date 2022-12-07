@@ -42,6 +42,7 @@ export const FORM_TYPE = {
   TEXTAREA: 'textarea',
   CHECKBOX: 'checkbox',
   DATEPICKER: 'datepicker',
+  DATE_TIME_PICKER: 'datetime',
   DATEPICKER_RANGE: 'datepicker_range',
   EDITOR: 'editor',
   FILE_UPLOAD: 'file-upload',
@@ -50,6 +51,7 @@ export const FORM_TYPE = {
   ADDRESS_SELECT_RANGE: 'address_select_range',
   MY_SELECT: 'my_select',
   RENDER: 'render',
+  INPUT_NUMBER: 'input-number',
   IMAGE_UPLOAD_GROUP: 'image_upload_group',
 }
 
@@ -119,6 +121,9 @@ export const PRODUCT_MANAGE_TYPE = {
 }
 
 export const ACTIVITY_STATUS = [{
+  label: '未开始',
+  value: 1
+},{
   label: '进行中',
   value: 2
 },{
@@ -148,9 +153,9 @@ export const BIDDING_TRANSACTION_STATUS = [{
   value: 2
 }]
 
-//挂牌状态
+//挂牌状态 -1  标识还没提交过
 export const LISTING_TRANSACTION_STATUS = [{
-  label: '待卖方确认',
+  label: '等待供货商进行确认',
   value: 0
 },{
   label: '交易成功',

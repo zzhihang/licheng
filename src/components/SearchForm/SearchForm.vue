@@ -2,7 +2,7 @@
   <el-form ref="searchForm" class="search-form">
     <el-row :gutter="30">
       <template v-for="(item, index) in list">
-        <el-col :md="8" :sm="24" :key="index">
+        <el-col :md="item.type === FORM_TYPE.DATEPICKER_RANGE ? 12 : 8" :sm="24" :key="index">
           <el-form-item :label="item.label">
             <el-select v-if="item.type === 'select'"
                        v-model="queryParams[item.field]"
@@ -12,7 +12,7 @@
                 v-for="(child, index) in item.options"
                 :key="index"
                 :value="child.value"
-                :label="item.label"
+                :label="child.label"
               >
                 {{ child.label }}
               </el-option>
@@ -55,6 +55,7 @@
 
 <script>
 import { formatDate } from "@utils/time";
+import {FORM_TYPE} from "@utils/const";
 
 export default {
   name: 'SearchForm',
@@ -66,7 +67,8 @@ export default {
   },
   data() {
     return {
-      queryParams: {}
+      queryParams: {},
+      FORM_TYPE: FORM_TYPE
     }
   },
   methods: {

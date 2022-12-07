@@ -11,7 +11,7 @@
     </div>
     <data-table ref="table" :columns="columns" url="/goodsFindCar/userPostLogisticsList">
       <template slot="operate" slot-scope="{row}">
-        <el-button type="text" v-if="row.status === 0">编辑</el-button>
+        <el-button type="text" v-if="row.status === 0" @click="onEditClick(row)">编辑</el-button>
         <confirm-button
           style="margin-left: 8px"
           url="/news/delete/"
@@ -23,7 +23,10 @@
         >
           删除
         </confirm-button>
-        <el-button type="text" v-if="row.status === 1 || row.status === 2">查看</el-button>
+        <el-button type="text"
+                   v-if="row.status === 1 || row.status === 2"
+                   @click="$router.push({path: '/center/logistics/' + row.id, query: {type: row.type}})"
+        >查看</el-button>
         <confirm-button
           :url="row.type === 0 ? '/carFindGoods/off/' : '/goodsFindCar/off/' "
           :id="row.id"
@@ -33,7 +36,7 @@
         >
           取消发布
         </confirm-button>
-        <el-button type="text" v-if="row.status === 1 || row.status === 2">复制</el-button>
+        <el-button type="text" v-if="row.status === 1 || row.status === 2" @click="onEditClick(row, 'copy')">复制</el-button>
       </template>
     </data-table>
   </div>
@@ -42,7 +45,7 @@
 <script>
 import Vue from 'vue';
 import SearchForm from "@components/SearchForm/SearchForm";
-import {FORM_TYPE, LOGISTICS_TYPE, NEWS_STATUS, NEWS_TYPE} from "@utils/const";
+import {FORM_TYPE, LOGISTICS_TYPE, NEWS_CLASS, NEWS_STATUS, NEWS_TYPE} from "@utils/const";
 import DataTable from "@components/DataTable/DataTable";
 import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
 
@@ -98,6 +101,12 @@ export default {
       this.queryParam = params;
       this.$refs.table.load(params)
     },
+    onEditClick(row, copy){
+      this.$router.push({
+        path: row.type === NEWS_CLASS.GOODS_FIND_CAR ? '/center/logistics/publish/goods-find-car' : '/center/logistics/publish/car-find-goods',
+        query: {id: row.id, copy}
+      })
+    }
   },
 }
 </script>

@@ -3,7 +3,7 @@
     <img :src="data.img || require('@images/null-bid.png')" class="image">
     <div>
       <div class="info-list">
-        <h6 class="title"><span class="ellipsis1">{{data.companyName}}</span><el-button type="primary" size="mini">进行中</el-button></h6>
+        <h6 class="title"><span class="ellipsis1">{{data.companyName}}</span><el-button type="primary" size="mini">{{getStatus(data.status)}}</el-button></h6>
         <div class="info-list-item" v-for="(item, index) in config" :key="index">
           <span class="title">{{item.title}}:</span>
           <span class="info" v-if="item.render">{{item.render(data)}}</span>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import {ACTIVITY_STATUS, getLabelByValue} from "@utils/const";
 
 export default {
   props: {
@@ -48,6 +48,11 @@ export default {
         title: '竞价结束时间',
         field: 'endTime'
       }]
+    }
+  },
+  methods: {
+    getStatus(status) {
+      return getLabelByValue(status, ACTIVITY_STATUS) || '未开始'
     }
   },
 }

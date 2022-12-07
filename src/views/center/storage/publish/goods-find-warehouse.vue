@@ -32,6 +32,7 @@ export default {
       if(this.$route.query.copy){
         delete data.id; //复制则删除id
       }
+      data.districtId = data.districtId.split(',')
       this.$refs.formRender.setData(data)
     },
     submitForm(status) {
@@ -44,6 +45,9 @@ export default {
             onConfirm: async (done) => {
               const params = this.$refs.formRender.getData();
               params.status = status;
+              if(Array.isArray(params.districtId)){
+                params.districtId = params.districtId.join(',')
+              }
               const result = await saveGoodsFindWarehouse(params);
               if(result.code === 200){
                 this.$router.go(-1);

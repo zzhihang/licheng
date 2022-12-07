@@ -4,7 +4,7 @@
     <data-table ref="table" :columns="columns" url="/bidding/adminList">
       <template slot="operate" slot-scope="{row}">
         <el-button type="text"
-                   @click="$router.push({path: `/center/bidding/${row.id}`})"
+                   @click="$router.push({path: `/transaction/bidding/detail`, query: {id: row.id}})"
         >查看商品详情</el-button>
       </template>
     </data-table>

@@ -10,7 +10,7 @@ export function getTransactionBiddingList(params) {
 
 export function getTransactionListingList({ pageNum = 1, pageSize = 10}) {
   return request({
-    url: '//index/transaction/listing',
+    url: '/index/transaction/listing',
     method: 'get',
     params: {pageNum, pageSize}
   })

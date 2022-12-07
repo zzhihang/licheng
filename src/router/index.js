@@ -356,7 +356,13 @@ export const constantRoutes = [
               path: '/center/logistics/collect',
               component: () => import('@/views/center/logistics/collect.vue'),
               meta: {title: '我的收藏', icon: 'dashboard', affix: true}
-            },]
+            },{
+              path: '/center/logistics/:id',
+              title: '资讯详情',
+              component: () => import('@/views/center/logistics/detail.vue'),
+              meta: {title: '资讯详情'},
+              hidden: true
+            }]
           },
           {
             path: '/center/product',

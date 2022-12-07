@@ -1,10 +1,8 @@
 <template>
-  <div class="w">
-    <preview-render :list="list"
-                    :data-source="dataSource"
-                    @onCollectClick="onCollectClick"
-    ></preview-render>
-  </div>
+  <preview-render :list="list"
+                  :data-source="dataSource"
+                  @onCollectClick="onCollectClick"
+  ></preview-render>
 </template>
 
 <script>

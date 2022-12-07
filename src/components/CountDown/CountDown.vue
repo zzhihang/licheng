@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import {ONE_DAY, ONE_HOUR, ONE_MINUTE, ONE_SECOND} from "@utils/time-const";
 
 export default {

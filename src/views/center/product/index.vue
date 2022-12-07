@@ -39,17 +39,19 @@
             style="margin-right: 18px;"
             @click="handleEdit(scope.row, 'action')">编辑</el-button>
           <confirm-button
-            size="mini"
+            size="medium"
             type="text"
-            :title="`是否确定${getStatusText(scope.row)}`"
+            :info="`是否确定${getStatusText(scope.row)}`"
+            :tip="`${getStatusText(scope.row)}这个类目将会${getStatusText(scope.row)}它的子类目`"
             :id="scope.row.id"
             :url="getStatusUrl(scope.row)"
             @onSuccess="onSuccess"
             style="margin-right: 18px;">{{getStatusText(scope.row)}}</confirm-button>
           <confirm-button
-            size="mini"
+            size="medium"
             type="text"
-            title="是否确定删除"
+            info="是否确定删除"
+            tip="删除这个类目将会删除它的子类目"
             :url="String(scope.row.type) === '0' ? '/goods/delete/' : '/goodsType/delete/'"
             style="margin-right: 18px;"
             @onSuccess="onSuccess"

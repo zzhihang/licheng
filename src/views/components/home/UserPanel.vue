@@ -3,7 +3,7 @@
     <img class="avatar" :src="require('../../../../src/assets/images/default-avatar.png')" alt="">
     <div class="button-box">
       <el-button type="primary" class="login" round>登录</el-button>
-      <el-button round>注册</el-button>
+      <el-button round @click="$router.push('/register')">注册</el-button>
     </div>
     <div class="entry-list">
       <div class="entry-list-item" v-for="(item, index) in entryList" :key="index">

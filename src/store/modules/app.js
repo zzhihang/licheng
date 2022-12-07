@@ -6,7 +6,8 @@ const state = {
   device: 'desktop',
   size: 'medium',
   isCaps: false,
-  appList: []
+  appList: [],
+  loginVisible: false
 }
 window.addEventListener('keydown', (e) => {
   state.isCaps = e && e.getModifierState('CapsLock')
@@ -35,6 +36,9 @@ const mutations = {
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
   },
+  TOGGLE_LOGIN_VISIBLE: (state, visible) => {
+    state.loginVisible = visible
+  },
   SET_SIZE: (state, size) => {
     state.size = size
     localStorage.setItem('size', size)
@@ -47,6 +51,9 @@ const actions = {
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
+  toggleLoginVisible({ commit }, { visible }) {
+    commit('TOGGLE_LOGIN_VISIBLE', visible)
+  },
   closeSideBar({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
   },
@@ -55,7 +62,7 @@ const actions = {
   },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
-  }
+  },
 }
 export default {
   namespaced: true,

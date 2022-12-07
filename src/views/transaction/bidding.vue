@@ -12,7 +12,7 @@
 
 <script>
 import Vue from 'vue';
-import {BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE, TRANSACTION_STATUS} from "@utils/const";
+import {ACTIVITY_STATUS, BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE, TRANSACTION_STATUS} from "@utils/const";
 import TransactionBiddingCard from "@views/transaction/components/TransactionBiddingCard";
 import {getTransactionBiddingList} from "@/api/transaction/transaction";
 import SearchForm from "@components/SearchForm/SearchForm";
@@ -38,7 +38,7 @@ export default {
         field: 'status',
         label: '活动状态',
         type: FORM_TYPE.SELECT,
-        options: BIDDING_METHOD
+        options: ACTIVITY_STATUS
       },{
         field: 'time',
         label: '竞价日期',

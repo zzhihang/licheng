@@ -4,8 +4,6 @@ import {DICT_PRODUCT_LIST, FORM_TYPE} from "@utils/const";
 export const LISTING_ADD_MODEL = [{
   label: '商品名称',
   field: 'goodsName',
-  type: FORM_TYPE.MY_SELECT,
-  url: DICT_PRODUCT_LIST
 },{
   label: '商品品级',
   field: 'goodsGrade',
@@ -13,16 +11,19 @@ export const LISTING_ADD_MODEL = [{
 },{
   label: '商品单价',
   field: 'unitPrice',
-  validator: NUMBER_VALIDATOR,
-  maxLength: 20
+  type: FORM_TYPE.INPUT_NUMBER,
+  min: 0.01,
+  max: 99999999
 },{
   label: '商品数量',
   field: 'num',
-  validator: NUMBER_VALIDATOR
+  validator: NUMBER_VALIDATOR,
+  type: FORM_TYPE.INPUT_NUMBER,
+  min: 0.01,
 },{
   label: '单位',
   field: 'unit',
-  maxLength: 20
+  maxLength: 10
 },{
   label: '货源所在地',
   field: 'goodsOriginStr',
@@ -46,7 +47,7 @@ export const LISTING_ADD_MODEL = [{
   label: '交货时间',
   field: 'deliveryTime',
 },{
-  type: FORM_TYPE.DATEPICKER,
+  type: FORM_TYPE.DATE_TIME_PICKER,
   label: '挂牌截止时间',
   field: 'listingEndTime',
   options: {

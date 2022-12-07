@@ -14,6 +14,7 @@ const getters = {
   topbarRouters: state => state.permission.topbarRouters,
   defaultRoutes: state => state.permission.defaultRoutes,
   sidebarRouters: state => state.permission.sidebarRouters,
+  loginVisible: state => state.app.loginVisible,
   editEnabled: state => {
     const { roles } = state.user
     return roles.includes('admin') || roles.includes('operator') || roles.includes('purchaser')

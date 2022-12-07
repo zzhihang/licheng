@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import FloorTitle from "@/views/components/home/FloorTitle";
 import AuctionTransactionCard from "@/views/components/home/AuctionTransactionCard";
 import {getHomeBidingList} from "@/api/bidding/bidding";
+import {BIDDING_TYPE, getLabelByValue} from "@utils/const";
 
 export default {
   components: {
@@ -33,7 +33,10 @@ export default {
   methods: {
     async getData() {
       const result = await getHomeBidingList();
-      this.data = result.rows
+      this.data = result.rows;
+      this.data.forEach(item => {
+        item.type = getLabelByValue(item.type, BIDDING_TYPE)
+      })
     }
   },
 }

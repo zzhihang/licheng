@@ -31,6 +31,7 @@ export default {
   methods: {
     async getDetail(){
       const {data} = await getListingDetail(this.$route.query.id)
+      data.goodsOrigin = data.goodsOrigin.split(',')
       this.$refs.formRender.setData(data)
     },
     submitForm(status) {
@@ -43,6 +44,9 @@ export default {
             onConfirm: async (done) => {
               const params = this.$refs.formRender.getData();
               params.status = status;
+              if(Array.isArray(params.goodsOrigin)){
+                params.goodsOrigin = params.goodsOrigin.join(',')
+              }
               const result = await addListing(params);
               if(result.code === 200){
                 this.$router.go(-1);

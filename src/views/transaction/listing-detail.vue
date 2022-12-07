@@ -4,7 +4,7 @@
                     :data-source="dataSource"
                     :show-collect="false"
     >
-      <template #button>
+      <template #button v-if="!isDetail && dataSource.status === -1">
         <confirm-button type="primary"
                         style="width: 100px;margin-left: 270px;margin-bottom: 40px;"
                         url="/listing/pick/"
@@ -13,21 +13,21 @@
                         tip="摘牌后需等待供货商确认，是否达成交易，以供货商最终确认为准。"
         >摘牌</confirm-button>
       </template>
-      <template #extra>
+      <template #extra v-if="dataSource.status !== -1">
         <div class="preview-item">
-          <span class="preview-item-title" style="font-weight: normal">等待供货商进行确认</span>
+          <span class="preview-item-title" style="font-weight: bold;">{{statusText}}</span>
           <div class="preview-item-content">
             <div class="top-border">
               <span class="th">供应商名称</span>
-              <span class="td">需要接口提供</span>
+              <span class="td">{{dataSource.companyName}}</span>
             </div>
             <div>
               <span class="th">联系人</span>
-              <span class="td">需要接口提供</span>
+              <span class="td">{{dataSource.contact}}</span>
             </div>
             <div>
               <span class="th">联系电话</span>
-              <span class="td">需要接口提供</span>
+              <span class="td">{{dataSource.tel}}</span>
             </div>
           </div>
         </div>
@@ -38,9 +38,9 @@
 
 <script>
 import PreviewRender from "@components/PreviewRender/PreviewRender";
-import {FORM_TYPE, LOGISTICS_COST_TYPE} from "@utils/const";
+import {FORM_TYPE, getLabelByValue, LISTING_TRANSACTION_STATUS} from "@utils/const";
 import ConfirmButton from "@components/ConfirmButton/ConfirmButton";
-import {getListingDetail} from "@/api/listing/listing";
+import {getIndexListingInfo} from "@/api/listing/listing";
 
 export default {
   components: {
@@ -87,18 +87,25 @@ export default {
         field: 'imgUrls',
       }],
       dataSource: {},
-      id: ''
+      id: '',
+      isDetail: false
     }
   },
   created() {
     this.id = this.$route.params.id
     this.getData()
+    this.isDetail = this.$route.query.action === 'detail';
   },
   methods: {
     async getData() {
-      const {data} = await getListingDetail(this.id)
+      const {data} = await getIndexListingInfo(this.id)
       this.dataSource = data;
     },
+  },
+  computed: {
+    statusText() {
+      return getLabelByValue(this.dataSource.status, LISTING_TRANSACTION_STATUS)
+    }
   },
 }
 </script>

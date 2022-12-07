@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE} from "@utils/const";
+import {ACTIVITY_STATUS, BIDDING_METHOD, DICT_PRODUCT_LIST, FORM_TYPE} from "@utils/const";
 import TransactionListingCard from "@views/transaction/components/TransactionListingCard";
 import {getTransactionListingList} from "@/api/transaction/transaction";
 import SearchForm from "@components/SearchForm/SearchForm";
@@ -37,7 +37,7 @@ export default {
         field: 'status',
         label: '活动状态',
         type: FORM_TYPE.SELECT,
-        options: BIDDING_METHOD
+        options: ACTIVITY_STATUS
       },{
         field: 'time',
         label: '竞价日期',

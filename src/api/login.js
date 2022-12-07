@@ -1,12 +1,5 @@
 import request from '@/utils/request'
-import axios from "axios";
-
-const service = axios.create({
-  // axios中请求配置有baseURL选项，表示请求URL公共部分
-  baseURL: 'http://39.104.116.61:9080',
-  // 超时
-  timeout: 30000
-})
+import authService from "@utils/auth-request";
 
 // 登录方法
 export function login(username, password, code, uuid) {
@@ -16,7 +9,7 @@ export function login(username, password, code, uuid) {
     code,
     uuid
   }
-  return request({
+  return authService({
     url: '/auth/login',
     // url: '/login',
     headers: {

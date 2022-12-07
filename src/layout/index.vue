@@ -3,6 +3,7 @@
     <top-header></top-header>
     <router-view></router-view>
     <home-footer></home-footer>
+    <login-modal/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import { mapState } from 'vuex'
 import variables from '@/assets/styles/variables.scss'
 import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
 import {constantRoutes} from "@/router";
+import LoginModal from "@views/LoginModal";
 
 export default {
   name: 'Layout',
@@ -26,14 +28,16 @@ export default {
     TopHeader,
     TagsView,
     HomeFooter,
-    PanelContainer
+    PanelContainer,
+    LoginModal
   },
   mixins: [ResizeMixin],
   data() {
     return {
       title: '',
       subTitle: '',
-      hiddenRight: false
+      hiddenRight: false,
+      dialogVisible: false,
     }
   },
   computed: {

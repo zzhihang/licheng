@@ -6,6 +6,8 @@
       style="width: 100%">
       <el-table-column
         label="采购商"
+        align="center"
+        header-align="center"
         prop="companyName">
       </el-table-column>
       <el-table-column

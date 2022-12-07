@@ -7,7 +7,7 @@
     <div class="user-content">
       <div class="menu-item" v-for="(item, index) in menus" :key="index">
         <div class="sub-title">{{item.title}}</div>
-        <el-button type="primary" v-for="child in item.children" :key="item.id">{{child.title}}</el-button>
+        <el-button type="primary" v-for="child in item.children" :key="item.id" @click="onMenuClick(child)">{{child.title}}</el-button>
       </div>
     </div>
     <h1 style="margin-top: 60px;">
@@ -59,6 +59,9 @@ export default {
   methods: {
     onSuccess(){
       this.getMenus();
+    },
+    onMenuClick(data){
+      this.$router.push({path: data.path})
     },
     async getInfo() {
       const {data} = await getUserInfo();

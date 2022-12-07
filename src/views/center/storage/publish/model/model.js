@@ -5,7 +5,8 @@ export const WAREHOUSE_FIND_GOODS_MODEL = [{
   type: FORM_TYPE.INPUT,
   label: '标题名称',
   field: 'title',
-  asTitle: true
+  asTitle: true,
+  maxLength: 40
 },{
   type: FORM_TYPE.ADDRESS_SELECT,
   label: '所在区域',
@@ -16,9 +17,10 @@ export const WAREHOUSE_FIND_GOODS_MODEL = [{
   label: '详细地址',
   field: 'address',
 },{
-  type: FORM_TYPE.INPUT,
+  type: FORM_TYPE.INPUT_NUMBER,
   label: '面积',
   field: 'area',
+  min: 0
 },{
   type: FORM_TYPE.RADIO,
   label: '费用类型',
@@ -26,9 +28,11 @@ export const WAREHOUSE_FIND_GOODS_MODEL = [{
   options: LOGISTICS_COST_TYPE,
   defaultValue: 0
 },{
-  type: FORM_TYPE.INPUT,
+  type: FORM_TYPE.INPUT_NUMBER,
   label: '租金',
-  field: 'cost'
+  field: 'cost',
+  min: 0,
+  precision: 2
 },{
   type: FORM_TYPE.TEXTAREA,
   label: '厂房服务',
@@ -52,7 +56,8 @@ export const GOODS_FIND_WAREHOUSE_MODEL = [{
   type: FORM_TYPE.INPUT,
   label: '标题名称',
   field: 'title',
-  asTitle: true
+  asTitle: true,
+  maxLength: 40
 },{
   type: FORM_TYPE.ADDRESS_SELECT,
   label: '所在区域',
@@ -63,9 +68,10 @@ export const GOODS_FIND_WAREHOUSE_MODEL = [{
   label: '详细地址',
   field: 'address',
 },{
-  type: FORM_TYPE.INPUT,
+  type: FORM_TYPE.INPUT_NUMBER,
   label: '面积要求',
   field: 'requireArea',
+  min: 0
 },{
   type: FORM_TYPE.RADIO,
   label: '费用类型',
@@ -73,17 +79,21 @@ export const GOODS_FIND_WAREHOUSE_MODEL = [{
   options: LOGISTICS_COST_TYPE,
   defaultValue: 0
 },{
-  type: FORM_TYPE.INPUT,
+  type: FORM_TYPE.INPUT_NUMBER,
   label: '租金预算',
-  field: 'cost'
+  field: 'cost',
+  min: 0,
+  precision: 2
 },{
   type: FORM_TYPE.TEXTAREA,
   label: '具体要求',
-  field: 'details'
+  field: 'details',
+  maxLength: 300
 },{
   type: FORM_TYPE.INPUT,
   label: '联系人',
-  field: 'contact'
+  field: 'contact',
+  maxLength: 20
 },{
   type: FORM_TYPE.INPUT,
   label: '联系电话',
