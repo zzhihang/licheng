@@ -39,7 +39,7 @@ export default {
         path: '/center/listing'
       },{
         icon: require('../../../../src/assets/icons/img/icon4.png'),
-        title: '参与摘牌交易',
+        title: '参与挂牌交易',
         path: '/transaction/listing'
       }]
     }

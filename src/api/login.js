@@ -74,3 +74,17 @@ export function getCodeSms(mobile) {
     data: {mobile}
   })
 }
+
+
+//忘记密码修改密码
+export function resetPassword(data) {
+  return request({
+    url: '/auth/resetpwd',
+    headers: {
+      isToken: false
+    },
+    method: 'post',
+    timeout: 20000,
+    data: data
+  })
+}

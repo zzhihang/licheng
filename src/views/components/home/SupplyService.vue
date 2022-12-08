@@ -1,7 +1,7 @@
 <template>
   <div class="w">
     <floor-title title="供应链服务"></floor-title>
-    <img src="" class="supply-service-img" alt="">
+    <img :src="require('@views/supply/images/i1.png')" class="supply-service-img" alt="" @click="$router.push({path: '/supply'})">
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
   .supply-service-img{
     width: 100%;
-    height: 300px;
     margin-top: 30px;
+    cursor: pointer;
   }
 </style>

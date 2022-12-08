@@ -9,7 +9,7 @@
       text-color="#333333"
       active-text-color="#165DFF">
       <template>
-        <div class="parent-menu">交易中心</div>
+        <div class="parent-menu">{{parentTitle}}</div>
       </template>
       <template v-for="(item, index) in menus">
         <el-submenu :key="index"
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       menus: [],
+      parentTitle: '',
       isMenuCenter: false //左侧菜单样式是否居中显示
     }
   },
@@ -65,8 +66,9 @@ export default {
         const {fullPath} = this.$route
         const finderPath = '/' + fullPath.split('/')[1]
         const finder = constantRoutes.find(item => item.path === '/').children
-        this.menus = finder.find(item => item.path === finderPath).children || [];
-        this.menus = this.menus.filter(item => !item.hidden)
+        const parentFinder = finder.find(item => item.path === finderPath);
+        this.parentTitle = parentFinder.meta.title;
+        this.menus = (parentFinder.children || []).filter(item => !item.hidden)
         if(!fullPath.startsWith('/center')){
           this.isMenuCenter = true;
         }else{

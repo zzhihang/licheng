@@ -7,7 +7,12 @@
     <div class="user-content">
       <div class="menu-item" v-for="(item, index) in menus" :key="index">
         <div class="sub-title">{{item.title}}</div>
-        <el-button type="primary" v-for="child in item.children" :key="item.id" @click="onMenuClick(child)">{{child.title}}</el-button>
+        <div class="sub-title-content">
+          <template v-for="child in item.children">
+            <el-button type="primary" :key="item.id" @click="onMenuClick(child)">{{child.title}}</el-button>
+            <el-button v-for="grandSon in child.children" type="primary" :key="grandSon.id" @click="onMenuClick(grandSon)">{{grandSon.title}}</el-button>
+          </template>
+        </div>
       </div>
     </div>
     <h1 style="margin-top: 60px;">
@@ -101,6 +106,7 @@ export default {
         margin-bottom: 20px;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         &:last-child{
           margin-bottom: 0;
         }
@@ -111,6 +117,13 @@ export default {
         font-size: 16px;
         margin-right: 16px;
         font-weight: bold;
+        flex-shrink: 0;
+      }
+      .sub-title-content{
+        flex: 1;
+        .el-button{
+          margin-bottom: 10px;
+        }
       }
     }
     .base-info{

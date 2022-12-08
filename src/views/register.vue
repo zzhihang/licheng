@@ -15,12 +15,7 @@
       <el-form-item prop="authCode">
         <el-input v-model="registerForm.authCode" type="text" auto-complete="off" placeholder="请输入短信验证码">
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon"/>
-          <el-button type="text"
-                     slot="suffix"
-                     @click="getCaptcha"
-                     :disabled="state.smsSendBtn"
-                     v-text="!state.smsSendBtn && '获取验证码' || (state.time+'s后可重新发送')"
-          >发送验证码</el-button>
+          <code-button slot="suffix" url="/auth/senRegisterCode" :mobile="registerForm.mobile" @success="(uuid) => {registerForm.uuid = uuid}"></code-button>
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -66,9 +61,13 @@
 
 <script>
 import {getCodeImg, getCodeSms, register} from '@/api/login'
+import CodeButton from "@components/mine/CodeButton/CodeButton";
 
 export default {
   name: 'Register',
+  components: {
+    CodeButton
+  },
   data() {
     const equalToPassword = (rule, value, callback) => {
       if (this.registerForm.password !== value) {
@@ -115,26 +114,6 @@ export default {
 
   },
   methods: {
-    getCaptcha (e) {
-      const {state} = this;
-      e.preventDefault()
-      state.smsSendBtn = true
-      getCodeSms('15210821694').then(result => {
-        if(result.code === 200){
-          this.$message.success('发送成功')
-          const interval = window.setInterval(() => {
-            if (state.time-- <= 0) {
-              state.time = 60
-              state.smsSendBtn = false
-              this.registerForm.uuid = result.data.uuid
-              window.clearInterval(interval)
-            }
-          }, 1000)
-        }else{
-          this.$message.error(result.msg);
-        }
-      })
-    },
     getCode() {
       getCodeImg().then(res => {
         this.captchaOnOff = res.captchaOnOff === undefined ? true : res.captchaOnOff
@@ -155,19 +134,20 @@ export default {
               authCode,
               uuid,
             } = this.registerForm;
-          register(this.registerForm).then(res => {
+          register({
+            username,
+            mobile,
+            password,
+            authCode,
+            uuid,
+          }).then(res => {
             const username = this.registerForm.username
             this.$alert("<font color='red'>恭喜你，您的账号 " + username + ' 注册成功！</font>', '系统提示', {
               dangerouslyUseHTMLString: true,
               type: 'success'
             }).then(() => {
-              this.$router.push('/login')
+              this.$router.push('/home')
             }).catch(() => {})
-          }).catch(() => {
-            this.loading = false
-            if (this.captchaOnOff) {
-              this.getCode()
-            }
           })
         }
       })

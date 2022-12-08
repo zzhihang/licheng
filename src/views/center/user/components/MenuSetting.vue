@@ -36,10 +36,10 @@
       </div>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button icon="el-icon-refresh-left">恢复默认</el-button>
+      <el-button icon="el-icon-refresh-left" @click="onResetClick">恢复默认</el-button>
       <div class="button-box">
         <el-button type="primary" plain @click="close">取 消</el-button>
-        <el-button type="primary" @click="onSaveClick">确 定</el-button>
+        <el-button type="primary" @click="onSaveClick(false)">确 定</el-button>
       </div>
     </span>
   </el-dialog>
@@ -77,7 +77,7 @@ export default {
         this.selected = deepClone(DEFAULT_SHORT_CUT_MENUS)
       }
     },
-    onToggleClick(data){debugger
+    onToggleClick(data){
       const index = this.selected.findIndex(item => item.menuId === data.id)
       if(index > -1){
         this.selected.splice(index, 1)
@@ -85,7 +85,11 @@ export default {
         if(this.selected.length === 10){
           return this.$message.warning('最多可以设置10个快捷菜单')
         }
-        this.selected.push(data);
+        const push = {
+          menuId: data.id,
+          name: data.title
+        }
+        this.selected.push(push);
       }
     },
     getType(data){
@@ -99,8 +103,18 @@ export default {
     close(){
       this.$emit('update:visible',false)
     },
-    async onSaveClick(){
-      const result = await saveShortcutMenu(this.selected.map(item => item.id));
+    onResetClick(){
+      const ids = DEFAULT_SHORT_CUT_MENUS.map(item => item.id);
+      this.$confirm('是否确认恢复默认设置？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.onSaveClick(ids);
+      })
+    },
+    async onSaveClick(ids){
+      const result = await saveShortcutMenu(ids || this.selected.map(item => item.menuId));
       if(result.code === 200){
         this.$message.success(result.msg)
         this.close();
