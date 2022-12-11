@@ -5,6 +5,7 @@
       <template slot="operate" slot-scope="{row}">
         <confirm-button type="text"
                         :id="row.id"
+                        url="/user/resetRandomPwd"
                         @onSuccess="onSearch"
                         info="是否确定重置密码"
                         tip="重置密码后，将会给用户短信发送新的初始密码"
@@ -78,7 +79,8 @@ export default {
       },{
         name: '用户状态',
         key: 'status',
-        dict: USER_STATUS
+        dict: USER_STATUS,
+        width: 80
       },{
         name: '操作',
         key: 'operate',

@@ -37,9 +37,10 @@ export default {
     async onAuditClick(status){
       const result = await auditEnterprise({id: this.id, status, type: 0})
       if(result.code === 200){
-        this.$message.success(res.msg);
+        this.$message.success(result.msg);
+        this.$router.go(-1)
       }else{
-        this.$message.error(res.msg)
+        this.$message.error(result.msg)
       }
     }
   },

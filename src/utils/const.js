@@ -203,7 +203,7 @@ export const COMPANY_STATUS = [{
   label: '未完成企业认证',
   value: 0
 },{
-  label: '已提交企业认证：',
+  label: '已提交企业认证',
   value: 1
 },{
   label: '驳回认证',
@@ -238,17 +238,15 @@ export const ENTERPRISE_AUDIT_TYPE = [{
 }]
 
 export const ENTERPRISE_AUDIT_STATUS = [{
-  label: '未认证',
+  label: '未审核',
   value: 0
 },{
-  label: '已认证',
+  label: '审核通过',
   value: 1
 },{
-  label: '驳回认证',
+  label: '审核驳回',
   value: 2
 }]
-
-
 
 
 export const MINUTES_LIST = Array.from(new Array(60).keys()).map(item => {

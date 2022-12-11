@@ -58,7 +58,7 @@ service.interceptors.response.use(res => {
           type: 'warning'
         }
       ).then(() => {
-        location.href = '/index'
+        store.dispatch('app/toggleLoginVisible', { visible: true }).then(() => {})
         tipping = false
         store.dispatch('user/LogOut').then(() => {
         })

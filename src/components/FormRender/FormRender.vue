@@ -64,6 +64,7 @@
 
         <image-upload v-else-if="item.type === FORM_TYPE.IMAGE_UPLOAD"
                       v-model="ruleForm[item.field]"
+                      :tip="item.tip"
                       :limit="item.limit"
         />
 
@@ -73,6 +74,8 @@
             :key="index"
             v-model="ruleForm[child]"
             :limit="item.limit"
+            :is-show-tip="item.isShowTip"
+            :tip="(item.tips || [])[index]"
           />
         </div>
 
@@ -215,5 +218,8 @@ export default {
   .image-upload-group{
     display: flex;
     align-items: center;
+    .component-upload-image{
+      margin-right: 10px;
+    }
   }
 </style>

@@ -24,8 +24,8 @@
         <div>
           <span class="title">用户名：</span>
           <span class="content">{{data.userName}}</span>
-          <el-button type="text" style="margin-left: 50px;">修改登录密码</el-button>
-          <el-button type="text" style="margin-left: 24px;">绑定手机号</el-button>
+          <el-button type="text" style="margin-left: 50px;" @click="passwordVisible = true">修改登录密码</el-button>
+          <el-button type="text" style="margin-left: 24px;"  @click="mobileVisible = true">修改手机号码</el-button>
         </div>
         <div>
           <span class="title">{{data.companyStautsText}}：
@@ -36,6 +36,8 @@
       </div>
     </div>
     <menu-setting :visible.sync="settingVisible" @onSuccess="onSuccess"/>
+    <modify-password-modal :visible.sync="passwordVisible"/>
+    <modify-mobile-modal :visible.sync="mobileVisible"/>
   </div>
 </template>
 
@@ -45,15 +47,21 @@ import {getUserInfo, getUserShortcutMenu} from "@/api/user/user";
 import {COMPANY_STATUS, DEFAULT_SHORT_CUT_MENUS, getLabelByValue} from "@utils/const";
 import MenuSetting from "@views/center/user/components/MenuSetting";
 import {deepClone} from "@utils";
+import ModifyPasswordModal from "@views/center/user/components/ModifyPasswordModal";
+import ModifyMobileModal from "@views/center/user/components/ModifyMobileModal";
 
 export default {
   components: {
-    MenuSetting
+    MenuSetting,
+    ModifyPasswordModal,
+    ModifyMobileModal
   },
   data() {
     return {
       data: {},
       settingVisible: false,
+      passwordVisible: false,
+      mobileVisible: false,
       menus: []
     }
   },

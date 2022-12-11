@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="focus-area" v-if="String(userType) === '0'">
+    <div class="focus-area" v-if="String(companyStatus) === '0'">
       <p>请先进行企业认证，完成企业认证后即可上传营运资料</p>
       <el-button type="primary" @click="$router.push({path: '/center/user/enterprise-auth'})">企业认证</el-button>
     </div>
@@ -10,11 +10,11 @@
       <el-button type="primary" @click="$router.push({path: '/center/user/enterprise-auth'})">营运资料认证</el-button>
     </div>
 
-    <div class="focus-area" v-if="String(userType) === '1'">
+    <div class="focus-area" v-if="String(companyStatus) === '1'">
       <p>认证信息已提交，等待审核</p>
     </div>
 
-    <div class="focus-area" v-if="String(userType) === '2'">
+    <div class="focus-area" v-if="String(companyStatus) === '2'">
       <p>企业营运资料认证审核驳回，请重新提交营运资料！</p>
       <p class="reason">驳回原因：请上传清晰的营业执照图片</p>
       <el-button type="primary" @click="$router.push({path: '/center/user/enterprise-auth'})">营运资料认证</el-button>
@@ -38,20 +38,22 @@ export default {
   },
   data() {
     return {
-      userType: 0,
+      companyStatus: 0,
       list: ENTERPRISE_OPERATE_MODEL,
       dataSource: {}
     }
   },
   created() {
     this.getData()
-    this.getAuthInfo();
   },
   methods: {
     async getData() {
       const result = await getUserInfo();
       //0 普通 1 认证 2 管理员 //TODO 使用全局store修改
-      this.userType = result.data.type || 0;
+      this.companyStatus = result.data.companyStatus
+      if(this.companyStatus !== 0){
+        await this.getAuthInfo();
+      }
     },
     async getAuthInfo(){
       const result = await getCurrentEnterpriseOperateInfo();

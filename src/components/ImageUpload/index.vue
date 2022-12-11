@@ -27,6 +27,11 @@
       的文件
     </div>
 
+    <!-- 上传普通提示 -->
+    <div v-if="tip" slot="tip" class="el-upload__tip" style="text-align: center">
+      {{tip}}
+    </div>
+
     <el-dialog
       :visible.sync="dialogVisible"
       title="预览"
@@ -66,6 +71,10 @@ export default {
     isShowTip: {
       type: Boolean,
       default: true
+    },
+    tip: {
+      type: String,
+      default: ''
     }
   },
   data() {

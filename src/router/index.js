@@ -230,7 +230,7 @@ export const constantRoutes = [
               path: '/center/user/enterprise-operate',
               component: () => import('@/views/center/user/enterprise-operate.vue'),
               name: 'CenterNewsAdd',
-              meta: {title: '营运资料维护'}
+              meta: {title: '营运资料认证'}
             },{
               path: '/center/user/enterprise-audit',
               component: () => import('@/views/center/user/enterprise-audit.vue'),

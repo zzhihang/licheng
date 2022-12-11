@@ -30,6 +30,8 @@ export const ENTERPRISE_MODEL = [{
   type: FORM_TYPE.IMAGE_UPLOAD_GROUP,
   label: '上传证件照',
   fields: ['contactIdNumFront', 'contactIdNumBack', 'businessLicense'],
+  isShowTip: false,
+  tips: ['企业联系人身份证正面', '企业联系人身份证反面', '营业执照']
 }]
 
 export const ENTERPRISE_OPERATE_MODEL = [{

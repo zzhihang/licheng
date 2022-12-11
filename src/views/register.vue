@@ -147,7 +147,9 @@ export default {
               type: 'success'
             }).then(() => {
               this.$router.push('/home')
-            }).catch(() => {})
+            })
+          }).catch(() => {
+            this.loading = false
           })
         }
       })
