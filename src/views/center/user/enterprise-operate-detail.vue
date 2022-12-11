@@ -5,7 +5,7 @@
     ></preview-render>
     <div class="button-box">
       <el-button type="primary" plain @click="onAuditClick(2)">审核驳回</el-button>
-      <el-button type="primary" @click="onAuditClick(1)">审核通过</el-button>
+      <el-button type="primary" @click="onAuditClick(3)">审核通过</el-button>
     </div>
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
     async onAuditClick(status){
       const result = await auditEnterprise({id: this.id, status, type: 1})
       if(result.code === 200){
-        this.$message.success(res.msg);
+        this.$message.success(result.msg);
       }else{
-        this.$message.error(res.msg)
+        this.$message.error(result.msg)
       }
     }
   },

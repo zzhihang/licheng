@@ -36,7 +36,7 @@ export function register(data) {
 export function getInfo() {
   return request({
     // url: 'sso/getInfo',
-    url: '/system/user/getInfo',
+    url: '/user/currentUser',
     method: 'get'
   })
 }

@@ -1,34 +1,31 @@
 <template>
   <div :class="classObj" class="app-wrapper" :style="{'--current-color': theme}">
     <top-header></top-header>
-    <router-view></router-view>
+    <menu-router-view></menu-router-view>
     <home-footer></home-footer>
     <login-modal/>
   </div>
 </template>
 
 <script>
-import RightPanel from '@/components/RightPanel'
 import { AppMain, Navbar, Settings, Sidebar, TagsView, TopHeader, HomeFooter } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 import variables from '@/assets/styles/variables.scss'
-import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
-import {constantRoutes} from "@/router";
 import LoginModal from "@views/LoginModal";
+import MenuRouterView from "@/layout/components/MenuRouterView";
 
 export default {
   name: 'Layout',
   components: {
     AppMain,
     Navbar,
-    RightPanel,
     Settings,
     Sidebar,
     TopHeader,
     TagsView,
     HomeFooter,
-    PanelContainer,
+    MenuRouterView,
     LoginModal
   },
   mixins: [ResizeMixin],
@@ -128,31 +125,6 @@ export default {
 
   .mobile .fixed-header {
     width: 100%;
-  }
-
-  .my-container{
-    display: flex;
-    padding-top: 30px;
-    padding-bottom: 200px;
-  }
-
-  .panel-title {
-    line-height: 33px;
-    font-size: 28px;
-    color: #333333;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-
-    p {
-      color: #333333;
-      line-height: 22px;
-      font-size: 16px;
-      margin-top: 10px;
-      font-weight: normal;
-    }
   }
 
 </style>

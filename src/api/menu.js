@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export const getRouters = () => {
   return request({
     // url: '/getRouters',
-    url: '/system/menu/getRouters',
+    url: '/index/getRouters',
     method: 'get',
     params: { appCode: '' }
   })

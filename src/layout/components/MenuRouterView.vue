@@ -1,6 +1,6 @@
 <template>
   <div class="my-container w">
-    <panel-container />
+    <my-side-bar />
     <div class="main-box" >
       <div class="right-panel">
         <h1 class="panel-title">
@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
+import MySideBar from "@components/mine/MySideBar/MySideBar";
 import AppMain from "@/layout/components/AppMain";
 
 export default {
   name: 'Layout',
   components: {
     AppMain,
-    PanelContainer
+    MySideBar
   },
   data() {
     return {

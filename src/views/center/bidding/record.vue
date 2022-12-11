@@ -66,9 +66,9 @@ export default {
   created() {
     this.url = '/biddingTransaction/offer/' + this.$route.params.id
     this.columns.push({
-      name: String(this.$route.query.status) === '1' ? '报价状态' : '成交状态',
+      name: String(this.$route.query.status) === '2' ? '报价状态' : '成交状态',
       key: 'transactionStatus',
-      dict: String(this.$route.query.status) === '1' ? ACTIVITY_TRANSACTION_STATUS : BIDDING_TRANSACTION_STATUS,
+      dict: String(this.$route.query.status) === '2' ? ACTIVITY_TRANSACTION_STATUS : BIDDING_TRANSACTION_STATUS,
     })
   },
   methods: {

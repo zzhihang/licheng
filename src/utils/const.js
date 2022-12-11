@@ -170,14 +170,17 @@ export const TRANSACTION_STATUS = [{
   label: '草稿',
   value: 0
 },{
-  label: '交易进行中',
+  label: '未开始',
   value: 1
 },{
-  label: '交易成功',
+  label: '交易进行中 ',
   value: 2
 },{
   label: '交易结束',
   value: 3
+},{
+  label: '交易成功',
+  value: 4
 }]
 
 //竞价方式
@@ -241,11 +244,11 @@ export const ENTERPRISE_AUDIT_STATUS = [{
   label: '未审核',
   value: 0
 },{
-  label: '审核通过',
-  value: 1
-},{
   label: '审核驳回',
   value: 2
+},{
+  label: '审核通过',
+  value: 3
 }]
 
 

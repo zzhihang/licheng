@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import {constantRoutes} from '@/router'
+import {constantRoutes, dynamicRoutes} from '@/router'
 import {getAppList} from "@/api/common";
 
 export default {
@@ -65,8 +65,7 @@ export default {
       handler(val) {
         const {fullPath} = this.$route
         const finderPath = '/' + fullPath.split('/')[1]
-        const finder = constantRoutes.find(item => item.path === '/').children
-        const parentFinder = finder.find(item => item.path === finderPath);
+        const parentFinder = constantRoutes.concat(dynamicRoutes).find(item => item.path === finderPath);
         this.parentTitle = parentFinder.meta.title;
         this.menus = (parentFinder.children || []).filter(item => !item.hidden)
         if(!fullPath.startsWith('/center')){

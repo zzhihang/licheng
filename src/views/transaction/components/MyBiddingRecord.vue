@@ -16,7 +16,7 @@
       </el-table-column>
       <el-table-column
         label="数量"
-        prop="name">
+        prop="num">
       </el-table-column>
       <el-table-column
         label="时间"
@@ -25,7 +25,7 @@
       <el-table-column
         label="状态"
         align="status"
-        prop="name"
+        prop="status"
       >
         <template slot="header" slot-scope="scope">
           <span>状态</span>
@@ -45,6 +45,8 @@
 
 <script>
 
+import {ACTIVITY_TRANSACTION_STATUS, getLabelByValue} from "@utils/const";
+
 export default {
   props: {
     data: {
@@ -54,25 +56,7 @@ export default {
   },
   data() {
     return {
-      columns: [{
-        name: '采购商',
-        key: 'id',
-      },{
-        name: '竞拍单价',
-        key: 'title',
-      },{
-        name: '数量',
-        key: 'type',
-      },{
-        name: '时间',
-        key: 'method',
-      },{
-        name: '状态',
-        key: 'goodsName',
-      },{
-        name: '有效数量',
-        key: 'goodsNum',
-      }],
+      ACTIVITY_TRANSACTION_STATUS,
     }
   },
 }

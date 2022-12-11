@@ -14,7 +14,7 @@
         width="180">
       </el-table-column>
       <el-table-column
-        prop="id"
+        prop="code"
         label="分类ID"
         width="180">
       </el-table-column>

@@ -5,12 +5,10 @@
 <script>
 import Vue from 'vue';
 import NewsList from "@views/news/components/NewsList";
-import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
 
 export default {
   components: {
     NewsList,
-    PanelContainer
   },
   data() {
     return {

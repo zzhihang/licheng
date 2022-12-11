@@ -15,6 +15,14 @@ export function saveEnterprise(data) {
   })
 }
 
+export function saveOperate(data) {
+  return request({
+    url: '/operate',
+    method: 'post',
+    data
+  })
+}
+
 export function getEnterprise(id) {
   return request({
     url: `/company/info/${id}`,

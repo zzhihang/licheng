@@ -77,9 +77,9 @@ export default {
       this.$router.push({path: data.path})
     },
     async getInfo() {
-      const {data} = await getUserInfo();
-      data.companyStautsText = getLabelByValue(data.companyStatus, COMPANY_STATUS);
-      this.data = data;
+      const {user} = await getUserInfo();
+      user.companyStautsText = getLabelByValue(user.companyStatus, COMPANY_STATUS);
+      this.data = user;
     },
     async getMenus(){
       const {rows} = await getUserShortcutMenu()

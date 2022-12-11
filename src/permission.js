@@ -8,11 +8,10 @@ import store from './store'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/dataScreen']
+const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/dataScreen', '/index']
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()
-
   if (getToken()) {
     to.meta.title && store.dispatch('settings/setTitle', to.meta.title)
     /* has token*/
@@ -20,9 +19,9 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      if (!upload.client) {
-        await store.dispatch('settings/getOssClient')
-      }
+      // if (!upload.client) {
+      //   await store.dispatch('settings/getOssClient')
+      // }
       if (store.getters.roles.length === 0) {
         // 判断当前用户是否已拉取完user_info信息
         store.dispatch('user/GetInfo').then(() => {
@@ -32,10 +31,10 @@ router.beforeEach(async(to, from, next) => {
             next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
           })
         }).catch(err => {
-          store.dispatch('user/LogOut').then(() => {
-            Message.error(err)
-            next({ path: '/' })
-          })
+          // store.dispatch('user/LogOut').then(() => {
+          //   Message.error(err)
+          //   next({ path: '/' })
+          // })
         })
       } else {
         next()

@@ -4,14 +4,12 @@
 
 <script>
 import Vue from 'vue';
-import PanelContainer from "@components/mine/PanelContainer/PanelContainer";
 import PublishList from "@views/logistics/components/PublishList";
 import {NEWS_CLASS} from "@utils/const";
 
 export default {
   components: {
     PublishList,
-    PanelContainer
   },
   data() {
     return {

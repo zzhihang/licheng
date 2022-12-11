@@ -55,11 +55,11 @@ const part3 = [{
   type: FORM_TYPE.DATEPICKER,
   label: '竞价开始时间',
   field: 'startTime',
-  options: {
-    disabledDate(time){
-      return time.getTime() < Date.now();
-    }
-  }
+  // options: {
+  //   disabledDate(time){
+  //     return time.getTime() < Date.now();
+  //   }
+  // }
 },{
   type: FORM_TYPE.DATEPICKER,
   label: '竞价结束时间',

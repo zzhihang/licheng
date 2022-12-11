@@ -41,12 +41,12 @@ export const ENTERPRISE_OPERATE_MODEL = [{
 },{
   label: '驾驶员姓名',
   field: 'driver',
-  validator: NUMBER_CODE_VALIDATOR,
   maxLength: 18
 },{
   label: '驾驶员身份证号',
   field: 'driverIdNum',
-  maxLength: 20
+  maxLength: 20,
+  validator: ID_CARD_VALIDATOR
 },{
   label: '企业营运联系人',
   field: 'operateContact',
@@ -54,7 +54,7 @@ export const ENTERPRISE_OPERATE_MODEL = [{
 },{
   label: '联系电话',
   field: 'operateTel',
-  validator: ID_CARD_VALIDATOR
+  validator: MOBILE_VALIDATOR
 },{
   type: FORM_TYPE.IMAGE_UPLOAD_GROUP,
   label: '上传证件照',

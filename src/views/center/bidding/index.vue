@@ -31,7 +31,7 @@
           >查看商品详情</el-button>
         </template>
         <el-button type="text"
-                   v-if="row.status === 1 || row.status === 3"
+                   v-if="row.status === 2 || row.status === 3"
                    @click="$router.push({path: `/center/bidding/record/${row.id}?status=${row.status}`})"
         >查看出价记录</el-button>
         <confirm-button

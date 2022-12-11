@@ -47,7 +47,7 @@ export default {
     async getData() {
       const result = await getUserInfo();
       //0 普通 1 认证 2 管理员 //TODO 使用全局store修改
-      this.companyStatus = result.data.companyStatus;
+      this.companyStatus = result.user.companyStatus;
       if(this.companyStatus !== 0){
         await this.getAuthInfo();
       }

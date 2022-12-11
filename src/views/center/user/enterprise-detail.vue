@@ -5,7 +5,7 @@
     ></preview-render>
     <div class="button-box">
       <el-button type="primary" plain @click="onAuditClick(2)">审核驳回</el-button>
-      <el-button type="primary" @click="onAuditClick(1)">审核通过</el-button>
+      <el-button type="primary" @click="onAuditClick(3)">审核通过</el-button>
     </div>
   </div>
 </template>
@@ -14,6 +14,7 @@
 import PreviewRender from "@components/PreviewRender/PreviewRender";
 import {ENTERPRISE_MODEL} from "@views/center/user/model/enterprise-model";
 import {auditEnterprise, getEnterprise} from "@/api/user/user";
+import {addBidding} from "@/api/bidding/bidding";
 
 export default {
   components: {
@@ -35,13 +36,28 @@ export default {
       this.dataSource = data;
     },
     async onAuditClick(status){
-      const result = await auditEnterprise({id: this.id, status, type: 0})
-      if(result.code === 200){
-        this.$message.success(result.msg);
-        this.$router.go(-1)
-      }else{
-        this.$message.error(result.msg)
-      }
+      this.$callConfirm({
+        info: '是否确定审核通过',
+        tip: '审核通过后将为企业开通交易权限',
+        hiddenConfirm: status === 0,
+        onConfirm: async (done) => {
+          const result = await auditEnterprise({id: this.id, status, type: 0})
+          if(result.code === 200){
+            this.$message.success(result.msg);
+            this.$router.go(-1)
+          }else{
+            this.$message.error(result.msg)
+          }
+          if(result.code === 200){
+            this.$router.go(-1);
+            this.$message.success(result.msg)
+          }else{
+            this.$message.error(result.msg)
+          }
+          done && done();
+        }
+      })
+
     }
   },
 }

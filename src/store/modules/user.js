@@ -60,11 +60,11 @@ const user = {
     GetInfo({ commit, state, dispatch }) {
       return new Promise((resolve, reject) => {
         getInfo().then(res => {
-          const user = res.data || {}
+          const user = res.user || {}
           user.dept = user.sysDept
           const avatar = user.avatar
           const roles = res?.roles || []
-          const permissions = user.userPermInfoVoList.map(x=>x.permissions).flat()
+          const permissions = res.permissions.map(x=>x.permissions).flat()
           commit('SET_USER', user)
           commit('SET_PERMISSIONS', permissions)
           commit('SET_NAME', user.userName)

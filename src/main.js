@@ -12,7 +12,7 @@ import filters from './filters'
 import plugins from './plugins' // plugins
 import { download } from '@/utils/request'
 import './assets/icons' // icon
-// import './permission' // permission control
+import './permission' // permission control
 import { getDicts } from '@/api/system/dict/data'
 import { getConfigKey } from '@/api/system/config'
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, handleTree } from '@/utils/ruoyi'

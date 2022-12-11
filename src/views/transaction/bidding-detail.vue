@@ -95,10 +95,13 @@ export default {
         this.endDistance = new Date(result.data.endTime) - new Date().getTime();
         if (this.startDistance < 0) {
           this.isOpen = true;
+          if (this.endDistance < 0) {
+            this.isFinish = true;
+          }else{
+            this.startDistance = this.endDistance
+          }
         }
-        if (this.endDistance < 0) {
-          this.isFinish = true;
-        }
+
       }
     }
   },

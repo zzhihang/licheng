@@ -30,7 +30,7 @@ export default {
       active: 0,
       menus: [{
         title: '网站首页',
-        path: '/home'
+        path: '/index'
       },{
         title: '交易中心',
         path: '/transaction'
