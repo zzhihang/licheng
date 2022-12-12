@@ -70,13 +70,10 @@ export const constantRoutes = [
         path: '/index',
         component: () => import('@/views/home'),
         name: 'Index',
-        meta: {title: '首页', icon: 'dashboard', affix: true}
+        meta: {title: '首页', hideTitle: true}
       },
     ]
   },
-]
-// 动态路由，基于用户权限动态去加载
-export const dynamicRoutes = [
   {
     path: '/transaction',
     component: Layout,
@@ -154,7 +151,51 @@ export const dynamicRoutes = [
       meta: {title: '查看仓找货'},
       hidden: true,
     }]
+  },{
+    path: '',
+    component: Layout,
+    children: [
+
+    ]
   },
+  {
+    path: '/supply',
+    component: () => import('@/views/supply'),
+    name: 'Supply',
+    meta: {title: '供应链服务', hideTitle: true}
+  },
+  {
+    path: '/logistics/:id',
+    component: () => import('@/views/logistics/detail'),
+    meta: {title: '查看车找货', hideTitle: true},
+    hidden: true,
+  },
+  {
+    path: '/news/:id',
+    component: () => import('@/views/news/detail'),
+    meta: {title: '资讯详情', hideTitle: true},
+    hidden: true
+  },
+  {
+    path: '/transaction/listing/:id',
+    component: () => import('@/views/transaction/listing-detail'),
+    meta: {title: '挂牌商品详情', hideTitle: true}
+  },
+  {
+    path: '/storage/:id',
+    component: () => import('@/views/storage/detail'),
+    meta: {title: '资讯详情', hideTitle: true},
+    hidden: true
+  },
+  {
+    path: '/transaction/bidding/detail',
+    component: () => import('@/views/transaction/bidding-detail'),
+    meta: {title: '竞价商品详情', hideTitle: true},
+    hidden: true
+  },
+]
+// 动态路由，基于用户权限动态去加载
+export const dynamicRoutes = [
   {
     path: '/center',
     component: Layout,
@@ -385,42 +426,6 @@ export const dynamicRoutes = [
       },
     ]
   },
-  {
-    path: '/supply',
-    component: () => import('@/views/supply'),
-    name: 'Supply',
-    meta: {title: '供应链服务'}
-  },
-  {
-    path: '/logistics/:id',
-    component: () => import('@/views/logistics/detail'),
-    meta: {title: '查看车找货'},
-    hidden: true,
-  },
-  {
-    path: '/news/:id',
-    component: () => import('@/views/news/detail'),
-    meta: {title: '资讯详情'},
-    hidden: true
-  },
-  {
-    path: '/transaction/listing/:id',
-    component: () => import('@/views/transaction/listing-detail'),
-    meta: {title: '挂牌商品详情'}
-  },
-  {
-    path: '/storage/:id',
-    component: () => import('@/views/storage/detail'),
-    meta: {title: '资讯详情'},
-    hidden: true
-  },
-  {
-    path: '/transaction/bidding/detail',
-    component: () => import('@/views/transaction/bidding-detail'),
-    meta: {title: '竞价商品详情'},
-    hidden: true
-  },
-
 ]
 export default new Router({
   mode: 'history', // 去掉url中的#

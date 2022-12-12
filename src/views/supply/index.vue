@@ -87,7 +87,6 @@ export default {
 <style lang="scss" scoped>
 .supply-intro {
   padding-bottom: 40px;
-  padding-top: 37px;
   h5 {
     color: #333333;
     line-height: 25px;

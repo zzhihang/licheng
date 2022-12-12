@@ -8,7 +8,7 @@ import store from './store'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/dataScreen', '/index']
+const whiteList = ['/login', '/auth-redirect', '/bind', '/register', '/dataScreen', '/index', '/news', '/transaction', '/logistics', '/storage']
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()

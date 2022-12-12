@@ -66,13 +66,14 @@ export default {
         const {fullPath} = this.$route
         const finderPath = '/' + fullPath.split('/')[1]
         const parentFinder = constantRoutes.concat(dynamicRoutes).find(item => item.path === finderPath);
-        this.parentTitle = parentFinder.meta.title;
-        this.menus = (parentFinder.children || []).filter(item => !item.hidden)
-        if(!fullPath.startsWith('/center')){
-          this.isMenuCenter = true;
+        if(parentFinder){
+          this.parentTitle = parentFinder.meta.title;
+          this.menus = (parentFinder.children || []).filter(item => !item.hidden)
+          this.isMenuCenter = !fullPath.startsWith('/center');
         }else{
-          this.isMenuCenter = false
+          this.menus = []
         }
+
       },
       immediate: true
     }

@@ -54,7 +54,7 @@ export default {
     async getData() {
       const result = await getCurrentEnterpriseInfo();
       this.operateStatus = result.data.operateStatus; //0 未提交  1 已提交  2 已驳回  3 已认证
-      this.companyStatus = result.data.companystatus;
+      this.companyStatus = result.data.companyStatus;
       if(this.operateStatus !== 0){
         await this.getAuthInfo();
       }

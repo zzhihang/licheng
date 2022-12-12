@@ -2,7 +2,7 @@
   <div class="my-container w">
     <my-side-bar />
     <div class="main-box" >
-      <div class="right-panel">
+      <div class="right-panel" v-if="!hideTitle">
         <h1 class="panel-title">
           <div>
             <span>{{ title }}</span>
@@ -21,7 +21,6 @@ import MySideBar from "@components/mine/MySideBar/MySideBar";
 import AppMain from "@/layout/components/AppMain";
 
 export default {
-  name: 'Layout',
   components: {
     AppMain,
     MySideBar
@@ -30,14 +29,15 @@ export default {
     return {
       title: '',
       subTitle: '',
-      hiddenRight: false
+      hideTitle: false
     }
   },
   watch: {
     $route: {
       handler(val) {
         this.title = this.$route.meta.title
-        this.subTitle = this.$route.meta.subTitle || ''
+        this.subTitle = this.$route.meta.subTitle || '';
+        this.hideTitle = this.$route.meta.hideTitle
       },
       immediate: true
     }
